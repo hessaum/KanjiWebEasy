@@ -17,4 +17,14 @@
 	<p>None.</p>
 {% endif %}
 
+<h2>Words</h2>
+<ul>
+{% for word in words %}
+	<li><a href="{{ url_for('show_word', word=word) }}">{{ word }}</a></li>
+{% endfor %}
+{% if len(words) == 0 %}
+	<li>None.</li>
+{% endif %}
+</ul>
+
 {% endblock %}

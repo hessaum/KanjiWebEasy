@@ -26,7 +26,8 @@ def show_kanji(kanji):
         return redirect('/')
     
     kanji_info = data['kanji'][kanji]
-    return render_template('kanji.html', kanji=kanji, info=kanji_info)
+    kanji_words = [word for word, word_info in data['words'].items() if kanji in word_info['kanji']]
+    return render_template('kanji.html', kanji=kanji, info=kanji_info, words=kanji_words)
 
 @app.route('/word/<word>')
 def show_word(word):
