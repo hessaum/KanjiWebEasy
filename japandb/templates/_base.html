@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html> <!-- lang? -->
+	<head>
+		<title>{% block page_title %}{% endblock %}</title>
+		{% block head_extra %}{% endblock %}
+	</head>
+	<body>
+		<section id="content">
+			{% block content %}
+			{% endblock %}
+		</section>
+		<footer id="footer">
+			<!-- footer area -->
+		</footer>
+	</body>
+</html>
