@@ -1,1 +1,1 @@
-web: gunicorn japandb.main:app
+web: gunicorn japandb.appmain:app
