@@ -1,22 +1,22 @@
 {% extends "_base.html" %}
-{% block title %}Japanese Database{% endblock %}
+{% block title %}Home{% endblock %}
 {% block content %}
 
-<h1>Japanese Database Home</h1>
+<h1>Japanese Database</h1>
 
-<p>A page</p>
+<p>Intro text here.</p>
 
 <h2>Kanji</h2>
 <ul class="kanji">
-	{% for kanji in data.kanji.keys() %}
-	<li><a href="/kanji/{{ kanji }}">{{ kanji }}</a></li>
+	{% for kanji, info in kanji_items %}
+	<li><a href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a> - {{ len(info.readings) }} readings</li>
 	{% endfor %}
 </ul>
 
 <h2>Words</h2>
 <ul class="words">
-	{% for word in data.words %}
-	<li><a href="/word/{{ list(word.keys())[0] }}">{{ list(word.keys())[0] }}</a></li>
+	{% for word in word_keys %}
+	<li><a href="{{ url_for('show_word', word=word) }}">{{ word }}</a></li>
 	{% endfor %}
 </ul>
 

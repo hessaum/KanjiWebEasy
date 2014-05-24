@@ -1,0 +1,41 @@
+{% extends "_base.html" %}
+{% block title %}Word: {{ word }}{% endblock %}
+{% block content %}
+
+<h1>Word: {{ word }}</h1>
+
+<h2>Readings</h2>
+{% for reading, reading_data in info.readings.items() %}
+	<h3>{{ reading }}</h3>
+	Class: {{ reading_data.class }} <br />
+	Furigana: <ul>
+	{% for furigana in reading_data.furigana %}
+		<li>{{ furigana }}</li>
+	{% endfor %}
+	</ul>
+	Type: <ul>
+	{% for type in reading_data.type %}
+		<li>{{ type }}</li>
+	{% endfor %}
+	</ul>
+	Articles: <ul>
+	{% for article in reading_data.articles %}
+		<li>{{ article }}</li>
+	{% endfor %}
+	</ul>
+{% endfor %}
+{% if len(info.readings) == 0 %}
+	<p>None.</p>
+{% endif %}
+
+<h2>Kanji</h2>
+<ul>
+{% for kanji in info.kanji %}
+	<li><a href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a></li>
+{% endfor %}
+{% if len(info.kanji) == 0 %}
+	<li>None.</li>
+{% endif %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+{% block title %}Kanji: {{ kanji }}{% endblock %}
+{% block content %}
+
+<h1>Kanji: {{ kanji }}</h1>
+
+<h2>Readings</h2>
+{% for reading, sources in info.readings.items() %}
+	<h3>{{ reading }}</h3>
+	<ul>
+	{% for source in sources %}
+		<li>{{ source }}</li>
+	{% endfor %}
+	</ul>
+{% endfor %}
+{% if len(info.readings) == 0 %}
+	<p>None.</p>
+{% endif %}
+
+{% endblock %}
