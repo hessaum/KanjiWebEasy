@@ -7,17 +7,17 @@
 <p>Intro text here.</p>
 
 <h2>Kanji</h2>
-<ul class="kanji">
+<div class="kanji">
 	{% for kanji, info in kanji_items %}
-	<li><a href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a> - {{ len(info.readings) }} readings</li>
+	<a href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a> -
 	{% endfor %}
-</ul>
+</div>
 
 <h2>Words</h2>
-<ul class="words">
+<div class="words">
 	{% for word in word_keys %}
-	<li><a href="{{ url_for('show_word', word=word) }}">{{ word }}</a></li>
+	<a href="{{ url_for('show_word', word=word) }}">{{ word }}</a> -
 	{% endfor %}
-</ul>
+</div>
 
 {% endblock %}
