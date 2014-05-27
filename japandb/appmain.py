@@ -26,4 +26,8 @@ def show_word(word):
     word_info = data.get_word_info(word)
     if not word_info:
         return redirect('/')
+    
+    # flatten kanji array
+    word_info['kanji'] = list(''.join(word_info['kanji']))
+    
     return templates.render('word', word=word, info=word_info)
