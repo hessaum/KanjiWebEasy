@@ -16,10 +16,10 @@ def index():
 
 @app.route('/kanji/<kanji>')
 def show_kanji(kanji):
-    info, words = data.get_kanji_info_and_words(kanji)
+    info = data.get_kanji_info(kanji)
     if not info:
         return redirect('/')
-    return templates.render('kanji', kanji=kanji, info=info, words=words)
+    return templates.render('kanji', kanji=kanji, info=info, words=info['words'])
 
 @app.route('/word/<word>')
 def show_word(word):

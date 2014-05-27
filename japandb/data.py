@@ -37,10 +37,8 @@ def get_kanji_keys():
 def get_kanji_items():
     return sorted(_kanji.items())
 
-def get_kanji_info_and_words(kanji):
-    if not kanji in _kanji:
-        return None, None
-    return _kanji[kanji], words_by_kanji.get(kanji, [])
+def get_kanji_info(kanji):
+    return _kanji.get(kanji)
 
 def get_word_keys():
     return sorted(_all_words.keys())
