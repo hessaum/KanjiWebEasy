@@ -1,42 +1,29 @@
 # appmain.py
 # root thing
 
-import os
-import json
-from flask import Flask, render_template, redirect
-
-with open('data/test3.json') as f:
-    data = json.load(f)
+from flask import Flask, redirect
+from japandb import data, templates
 
 app = Flask(__name__)
-
-@app.context_processor
-def inject_python():
-    return dict(len=len)
+templates.setup(app)
 
 @app.route('/')
-def hello():
-    kanji_info = sorted(data['kanji'].items())
-    word_keys = sorted(data['words'].keys())
-    return render_template('index.html', kanji_items=kanji_info, word_keys=word_keys)
+def index():
+    return templates.render('index',
+        kanji_items=data.get_kanji_items(),
+        word_keys=data.get_word_keys()
+    )
 
 @app.route('/kanji/<kanji>')
 def show_kanji(kanji):
-    if kanji not in data['kanji']:
+    info, words = data.get_kanji_info_and_words(kanji)
+    if not info:
         return redirect('/')
-    
-    kanji_info = data['kanji'][kanji]
-    kanji_words = [word for word, word_info in data['words'].items() if kanji in word_info['kanji']]
-    return render_template('kanji.html', kanji=kanji, info=kanji_info, words=kanji_words)
+    return templates.render('kanji', kanji=kanji, info=info, words=words)
 
 @app.route('/word/<word>')
 def show_word(word):
-    if word not in data['words']:
+    word_info = data.get_word_info(word)
+    if not word_info:
         return redirect('/')
-    
-    word_info = data['words'][word]
-    return render_template('word.html', word=word, info=word_info)
-
-@app.route('/flerp')
-def flerp():
-    return 'Flerp.'
+    return templates.render('word', word=word, info=word_info)
