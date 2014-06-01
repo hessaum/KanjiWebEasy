@@ -2,9 +2,9 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-<h1>Japanese Database</h1>
+<h1>Welcome to {{ SITE_TITLE }}</h1>
 
-<p>Intro text here.</p>
+{% include "bits/introduction.html" %}
 
 <h2>Kanji</h2>
 <div class="kanji">
