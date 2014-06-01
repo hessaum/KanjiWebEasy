@@ -8,15 +8,15 @@
 
 <h2>Kanji</h2>
 <div class="kanji">
-	{% for kanji, info in kanji_items %}
-	<a href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a> -
+	{% for kanji in kanji_keys %}
+	<a href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a> <br />
 	{% endfor %}
 </div>
 
 <h2>Words</h2>
 <div class="words">
 	{% for word in word_keys %}
-	<a href="{{ url_for('show_word', word=word) }}">{{ word }}</a> -
+	<a href="{{ url_for('show_word', word=word) }}">{{ word }}</a> <br />
 	{% endfor %}
 </div>
 
