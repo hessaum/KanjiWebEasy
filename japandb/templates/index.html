@@ -2,6 +2,51 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
+<style>
+body {
+	background-color:#FAFAFA;
+	color:#555555;
+	font-family: Meiryo
+}
+div.kanjibox {
+	float:left;
+	margin:2px;
+	min-width: 175px;
+	max-width:175px;
+	max-height:70px;
+	border:5px solid gray;
+	display:block;
+}
+a.link {
+	text-decoration:none;
+	color:#444444;
+}
+span.id {
+	position:relative;
+	left:25px;
+	font-size:10px;
+	vertical-align:text-top;
+}
+span.kanji {
+	position:relative;
+	left:30px;
+	font-size:300%;
+}
+div.more {
+	font-family: Monaco;
+	position:relative;
+	top:-50px;
+	left:105px;
+	font-size:75%;
+	max-width:0px;
+}
+span.count {
+	width:100px;
+}
+span.freq {
+	width:100px;
+}
+</style>
 <h1>Welcome to {{ SITE_TITLE }}</h1>
 
 {% include "bits/introduction.html" %}
@@ -9,20 +54,20 @@
 <h2>Kanji</h2>
 <div class="kanji">
 	{{ len(kanji_count)}} kanji listed <br /> <br />
-	<table style="width:300px">
-	<tr>
-	<td>id</td>
-	<td>kanji</td>
-	<td>count</td>
-	<td>freq</td>
-	</tr>
-	{% for x in range(0, len(kanji_count)) %}
-	<tr>
-	<td>{{x+1}}</td>
-	<td><a href="{{ url_for('show_kanji', kanji=kanji_count[x][0]) }}">{{ kanji_count[x][0]}}</a></td>
-	<td>{{kanji_count[x][1] }}</td>
-	<td>{{'%.02f' % (100*(kanji_count[x][1]/kanji_total))}}%</td>
-	</tr>
+	{% for x, (kanji, count) in enumerate(kanji_count) %}
+
+	
+	<div class="kanjibox">
+		<a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">
+			<span class="id">{{x+1}}</span>
+			<span class="kanji">{{ kanji}}</span>
+			<div class="more">
+				<span class="count">{{count }}</span>
+				<span class="freq">{{'%.02f' % (100*(count/kanji_total))}}%</span>
+			</div>
+		</a>
+	</div>
+	
 	{% endfor %}
 	</table>
 </div>
