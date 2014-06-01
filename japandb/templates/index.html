@@ -8,9 +8,23 @@
 
 <h2>Kanji</h2>
 <div class="kanji">
-	{% for kanji in kanji_keys %}
-	<a href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a> <br />
+	{{ len(kanji_count)}} kanji listed <br /> <br />
+	<table style="width:300px">
+	<tr>
+	<td>id</td>
+	<td>kanji</td>
+	<td>count</td>
+	<td>freq</td>
+	</tr>
+	{% for x in range(0, len(kanji_count)) %}
+	<tr>
+	<td>{{x+1}}</td>
+	<td><a href="{{ url_for('show_kanji', kanji=kanji_count[x][0]) }}">{{ kanji_count[x][0]}}</a></td>
+	<td>{{kanji_count[x][1] }}</td>
+	<td>{{'%.02f' % (100*(kanji_count[x][1]/kanji_total))}}%</td>
+	</tr>
 	{% endfor %}
+	</table>
 </div>
 
 <h2>Words</h2>
