@@ -12,7 +12,8 @@ def index():
     return templates.render('index',
         kanji_count=data.get_kanji_count(),
         kanji_total = data.get_kanji_total(),
-        word_keys=data.get_word_keys()
+        word_count=data.get_word_count(),
+        word_total = data.get_word_total()
     )
 
 @app.route('/kanji/<kanji>')

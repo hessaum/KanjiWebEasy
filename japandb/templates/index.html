@@ -27,8 +27,17 @@
 
 <h2>Words</h2>
 <div class="words">
-	{% for word in word_keys %}
-	<a href="{{ url_for('show_word', word=word) }}">{{ word }}</a> <br />
+	{% for x, (word, count) in enumerate(word_count) %}	
+	<div class="wordbox">
+		<a class="link" href="{{ url_for('show_word', word=word) }}">
+		<span class="id">{{ x+1 }}</span>
+		<span class="word">{{ word }}</span>
+		<div class="more">
+			<span class="count">{{count}}</span>
+			<span class="freq">{{ '%.02f' % (100*(count/word_total)) }}</span>
+		</div>
+		</a>
+	</div>
 	{% endfor %}
 </div>
 

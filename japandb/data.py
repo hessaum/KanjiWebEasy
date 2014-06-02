@@ -67,3 +67,9 @@ def get_word_keys():
     
 def get_word_info(word):
     return _all_words.get(word)
+    
+def get_word_total():
+    return _word_total;
+
+def get_word_count():
+    return sorted(_all_word_count.items(), key=itemgetter(1, 0), reverse=True)
