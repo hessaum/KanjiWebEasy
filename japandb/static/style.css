@@ -11,7 +11,6 @@ div.clearfloat {
 }
 
 /* Wordboxes */
-
 .wordbox {
 	float:left;
 	margin-left:3px;
@@ -91,4 +90,12 @@ div.clearfloat {
 }
 .kanjibox .freq {
 	width: 100px;
+}
+
+/* Hover tags */
+.wordbox:hover {
+	text-shadow: 0 0 0.1em #87F
+}
+.kanjibox:hover {
+	text-shadow: 0 0 0.1em #87F
 }
