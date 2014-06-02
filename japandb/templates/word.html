@@ -30,8 +30,17 @@
 
 <h2>Kanji</h2>
 <ul>
-{% for kanji in info.kanji %}
-	<li><a href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a></li>
+{% for x,(kanji) in enumerate(info.kanji) %}
+	<div class="kanjibox">
+		<a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">
+			<span class="id">{{ x+1 }}</span>
+			<span class="kanji">{{ kanji }}</span>
+			<div class="more">
+				<span class="count">{{ kanji_count[kanji] }}</span>
+				<span class="freq">{{ '%.02f' % (100*(kanji_count[kanji]/usage_total)) }}%</span>
+			</div>
+		</a>
+	</div>
 {% endfor %}
 {% if len(info.kanji) == 0 %}
 	<li>None.</li>
