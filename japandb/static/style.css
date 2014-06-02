@@ -1,0 +1,51 @@
+/* ArataTori styles */
+
+body {
+	background-color: #FAFAFA;
+	color: #555555;
+	font-family: Meiryo;
+}
+
+div.clearfloat {
+	clear: both;
+}
+
+/* Kanjiboxes */
+.kanjibox {
+	float: left;
+	margin: 2px;
+	min-width: 175px;
+	max-width: 175px;
+	max-height: 70px;
+	border: 5px solid gray;
+	display: block;
+}
+.kanjibox .link {
+	text-decoration: none;
+	color: #444444;
+}
+.kanjibox .id {
+	position: relative;
+	left: 25px;
+	font-size: 10px;
+	vertical-align: text-top;
+}
+.kanjibox .kanji {
+	position: relative;
+	left: 30px;
+	font-size: 300%;
+}
+.kanjibox .more {
+	font-family: Monaco;
+	position: relative;
+	top: -50px;
+	left: 105px;
+	font-size: 75%;
+	max-width: 0px;
+}
+.kanjibox .count {
+	width: 100px;
+}
+.kanjibox .freq {
+	width: 100px;
+}
