@@ -21,7 +21,13 @@ def show_kanji(kanji):
     info = data.get_kanji_info(kanji)
     if not info:
         return redirect('/')
-    return templates.render('kanji', kanji=kanji, info=info, words=info['words'])
+    return templates.render('kanji', 
+        kanji=kanji, 
+        info=info, 
+        words=data.sort_word_info(info['words']),
+        word_count = data._all_word_count,
+        usage_total = data.get_kanji_usage_total(kanji)
+    )
 
 @app.route('/word/<word>')
 def show_word(word):

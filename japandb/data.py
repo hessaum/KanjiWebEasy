@@ -73,3 +73,12 @@ def get_word_total():
 
 def get_word_count():
     return sorted(_all_word_count.items(), key=itemgetter(1, 0), reverse=True)
+
+def sort_word_info(word_array):
+    return sorted(word_array, key=lambda x: (_all_word_count[x],x), reverse=True)
+
+def get_kanji_usage_total(kanji):
+    count_total = 0
+    for word in _kanji[kanji]['words']:
+        count_total += _all_word_count[word]
+    return count_total
