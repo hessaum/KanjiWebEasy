@@ -80,6 +80,16 @@ def sort_word_info(word_array):
 def sort_kanji_info(word_array):
     return sorted(word_array, key=lambda x: (_all_kanji_count[x],x), reverse=True)
 
+def get_inside_word_usage(word_info):
+    count_total = 0
+    count_map = {}
+    for reading, reading_info in word_info['readings'].items():
+        num_examples = len(reading_info['examples'])
+        count_total += num_examples
+        count_map[reading] = num_examples
+        
+    return (count_map, count_total)
+
 def get_kanji_usage_total(kanji):
     count_total = 0
     for word in _kanji[kanji]['words']:

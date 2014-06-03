@@ -37,12 +37,17 @@ def show_word(word):
         return redirect('/')
     
     # flatten kanji array
-    word_info['kanji'] = list(''.join(word_info['kanji']))
-    word_info['kanji'] = data.sort_kanji_info(word_info['kanji'])
+    flat_kanji = list(''.join(word_info['kanji']))
+    flat_kanji = data.sort_kanji_info(flat_kanji)
     
+    word_usage_info = data.get_inside_word_usage(word_info)
+    word_order = sorted(word_info['readings'].items(), key=lambda x: word_usage_info[0][x[0]], reverse=True)
     return templates.render('word', 
         word=word, 
+        flat_kanji=flat_kanji,
         info=word_info,
         kanji_count = data._all_kanji_count,
-        usage_total = data.get_kanji_total()
+        word_count = word_usage_info[0],
+        word_usage_total = word_usage_info[1],
+        kanji_usage_total = data.get_kanji_total()
     )
