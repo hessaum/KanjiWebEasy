@@ -26,7 +26,7 @@ for category, cat_info in _categories.items():
             example_count = len(reading_info["examples"])
             word_occurrence = word_occurrence + example_count
             
-            for kanji_str in word_info["kanji"]:
+            for kanji_str in reading_info["kanji"]:
                 for kanji in kanji_str:
                     _all_kanji_count[kanji] = _all_kanji_count.get(kanji, 0) + example_count
         _all_word_count[word] = word_occurrence
@@ -36,13 +36,14 @@ _word_total = sum(count for word, count in _all_word_count.items())
     
 # index the kanji in the words
 def _make_kanji_default():
-    return {'words': [], 'readings': {}}
+    return {'words': set(), 'readings': {}}
 _kanji = defaultdict(_make_kanji_default)
 
 for word, word_info in _all_words.items():
-    for kanji_str in word_info["kanji"]:
-        for kanji in kanji_str:
-            _kanji[kanji]['words'].append(word)
+    for reading, reading_info in word_info["readings"].items():
+        for kanji_str in reading_info["kanji"]:
+            for kanji in kanji_str:
+                _kanji[kanji]['words'].add(word)
     # todo: determine readings properly
 
 # Public interface

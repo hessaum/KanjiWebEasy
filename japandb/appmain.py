@@ -19,10 +19,11 @@ def index():
 @app.route('/kanji/<kanji>')
 def show_kanji(kanji):
     info = data.get_kanji_info(kanji)
-    info['words'] = data.sort_word_info(info['words'])
-    
     if not info:
         return redirect('/')
+        
+    info['words'] = data.sort_word_info(info['words'])
+    
     return templates.render('kanji', 
         kanji=kanji, 
         info=info, 
@@ -35,17 +36,23 @@ def show_word(word):
     word_info = data.get_word_info(word)
     if not word_info:
         return redirect('/')
-    
-    # flatten kanji array
-    flat_kanji = list(''.join(word_info['kanji']))
-    flat_kanji = data.sort_kanji_info(flat_kanji)
-    
+        
     word_usage_info = data.get_inside_word_usage(word_info)
     word_order = sorted(word_info['readings'].items(), key=lambda x: word_usage_info[0][x[0]], reverse=True)
+    
+    #Flatten kanji array
+    kanji_dict = {}
+    for reading, reading_data in word_info['readings'].items():
+        reading_kanji_list = []
+        for kanji_subword in reading_data['kanji']:
+            for kanji in kanji_subword:
+                reading_kanji_list.append(kanji)
+        kanji_dict[reading] = reading_kanji_list
+    
     return templates.render('word', 
         word=word, 
-        flat_kanji=flat_kanji,
         info=word_info,
+        kanji_dict = kanji_dict,
         kanji_count = data._all_kanji_count,
         word_count = word_usage_info[0],
         word_usage_total = word_usage_info[1],

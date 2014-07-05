@@ -5,69 +5,70 @@
 <h1>Word: {{ word }}</h1>
 
 <h2>Readings</h2>
-{% for x, (reading, reading_data) in enumerate(info.readings.items()) %}	
-	<div class="readingbox">
-		<span class="id">{{x+1}}</span>
-		
-		<span class="group">
-		{% for x, (furigana) in enumerate(reading_data.furigana) %}
-			<ruby>
-				<span class="furigana">{{furigana}}</span>
-				<rp>(</rp>
-				<rt>
-					<span class="kanji">{{(info.kanji[x])}}</span>
-				</rt>
-				<rp>)</rp>
-			</ruby>
-		{% endfor %}
-		</span>
-		
-		<br /> <br />
-		<span class="type">
-			Type: 
+{% for x, (reading, reading_data) in enumerate(info.readings.items()) %}
+	<div class="test">
+		<div class="readingbox">
+			<span class="id">{{x+1}}</span>
 			
-			{% for type in reading_data.type %}
-				<span class="type">{{ type }}</span>
+			<span class="group">
+			{% for x, (furigana) in enumerate(reading_data.furigana) %}
+				<ruby>
+					<span class="furigana">{{furigana}}</span>
+					<rp>(</rp>
+					<rt>
+						<span class="kanji">{{(reading_data.kanji[x])}}</span>
+					</rt>
+					<rp>)</rp>
+				</ruby>
 			{% endfor %}
+			</span>
 			
-			{% if len(reading_data.type) == 0 %}
-				Unknown
-			{% endif %}
-		</span>
-		
-		<br /><br />
-		<div class="more">
-			<span class="count">{{word_count[reading]}}</span>
-			<br />
-			<span class="freq">{{ '%.02f' % (100*(word_count[reading]/word_usage_total)) }}%</span>
+			<br /> <br />
+			<span class="type">
+				Type: 
+				
+				{% for type in reading_data.type %}
+					<span class="type">{{ type }}</span>
+				{% endfor %}
+				
+				{% if len(reading_data.type) == 0 %}
+					Unknown
+				{% endif %}
+			</span>
+			
+			<br /><br />
+			<div class="more">
+				Count: 
+				<span class="count">{{word_count[reading]}}</span>
+				<br />
+				<span class="freq">{{ '%.02f' % (100*(word_count[reading]/word_usage_total)) }}%</span>
+			</div>
+			<br /><br />
+			<span class="class">
+				Class: {{ reading_data.class }}
+			</span>
 		</div>
-		<br /><br />
-		<span class="class">
-			Class: {{ reading_data.class }}
-		</span>
+		<h2>Kanji</h2>
+		<ul>
+		{% for x, kanji in enumerate(kanji_dict[reading]) %}
+			<div class="kanjibox">
+				<a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">
+					<span class="id">{{ x+1 }}</span>
+					<span class="kanji">{{ kanji }}</span>
+					<div class="more">
+						<span class="count">{{ kanji_count[kanji] }}</span>
+						<span class="freq">{{ '%.02f' % (100*(kanji_count[kanji]/kanji_usage_total)) }}%</span>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+		{% if len(reading_data.kanji) == 0 %}
+			<li>None.</li>
+		{% endif %}
+		</ul>
 	</div>
 {% endfor %}
 {% if len(info.readings) == 0 %}
 	<p>None.</p>
 {% endif %}
-
-<h2>Kanji</h2>
-<ul>
-{% for x,(kanji) in enumerate(flat_kanji) %}
-	<div class="kanjibox">
-		<a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">
-			<span class="id">{{ x+1 }}</span>
-			<span class="kanji">{{ kanji }}</span>
-			<div class="more">
-				<span class="count">{{ kanji_count[kanji] }}</span>
-				<span class="freq">{{ '%.02f' % (100*(kanji_count[kanji]/kanji_usage_total)) }}%</span>
-			</div>
-		</a>
-	</div>
-{% endfor %}
-{% if len(info.kanji) == 0 %}
-	<li>None.</li>
-{% endif %}
-</ul>
-
 {% endblock %}
