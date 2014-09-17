@@ -87,6 +87,10 @@ def show_word(word):
                     break
                 
             all_sentences.append(example_sentence)
+            
+            #limit max # of sentences
+            if len(all_sentences) == 10:
+                break
                     
     
     return templates.render('word', 
