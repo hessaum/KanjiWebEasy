@@ -62,11 +62,17 @@
 				</a>
 			</div>
 		{% endfor %}
-		{% if len(reading_data.kanji) == 0 %}
+		{% if len(reading_data.kanji[0]) == 0 %}
 			<li>None.</li>
 		{% endif %}
 		</ul>
-	</div>
+		
+		<span style=" clear: left; display: block; ">
+		<h2>Example sentences</h2>
+		{% for sentence in example_sentences %}
+			<p>{% for word in sentence %}{% if len(word) == 2 %}<ruby>{{ word[0] }}<rp>（</rp><rt>{{ word[1] }}</rt><rp>）</rp></ruby>{% else %}{{ word[0] }}{% endif %}{% endfor %}</p>
+		{% endfor %}
+		</span>
 {% endfor %}
 {% if len(info.readings) == 0 %}
 	<p>None.</p>

@@ -1,0 +1,2830 @@
+{
+  "newsid": "k10014219241000",
+  "text": "缶詰やコーヒーなどの食料品　９月から値段が高くなる 魚や貝の缶詰やコーヒーなど一部の食料品の値段が９月１日から高くなります。 「マルハニチロ」は、さけやかに、ほたてを使った缶詰など６５の商品の値段を上げます。５％から３３％ぐらい上げると言っています。世界のいろいろな国で魚や貝などをたくさん使うようになって、値段が高くなっているためです。 「ＵＣＣ上島珈琲」もコーヒーの豆の値段がとても高くなったため、７つの「ブルーマウンテン」の商品の値段を上げることにしました。店で買うときの値段は２１％から４０％ぐらい高くなると説明しています。 「雪印メグミルク」も牛乳の値段が高くなっているため、牛乳を使った飲み物やヨーグルトなどの値段を２％から５％ぐらい上げます。 このほかの食料品の会社でも、原料の値段が高くなると、商品の値段を上げていくことになりそうです。  ",
+  "morph": [
+    {
+      "word": "<S>",
+      "dict": "<pg>"
+    },
+    {
+      "base": "缶詰",
+      "word": "缶詰",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "かんづめ",
+          "s": "缶詰"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-005589']",
+      "kana": "カンヅメ",
+      "dicid": "BE-0000"
+    },
+    {
+      "base": "や",
+      "word": "や",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "や"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027752']",
+      "kana": "ヤ"
+    },
+    {
+      "base": "コーヒー",
+      "word": "コーヒー",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "コーヒー"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-008972']",
+      "kana": "コーヒー"
+    },
+    {
+      "base": "など",
+      "word": "など",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "など"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020220']",
+      "kana": "ナド"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "食料品",
+      "word": "食料品",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "しょくりょうひん",
+          "s": "食料品"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-013066']",
+      "kana": "ショクリョウヒン"
+    },
+    {
+      "base": "",
+      "word": "　",
+      "class": "F",
+      "ruby": [
+        {
+          "s": "　"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "９月",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "９"
+        },
+        {
+          "r": "がつ",
+          "s": "月"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "から",
+      "word": "から",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "から"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-005143']",
+      "kana": "カラ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "が",
+      "word": "が",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "が"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-003773']",
+      "kana": "ガ"
+    },
+    {
+      "base": "高い",
+      "word": "高く",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "たか",
+          "s": "高"
+        },
+        {
+          "s": "く"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016213']",
+      "kana": "タカイ"
+    },
+    {
+      "base": "なる",
+      "word": "なる",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なる"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "word": "</S>",
+      "dict": "<pg>"
+    },
+    {
+      "word": "<S>",
+      "dict": "<pg>"
+    },
+    {
+      "base": "魚",
+      "word": "魚",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "さかな",
+          "s": "魚"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-010094']",
+      "kana": "サカナ"
+    },
+    {
+      "base": "や",
+      "word": "や",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "や"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027752']",
+      "kana": "ヤ"
+    },
+    {
+      "base": "貝",
+      "word": "貝",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "かい",
+          "s": "貝"
+        }
+      ],
+      "dict": "/rsk5/dictionary/漢字項目[@id='RSHOK-H-003799']",
+      "kana": "カイ",
+      "dicid": "BE-0001"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "缶詰",
+      "word": "缶詰",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "かんづめ",
+          "s": "缶詰"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-005589']",
+      "kana": "カンヅメ",
+      "dicid": "BE-0000"
+    },
+    {
+      "base": "や",
+      "word": "や",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "や"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027752']",
+      "kana": "ヤ"
+    },
+    {
+      "base": "コーヒー",
+      "word": "コーヒー",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "コーヒー"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-008972']",
+      "kana": "コーヒー"
+    },
+    {
+      "base": "など",
+      "word": "など",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "など"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020220']",
+      "kana": "ナド"
+    },
+    {
+      "base": "一部",
+      "word": "一部",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "いちぶ",
+          "s": "一部"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-001403']",
+      "kana": "イチブ",
+      "dicid": "BE-0002"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "食料品",
+      "word": "食料品",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "しょくりょうひん",
+          "s": "食料品"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-013066']",
+      "kana": "ショクリョウヒン"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "が",
+      "word": "が",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "が"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-003773']",
+      "kana": "ガ"
+    },
+    {
+      "base": "",
+      "word": "９月",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "９"
+        },
+        {
+          "r": "がつ",
+          "s": "月"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "１日",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "ついたち",
+          "s": "１日"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "から",
+      "word": "から",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "から"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-005143']",
+      "kana": "カラ"
+    },
+    {
+      "base": "高い",
+      "word": "高く",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "たか",
+          "s": "高"
+        },
+        {
+          "s": "く"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016213']",
+      "kana": "タカイ"
+    },
+    {
+      "base": "なる",
+      "word": "なり",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なり"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "base": "ます",
+      "word": "ます",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "ます"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-025930']",
+      "kana": "マス"
+    },
+    {
+      "base": "",
+      "word": "。",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "。"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "word": "</S>",
+      "dict": "<pg>"
+    },
+    {
+      "word": "<S>",
+      "dict": "<pg>"
+    },
+    {
+      "base": "",
+      "word": "「",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "「"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "マルハニチロ",
+      "class": "C",
+      "ruby": [
+        {
+          "s": "マルハニチロ"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "」",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "」"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "は",
+      "word": "は",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "は"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021416']",
+      "kana": "ハ"
+    },
+    {
+      "base": "",
+      "word": "、",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "、"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "鮭",
+      "word": "さけ",
+      "class": "0",
+      "ruby": [
+        {
+          "s": "さけ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-010199']",
+      "kana": "サケ",
+      "dicid": "BE-0003"
+    },
+    {
+      "base": "や",
+      "word": "や",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "や"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027752']",
+      "kana": "ヤ"
+    },
+    {
+      "base": "蟹",
+      "word": "かに",
+      "class": "0",
+      "ruby": [
+        {
+          "s": "か"
+        },
+        {
+          "s": "に"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-004965']",
+      "kana": "カニ",
+      "dicid": "BE-0004"
+    },
+    {
+      "base": "",
+      "word": "、",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "、"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "帆立貝",
+      "word": "ほたて",
+      "class": "0",
+      "ruby": [
+        {
+          "s": "ほたて"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-025413']",
+      "kana": "ホタテガイ",
+      "dicid": "BE-0005"
+    },
+    {
+      "base": "を",
+      "word": "を",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "を"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-030251']",
+      "kana": "ヲ"
+    },
+    {
+      "base": "使う",
+      "word": "使っ",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "つか",
+          "s": "使"
+        },
+        {
+          "s": "っ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-017721']",
+      "kana": "ツカウ"
+    },
+    {
+      "base": "た",
+      "word": "た",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "た"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-015801']",
+      "kana": "タ"
+    },
+    {
+      "base": "缶詰",
+      "word": "缶詰",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "かんづめ",
+          "s": "缶詰"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-005589']",
+      "kana": "カンヅメ",
+      "dicid": "BE-0000"
+    },
+    {
+      "base": "など",
+      "word": "など",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "など"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020220']",
+      "kana": "ナド"
+    },
+    {
+      "base": "",
+      "word": "６５",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "６"
+        },
+        {
+          "s": "５"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "商品",
+      "word": "商品",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "しょうひん",
+          "s": "商品"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-012917']",
+      "kana": "ショウヒン",
+      "dicid": "BE-0006"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "を",
+      "word": "を",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "を"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-030251']",
+      "kana": "ヲ"
+    },
+    {
+      "base": "上げる",
+      "word": "上げ",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "あ",
+          "s": "上"
+        },
+        {
+          "s": "げ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-000283']",
+      "kana": "アゲル"
+    },
+    {
+      "base": "ます",
+      "word": "ます",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "ます"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-025930']",
+      "kana": "マス"
+    },
+    {
+      "base": "",
+      "word": "。",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "。"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "５",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "５"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "％",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "％"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "から",
+      "word": "から",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "から"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-005143']",
+      "kana": "カラ"
+    },
+    {
+      "base": "",
+      "word": "３",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "３"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "３",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "３"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "％",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "％"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "ぐらい",
+      "word": "ぐらい",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "ぐらい"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-007384']",
+      "kana": "グライ"
+    },
+    {
+      "base": "上げる",
+      "word": "上げる",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "あ",
+          "s": "上"
+        },
+        {
+          "s": "げる"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-000283']",
+      "kana": "アゲル"
+    },
+    {
+      "base": "と",
+      "word": "と",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "と"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018819']",
+      "kana": "ト"
+    },
+    {
+      "base": "言う",
+      "word": "言っ",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "い",
+          "s": "言"
+        },
+        {
+          "s": "っ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-000998']",
+      "kana": "イウ"
+    },
+    {
+      "base": "て",
+      "word": "て",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "て"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018092']",
+      "kana": "テ"
+    },
+    {
+      "base": "",
+      "word": "い",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "い"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "ます",
+      "word": "ます",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "ます"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-025930']",
+      "kana": "マス"
+    },
+    {
+      "base": "",
+      "word": "。",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "。"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "世界",
+      "word": "世界",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "せかい",
+          "s": "世界"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-014611']",
+      "kana": "セカイ"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "いろいろ",
+      "word": "いろいろ",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "いろいろ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-001791']",
+      "kana": "イロイロ"
+    },
+    {
+      "base": "だ",
+      "word": "な",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "な"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-015809']",
+      "kana": "ダ"
+    },
+    {
+      "base": "国",
+      "word": "国",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "くに",
+          "s": "国"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-007298']",
+      "kana": "クニ"
+    },
+    {
+      "base": "で",
+      "word": "で",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "で"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018095']",
+      "kana": "デ"
+    },
+    {
+      "base": "魚",
+      "word": "魚",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "さかな",
+          "s": "魚"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-010094']",
+      "kana": "サカナ"
+    },
+    {
+      "base": "や",
+      "word": "や",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "や"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027752']",
+      "kana": "ヤ"
+    },
+    {
+      "base": "貝",
+      "word": "貝",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "かい",
+          "s": "貝"
+        }
+      ],
+      "dict": "/rsk5/dictionary/漢字項目[@id='RSHOK-H-003799']",
+      "kana": "カイ",
+      "dicid": "BE-0001"
+    },
+    {
+      "base": "など",
+      "word": "など",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "など"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020220']",
+      "kana": "ナド"
+    },
+    {
+      "base": "を",
+      "word": "を",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "を"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-030251']",
+      "kana": "ヲ"
+    },
+    {
+      "base": "",
+      "word": "たくさん",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "たくさん"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "使う",
+      "word": "使う",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "つか",
+          "s": "使"
+        },
+        {
+          "s": "う"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-017721']",
+      "kana": "ツカウ"
+    },
+    {
+      "base": "よう",
+      "word": "よう",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "よう"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-028479']",
+      "kana": "ヨウ"
+    },
+    {
+      "base": "に",
+      "word": "に",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "に"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020493']",
+      "kana": "ニ"
+    },
+    {
+      "base": "なる",
+      "word": "なっ",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なっ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "base": "て",
+      "word": "て",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "て"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018092']",
+      "kana": "テ"
+    },
+    {
+      "base": "",
+      "word": "、",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "、"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "が",
+      "word": "が",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "が"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-003773']",
+      "kana": "ガ"
+    },
+    {
+      "base": "高い",
+      "word": "高く",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "たか",
+          "s": "高"
+        },
+        {
+          "s": "く"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016213']",
+      "kana": "タカイ"
+    },
+    {
+      "base": "なる",
+      "word": "なっ",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なっ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "base": "て",
+      "word": "て",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "て"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018092']",
+      "kana": "テ"
+    },
+    {
+      "base": "",
+      "word": "いる",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "いる"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "ため",
+      "word": "ため",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "ため"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016698']",
+      "kana": "タメ"
+    },
+    {
+      "base": "です",
+      "word": "です",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "です"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018382']",
+      "kana": "デス"
+    },
+    {
+      "base": "",
+      "word": "。",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "。"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "word": "</S>",
+      "dict": "<pg>"
+    },
+    {
+      "word": "<S>",
+      "dict": "<pg>"
+    },
+    {
+      "base": "",
+      "word": "「",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "「"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "word": "ＵＣＣ上島珈琲",
+      "ruby": [
+        {
+          "s": "ＵＣＣ"
+        },
+        {
+          "r": "うえしま",
+          "s": "上島"
+        },
+        {
+          "r": "コーヒー",
+          "s": "珈琲"
+        }
+      ],
+      "class": "C"
+    },
+    {
+      "base": "",
+      "word": "」",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "」"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "も",
+      "word": "も",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "も"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027329']",
+      "kana": "モ"
+    },
+    {
+      "base": "コーヒー",
+      "word": "コーヒー",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "コーヒー"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-008972']",
+      "kana": "コーヒー"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "豆",
+      "word": "豆",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "まめ",
+          "s": "豆"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-026144']",
+      "kana": "マメ",
+      "dicid": "BE-0007"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "が",
+      "word": "が",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "が"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-003773']",
+      "kana": "ガ"
+    },
+    {
+      "base": "とても",
+      "word": "とても",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "とても"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-019565']",
+      "kana": "トテモ"
+    },
+    {
+      "base": "高い",
+      "word": "高く",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "たか",
+          "s": "高"
+        },
+        {
+          "s": "く"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016213']",
+      "kana": "タカイ"
+    },
+    {
+      "base": "なる",
+      "word": "なっ",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なっ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "base": "た",
+      "word": "た",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "た"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-015801']",
+      "kana": "タ"
+    },
+    {
+      "base": "ため",
+      "word": "ため",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "ため"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016698']",
+      "kana": "タメ"
+    },
+    {
+      "base": "",
+      "word": "、",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "、"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "７つ",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "７つ"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "",
+      "word": "「",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "「"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "ブルーマウンテン",
+      "class": "F",
+      "ruby": [
+        {
+          "s": "ブルーマウンテン"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "」",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "」"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "商品",
+      "word": "商品",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "しょうひん",
+          "s": "商品"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-012917']",
+      "kana": "ショウヒン",
+      "dicid": "BE-0006"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "を",
+      "word": "を",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "を"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-030251']",
+      "kana": "ヲ"
+    },
+    {
+      "base": "上げる",
+      "word": "上げる",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "あ",
+          "s": "上"
+        },
+        {
+          "s": "げる"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-000283']",
+      "kana": "アゲル"
+    },
+    {
+      "base": "こと",
+      "word": "こと",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "こと"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-009407']",
+      "kana": "コト"
+    },
+    {
+      "base": "に",
+      "word": "に",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "に"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020493']",
+      "kana": "ニ"
+    },
+    {
+      "base": "する",
+      "word": "し",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "し"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-014243']",
+      "kana": "スル"
+    },
+    {
+      "base": "ます",
+      "word": "まし",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "まし"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-025930']",
+      "kana": "マス"
+    },
+    {
+      "base": "た",
+      "word": "た",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "た"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-015801']",
+      "kana": "タ"
+    },
+    {
+      "base": "",
+      "word": "。",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "。"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "店",
+      "word": "店",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "みせ",
+          "s": "店"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-026451']",
+      "kana": "ミセ"
+    },
+    {
+      "base": "で",
+      "word": "で",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "で"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018095']",
+      "kana": "デ"
+    },
+    {
+      "base": "買う",
+      "word": "買う",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "か",
+          "s": "買"
+        },
+        {
+          "s": "う"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-004133']",
+      "kana": "カウ"
+    },
+    {
+      "base": "とき",
+      "word": "とき",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "とき"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-019258']",
+      "kana": "トキ"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "は",
+      "word": "は",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "は"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021416']",
+      "kana": "ハ"
+    },
+    {
+      "base": "",
+      "word": "２１",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "２１"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "％",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "％"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "から",
+      "word": "から",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "から"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-005143']",
+      "kana": "カラ"
+    },
+    {
+      "base": "",
+      "word": "４０",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "４０"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "％",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "％"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "ぐらい",
+      "word": "ぐらい",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "ぐらい"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-007384']",
+      "kana": "グライ"
+    },
+    {
+      "base": "高い",
+      "word": "高く",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "たか",
+          "s": "高"
+        },
+        {
+          "s": "く"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016213']",
+      "kana": "タカイ"
+    },
+    {
+      "base": "なる",
+      "word": "なる",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なる"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "base": "と",
+      "word": "と",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "と"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018819']",
+      "kana": "ト"
+    },
+    {
+      "base": "説明",
+      "word": "説明",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "せつめい",
+          "s": "説明"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-014834']",
+      "kana": "セツメイ"
+    },
+    {
+      "base": "する",
+      "word": "し",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "し"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-014243']",
+      "kana": "スル"
+    },
+    {
+      "base": "て",
+      "word": "て",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "て"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018092']",
+      "kana": "テ"
+    },
+    {
+      "base": "",
+      "word": "い",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "い"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "ます",
+      "word": "ます",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "ます"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-025930']",
+      "kana": "マス"
+    },
+    {
+      "base": "",
+      "word": "。",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "。"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "word": "</S>",
+      "dict": "<pg>"
+    },
+    {
+      "word": "<S>",
+      "dict": "<pg>"
+    },
+    {
+      "base": "",
+      "word": "「",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "「"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "雪印メグミルク",
+      "class": "C",
+      "ruby": [
+        {
+          "r": "ゆきじるし",
+          "s": "雪印"
+        },
+        {
+          "s": "メグ"
+        },
+        {
+          "s": "ミルク"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "」",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "」"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "も",
+      "word": "も",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "も"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027329']",
+      "kana": "モ"
+    },
+    {
+      "base": "牛乳",
+      "word": "牛乳",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "ぎゅうにゅう",
+          "s": "牛乳"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-006458']",
+      "kana": "ギュウニュウ"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "が",
+      "word": "が",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "が"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-003773']",
+      "kana": "ガ"
+    },
+    {
+      "base": "高い",
+      "word": "高く",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "たか",
+          "s": "高"
+        },
+        {
+          "s": "く"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016213']",
+      "kana": "タカイ"
+    },
+    {
+      "base": "なる",
+      "word": "なっ",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なっ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "base": "て",
+      "word": "て",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "て"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018092']",
+      "kana": "テ"
+    },
+    {
+      "base": "",
+      "word": "いる",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "いる"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "ため",
+      "word": "ため",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "ため"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016698']",
+      "kana": "タメ"
+    },
+    {
+      "base": "",
+      "word": "、",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "、"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "牛乳",
+      "word": "牛乳",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "ぎゅうにゅう",
+          "s": "牛乳"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-006458']",
+      "kana": "ギュウニュウ"
+    },
+    {
+      "base": "を",
+      "word": "を",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "を"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-030251']",
+      "kana": "ヲ"
+    },
+    {
+      "base": "使う",
+      "word": "使っ",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "つか",
+          "s": "使"
+        },
+        {
+          "s": "っ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-017721']",
+      "kana": "ツカウ"
+    },
+    {
+      "base": "た",
+      "word": "た",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "た"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-015801']",
+      "kana": "タ"
+    },
+    {
+      "base": "飲み物",
+      "word": "飲み物",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "の",
+          "s": "飲"
+        },
+        {
+          "s": "み"
+        },
+        {
+          "r": "もの",
+          "s": "物"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021343']",
+      "kana": "ノミモノ"
+    },
+    {
+      "base": "や",
+      "word": "や",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "や"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027752']",
+      "kana": "ヤ"
+    },
+    {
+      "base": "ヨーグルト",
+      "word": "ヨーグルト",
+      "class": "0",
+      "ruby": [
+        {
+          "s": "ヨーグルト"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-028621']",
+      "kana": "ヨーグルト",
+      "dicid": "BE-0008"
+    },
+    {
+      "base": "など",
+      "word": "など",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "など"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020220']",
+      "kana": "ナド"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "を",
+      "word": "を",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "を"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-030251']",
+      "kana": "ヲ"
+    },
+    {
+      "base": "",
+      "word": "２",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "２"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "％",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "％"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "から",
+      "word": "から",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "から"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-005143']",
+      "kana": "カラ"
+    },
+    {
+      "base": "",
+      "word": "５",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "５"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "",
+      "word": "％",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "％"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "ぐらい",
+      "word": "ぐらい",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "ぐらい"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-007384']",
+      "kana": "グライ"
+    },
+    {
+      "base": "上げる",
+      "word": "上げ",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "あ",
+          "s": "上"
+        },
+        {
+          "s": "げ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-000283']",
+      "kana": "アゲル"
+    },
+    {
+      "base": "ます",
+      "word": "ます",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "ます"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-025930']",
+      "kana": "マス"
+    },
+    {
+      "base": "",
+      "word": "。",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "。"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "word": "</S>",
+      "dict": "<pg>"
+    },
+    {
+      "word": "<S>",
+      "dict": "<pg>"
+    },
+    {
+      "base": "この",
+      "word": "この",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "この"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-009464']",
+      "kana": "コノ"
+    },
+    {
+      "base": "",
+      "word": "ほか",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "ほか"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "食料品",
+      "word": "食料品",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "しょくりょうひん",
+          "s": "食料品"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-013066']",
+      "kana": "ショクリョウヒン"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "会社",
+      "word": "会社",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "かいしゃ",
+          "s": "会社"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-003937']",
+      "kana": "カイシャ"
+    },
+    {
+      "base": "で",
+      "word": "で",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "で"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018095']",
+      "kana": "デ"
+    },
+    {
+      "base": "も",
+      "word": "も",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "も"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-027329']",
+      "kana": "モ"
+    },
+    {
+      "base": "",
+      "word": "、",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "、"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "原料",
+      "word": "原料",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "げんりょう",
+          "s": "原料"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-008323']",
+      "kana": "ゲンリョウ",
+      "dicid": "BE-0009"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "が",
+      "word": "が",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "が"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-003773']",
+      "kana": "ガ"
+    },
+    {
+      "base": "高い",
+      "word": "高く",
+      "class": "4",
+      "ruby": [
+        {
+          "r": "たか",
+          "s": "高"
+        },
+        {
+          "s": "く"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-016213']",
+      "kana": "タカイ"
+    },
+    {
+      "base": "なる",
+      "word": "なる",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なる"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "base": "と",
+      "word": "と",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "と"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018819']",
+      "kana": "ト"
+    },
+    {
+      "base": "",
+      "word": "、",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "、"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "商品",
+      "word": "商品",
+      "class": "2",
+      "ruby": [
+        {
+          "r": "しょうひん",
+          "s": "商品"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-012917']",
+      "kana": "ショウヒン",
+      "dicid": "BE-0006"
+    },
+    {
+      "base": "の",
+      "word": "の",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "の"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-021148']",
+      "kana": "ノ"
+    },
+    {
+      "base": "値段",
+      "word": "値段",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "ねだん",
+          "s": "値段"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020998']",
+      "kana": "ネダン"
+    },
+    {
+      "base": "を",
+      "word": "を",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "を"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-030251']",
+      "kana": "ヲ"
+    },
+    {
+      "base": "上げる",
+      "word": "上げ",
+      "class": "3",
+      "ruby": [
+        {
+          "r": "あ",
+          "s": "上"
+        },
+        {
+          "s": "げ"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-000283']",
+      "kana": "アゲル"
+    },
+    {
+      "base": "て",
+      "word": "て",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "て"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018092']",
+      "kana": "テ"
+    },
+    {
+      "base": "",
+      "word": "いく",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "いく"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "base": "こと",
+      "word": "こと",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "こと"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-009407']",
+      "kana": "コト"
+    },
+    {
+      "base": "に",
+      "word": "に",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "に"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020493']",
+      "kana": "ニ"
+    },
+    {
+      "base": "なる",
+      "word": "なり",
+      "class": "4",
+      "ruby": [
+        {
+          "s": "なり"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-020377']",
+      "kana": "ナル"
+    },
+    {
+      "base": "そう",
+      "word": "そう",
+      "class": "3",
+      "ruby": [
+        {
+          "s": "そう"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-015258']",
+      "kana": "ソウ"
+    },
+    {
+      "base": "です",
+      "word": "です",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "です"
+        }
+      ],
+      "dict": "/rsk5/dictionary/項目[@id='RSHOK-K-018382']",
+      "kana": "デス"
+    },
+    {
+      "base": "",
+      "word": "。",
+      "class": "B",
+      "ruby": [
+        {
+          "s": "。"
+        }
+      ],
+      "dict": "",
+      "kana": ""
+    },
+    {
+      "word": "</S>",
+      "dict": "<pg>"
+    },
+    {
+      "word": "<S>",
+      "dict": "<pg>"
+    },
+    {
+      "word": "</S>",
+      "dict": "<pg>"
+    }
+  ]
+}

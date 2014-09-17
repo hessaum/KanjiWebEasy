@@ -81,6 +81,11 @@ def sort_word_info(word_array):
 def sort_kanji_info(word_array):
     return sorted(word_array, key=lambda x: (_all_kanji_count[x],x), reverse=True)
 
+def splice_article_id(articleId):
+    time = articleId[4:12];
+    id = articleId[13:];
+    return (time, id)
+
 def get_inside_word_usage(word_info):
     count_total = 0
     count_map = {}
