@@ -1,33 +1,11 @@
-files are categorized
-- regular
-- locations
-- company names
-- etc.
+﻿TODO ::
 
-clicking pencil colors some of the words
-light blue : companies
-
-website categorized: location/so
-
-look up words or symbols with search bar
-look at top frequency list
-
-per word : how common it is, example sentences
-possible readings
-
-Seb's converter:
-input: http://www3.nhk.or.jp/news/easy/k10014609731000/k10014609731000.out.json
-output: http://puu.sh/8W68M.txt
-
-commonly followed by / commonly preceded by
-
-if you click on a kanji it also shows the words the kanji is included in
-
-TODO ::
-on word page: keep that there's a list of kanji
-but change so each kanji in that list is an individual link
-& the kanji -> word lookup accounts for this
-
-====
-
-Most Japanese websites use the same core database for their information from kanji readings to example setences. The point of this website is to build a new database with more detailed and (constantly) updated information. This is done by crawling NHK Web Easy articles, and so we recommend you check out their articles daily to support them. The suggested use for this website is as a supplementary to your regular studies and features no translations for the aquired material from the NHK. However, we hope to one day be your dictionary of choice.
+Sort word usage by occurrence
+Add kanjibox info to kanji page
+Turn front page into search
+Show real class instead of just number
+Get rid of wordbox stuff
+Add footer
+Allow to search names only, etc.
+Sentences getting split by 。 inside quotes
+    ex: おもしろそうだと思って吸わないでください」と言っています 

@@ -18,6 +18,5 @@ def setup(app):
     app.context_processor(inject_python_builtins)
     app.context_processor(inject_constants)
 
-# ehhh...
 def render(name, **kwargs):
     return render_template(name + '.html', **kwargs)

@@ -4,75 +4,44 @@
 
 <h1>Word: {{ word }}</h1>
 
-<h2>Readings</h2>
 {% for x, (reading, reading_data) in enumerate(info.readings.items()) %}
-	<div class="test">
-		<div class="readingbox">
-			<span class="id">{{x+1}}</span>
-			
-			<span class="group">
-			{% for x, (furigana) in enumerate(reading_data.furigana) %}
-				<ruby>
-					<span class="furigana">{{furigana}}</span>
-					<rp>(</rp>
-					<rt>
-						<span class="kanji">{{(reading_data.kanji[x])}}</span>
-					</rt>
-					<rp>)</rp>
-				</ruby>
-			{% endfor %}
-			</span>
-			
-			<br /> <br />
-			<span class="type">
-				Type: 
-				
-				{% for type in reading_data.type %}
-					<span class="type">{{ type }}</span>
-				{% endfor %}
-				
-				{% if len(reading_data.type) == 0 %}
-					Unknown
-				{% endif %}
-			</span>
-			
-			<br /><br />
-			<div class="more">
-				Count: 
-				<span class="count">{{word_count[reading]}}</span>
-				<br />
-				<span class="freq">{{ '%.02f' % (100*(word_count[reading]/word_usage_total)) }}%</span>
-			</div>
-			<br /><br />
-			<span class="class">
-				Class: {{ reading_data.class }}
-			</span>
-		</div>
-		<h2>Kanji</h2>
-		<ul>
-		{% for x, kanji in enumerate(kanji_dict[reading]) %}
-			<div class="kanjibox">
-				<a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">
-					<span class="id">{{ x+1 }}</span>
-					<span class="kanji">{{ kanji }}</span>
-					<div class="more">
-						<span class="count">{{ kanji_count[kanji] }}</span>
-						<span class="freq">{{ '%.02f' % (100*(kanji_count[kanji]/kanji_usage_total)) }}%</span>
-					</div>
-				</a>
-			</div>
-		{% endfor %}
-		{% if len(reading_data.kanji[0]) == 0 %}
-			<li>None.</li>
-		{% endif %}
-		</ul>
+    <h2>{{ reading }}</h2>
 		
-		<span style=" clear: left; display: block; ">
-		<h2>Example sentences</h2>
-		{% for sentence in example_sentences %}
-			<p>{% for word in sentence %}{% if len(word) == 2 %}<ruby>{{ word[0] }}<rp>（</rp><rt>{{ word[1] }}</rt><rp>）</rp></ruby>{% else %}{{ word[0] }}{% endif %}{% endfor %}</p>
+    Reading: 
+    {% for x, (furigana) in enumerate(reading_data.furigana) %}
+        {% if reading_data.kanji[x] %}
+            <ruby>{{reading_data.kanji[x]}}<rp>（</rp><rt>{{furigana}}</rt><rp>）</rp></ruby>{% else %}{{furigana}}
+        {% endif %}
+    {% endfor %}
+    <br />
+    
+    Occurences: {{word_count[reading]}} 
+    <font size="1">({{ '%.02f' % (100*(word_count[reading]/word_usage_total)) }}%)</font>
+
+    <br />
+    Class: {{ reading_data.class }}
+    
+    <br />
+    Kanji:
+	{% for x, kanji in enumerate(kanji_dict[reading]) %}
+        <a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a>
+	{% endfor %}
+	{% if len(reading_data.kanji[0]) == 0 %}
+		<li>None.</li>
+	{% endif %}
+	
+	<span style=" clear: left; display: block; ">
+    <ol>
+	{% for sentence in example_sentences[reading] %}
+        <li>
+		<p>{% for word in sentence %}
+			{% if len(word) == 2 %}<ruby>{{ word[0] }}<rp>（</rp><rt>{{ word[1] }}</rt><rp>）</rp></ruby>{% else %}{{ word[0] }}{% endif %}
 		{% endfor %}
-		</span>
+		</p>
+        </li>
+	{% endfor %}
+	</span>
+    </ol>
 {% endfor %}
 {% if len(info.readings) == 0 %}
 	<p>None.</p>

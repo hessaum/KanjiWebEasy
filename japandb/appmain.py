@@ -44,8 +44,9 @@ def show_word(word):
     #Flatten kanji array
     #Also extract article info for example sentence
     kanji_dict = {}
-    example_sentence_lookup = set();
+    example_sentence_lookup = {}
     for reading, reading_data in word_info['readings'].items():
+        example_sentence_lookup[reading] = []
         reading_kanji_list = []
         for kanji_subword in reading_data['kanji']:
             for kanji in kanji_subword:
@@ -54,44 +55,41 @@ def show_word(word):
         for examples in reading_data['examples']:
             # add a tuple of sentenceNum and article
             if 'sentenceNum' in examples:
-                example_sentence_lookup.add((examples['sentenceNum'], examples['article']))
+                example_sentence_lookup[reading].append((examples['sentenceNum'], examples['article']))
     
     #Go through all the example sentences
-    all_sentences = list()
-    for lookup_info in example_sentence_lookup:
-        article_info = data.splice_article_id(lookup_info[1])
-        with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+lookup_info[1]+'.json', encoding='utf-8') as f:
-            containing_article = json.load(f)
-            current_sentence = 0
-            example_sentence = list()
-            for token in containing_article['morph']:
-            
-                #First check if we need to increase sentence number
-                if 'word' in token:
-                    if current_sentence <= 1 and token['word'] == "<S>":
-                        current_sentence += 1
-                        continue
-                    if token['word'] == '。':
-                        current_sentence += 1
-                        continue
+    all_sentences = {}
+    for key in example_sentence_lookup:
+        all_sentences[key] = []
+        for lookup_info in example_sentence_lookup[key]:
+            article_info = data.splice_article_id(lookup_info[1])
+            with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+lookup_info[1]+'.json', encoding='utf-8') as f:
+                containing_article = json.load(f)
+                current_sentence = 0
+                example_sentence = []
+                for token in containing_article['morph']:
                 
-                #Then parse one word
-                if current_sentence == lookup_info[0]:
-                    if 'ruby' in token:
-                        for reading in token['ruby']:
-                            if 'r' in reading:
-                                example_sentence.append((reading['s'], reading['r']))
-                            else:
-                                example_sentence.append((reading['s'],))
-                if current_sentence > lookup_info[0]:
-                    break
-                
-            all_sentences.append(example_sentence)
-            
-            #limit max # of sentences
-            if len(all_sentences) == 10:
-                break
+                    #First check if we need to increase sentence number
+                    if 'word' in token:
+                        if current_sentence <= 1 and token['word'] == "<S>":
+                            current_sentence += 1
+                            continue
+                        if token['word'] == '。':
+                            current_sentence += 1
+                            continue
                     
+                    #Then parse one word
+                    if current_sentence == lookup_info[0]:
+                        if 'ruby' in token:
+                            for reading in token['ruby']:
+                                if 'r' in reading:
+                                    example_sentence.append((reading['s'], reading['r']))
+                                else:
+                                    example_sentence.append((reading['s'],))
+                    if current_sentence > lookup_info[0]:
+                        break
+                all_sentences[key].append(example_sentence)
+                
     
     return templates.render('word', 
         word=word, 
