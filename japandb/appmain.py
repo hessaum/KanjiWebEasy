@@ -20,7 +20,7 @@ def index():
 @app.route('/kanji/')
 def show_all_kanji():
     return templates.render('allkanji',
-        all_kanji=data.get_kanji_items(),
+        all_kanji=data.get_kanji_count(),
         kanji_count = data._all_kanji_count,
         kanji_total=data.get_kanji_total()
     )
