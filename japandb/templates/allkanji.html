@@ -9,7 +9,7 @@
 
 	{% for x, kanji_info in enumerate(all_kanji) %}
         <div class="kanjibox">
-            <a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">
+            <a class="link" href="/kanji/{{kanji_info[0]}}">
                 <span class="id">{{ x+1 }}</span>
                 <span class="kanji">{{ kanji_info[0] }}</span>
                 <div class="more">
