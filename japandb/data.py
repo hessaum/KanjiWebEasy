@@ -101,3 +101,38 @@ def get_kanji_usage_total(kanji):
     for word in _kanji[kanji]['words']:
         count_total += _all_word_count[word]
     return count_total
+    
+def populate_example_sentences(example_sentence_lookup, key):
+    sentences = []
+    for lookup_info in example_sentence_lookup[key]:
+        article_info = splice_article_id(lookup_info[1])
+        with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+lookup_info[1]+'.json', encoding='utf-8') as f:
+            containing_article = json.load(f)
+            current_sentence = 0
+            example_sentence = []
+            for token in containing_article['morph']:
+            
+                #First check if we need to increase sentence number
+                if 'word' in token:
+                    if current_sentence <= 1 and token['word'] == "<S>":
+                        current_sentence += 1
+                        continue
+                    if token['word'] == '。':
+                        current_sentence += 1
+                        continue
+                
+                #Then parse one word
+                if current_sentence == lookup_info[0]:
+                    if 'ruby' in token:
+                        for reading in token['ruby']:
+                            if 'r' in reading:
+                                example_sentence.append((reading['s'], reading['r']))
+                            else:
+                                example_sentence.append((reading['s'],))
+                if current_sentence > lookup_info[0]:
+                    break
+            sentences.append(example_sentence)
+            
+            if len(sentences) == 10:
+                break
+    return sentences

@@ -71,35 +71,7 @@ def show_word(word):
     #Go through all the example sentences
     all_sentences = {}
     for key in example_sentence_lookup:
-        all_sentences[key] = []
-        for lookup_info in example_sentence_lookup[key]:
-            article_info = data.splice_article_id(lookup_info[1])
-            with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+lookup_info[1]+'.json', encoding='utf-8') as f:
-                containing_article = json.load(f)
-                current_sentence = 0
-                example_sentence = []
-                for token in containing_article['morph']:
-                
-                    #First check if we need to increase sentence number
-                    if 'word' in token:
-                        if current_sentence <= 1 and token['word'] == "<S>":
-                            current_sentence += 1
-                            continue
-                        if token['word'] == '。':
-                            current_sentence += 1
-                            continue
-                    
-                    #Then parse one word
-                    if current_sentence == lookup_info[0]:
-                        if 'ruby' in token:
-                            for reading in token['ruby']:
-                                if 'r' in reading:
-                                    example_sentence.append((reading['s'], reading['r']))
-                                else:
-                                    example_sentence.append((reading['s'],))
-                    if current_sentence > lookup_info[0]:
-                        break
-                all_sentences[key].append(example_sentence)
+        all_sentences[key] = data.populate_example_sentences(example_sentence_lookup, key)
                 
     
     return templates.render('word', 
