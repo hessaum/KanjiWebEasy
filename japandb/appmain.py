@@ -17,6 +17,15 @@ def index():
         word_total = data.get_word_total()
     )
 
+@app.route('/kanji/')
+def show_all_kanji():
+    return templates.render('allkanji',
+        all_kanji=data.get_kanji_items(),
+        kanji_count = data._all_kanji_count,
+        kanji_total=data.get_kanji_total()
+    )
+
+
 @app.route('/kanji/<kanji>')
 def show_kanji(kanji):
     info = data.get_kanji_info(kanji)

@@ -5,40 +5,8 @@
 
 {% include "bits/introduction.html" %}
 
-<h2>Kanji</h2>
 <div class="kanji">
-	<p>{{ len(kanji_count) }} kanji listed</p>
-
-	{% for x, (kanji, count) in enumerate(kanji_count) %}	
-	<div class="kanjibox">
-		<a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">
-			<span class="id">{{ x+1 }}</span>
-			<span class="kanji">{{ kanji }}</span>
-			<div class="more">
-				<span class="count">{{ count }}</span>
-				<span class="freq">{{ '%.02f' % (100*(count/kanji_total)) }}%</span>
-			</div>
-		</a>
-	</div>
-	{% endfor %}
-</div>
-
-<div class="clearfloat"></div>
-
-<h2>Words</h2>
-<div class="words">
-	{% for x, (word, count) in enumerate(word_count) %}	
-	<div class="wordbox">
-		<a class="link" href="{{ url_for('show_word', word=word) }}">
-		<span class="id">{{ x+1 }}</span>
-		<span class="word">{{ word }}</span>
-		<div class="more">
-			<span class="count">{{count}}</span>
-			<span class="freq">{{ '%.02f' % (100*(count/word_total)) }}</span>
-		</div>
-		</a>
-	</div>
-	{% endfor %}
+	<a class="link" href="/kanji/">See a list of all kanji</a>
 </div>
 
 {% endblock %}

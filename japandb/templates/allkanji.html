@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+{% block title %}All Kanjji{% endblock %}
+{% block content %}
+
+<h2>Kanji</h2>
+
+<div class="kanji">
+	<p>{{ len(all_kanji) }} kanji listed</p>
+
+	{% for x, kanji_info in enumerate(all_kanji) %}
+        <div class="kanjibox">
+            <a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">
+                <span class="id">{{ x+1 }}</span>
+                <span class="kanji">{{ kanji_info[0] }}</span>
+                <div class="more">
+                    <span class="count">{{ kanji_count[kanji_info[0]] }}</span>
+                    <span class="freq">{{ '%.02f' % (100*(kanji_count[kanji_info[0]]/kanji_total)) }}%</span>
+                </div>
+        	</a>
+        </div>
+	{% endfor %}
+</div>
+
+{% endblock %}

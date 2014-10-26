@@ -6,10 +6,6 @@ body {
     font-family: Meiryo;
 }
 
-div.clearfloat {
-    clear: both;
-}
-
 /* Wordboxes */
 .wordbox {
     float:left;
