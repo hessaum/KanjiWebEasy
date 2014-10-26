@@ -28,6 +28,8 @@ def show_kanji(kanji):
     return templates.render('kanji', 
         kanji=kanji, 
         info=info, 
+        kanji_count=data._all_kanji_count[kanji],
+        kanji_total = data.get_kanji_total(),
         word_count = data._all_word_count,
         usage_total = data.get_kanji_usage_total(kanji)
     )
@@ -93,7 +95,7 @@ def show_word(word):
     
     return templates.render('word', 
         word=word, 
-        info=word_info,
+        info=word_order,
         kanji_dict = kanji_dict,
         kanji_count = data._all_kanji_count,
         word_count = word_usage_info[0],

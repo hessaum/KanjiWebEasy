@@ -4,7 +4,8 @@
 
 <h1>Word: {{ word }}</h1>
 
-{% for x, (reading, reading_data) in enumerate(info.readings.items()) %}
+{{ info.readings }}
+{% for x, (reading, reading_data) in enumerate(info) %}
     <h2>{{ reading }}</h2>
 		
     Reading: 
@@ -15,7 +16,7 @@
     {% endfor %}
     <br />
     
-    Occurences: {{word_count[reading]}} 
+    Occurrences: {{word_count[reading]}} 
     <font size="1">({{ '%.02f' % (100*(word_count[reading]/word_usage_total)) }}%)</font>
 
     <br />
@@ -43,7 +44,4 @@
 	</span>
     </ol>
 {% endfor %}
-{% if len(info.readings) == 0 %}
-	<p>None.</p>
-{% endif %}
 {% endblock %}

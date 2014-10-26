@@ -1,7 +1,5 @@
 ﻿TODO ::
 
-Sort word usage by occurrence
-Add kanjibox info to kanji page
 Turn front page into search
 Show real class instead of just number
 Get rid of wordbox stuff
@@ -9,3 +7,7 @@ Add footer
 Allow to search names only, etc.
 Sentences getting split by 。 inside quotes
     ex: おもしろそうだと思って吸わないでください」と言っています 
+
+Fix issue with repeated readings?
+    ex: 吸っ　and 吸っ are both listed as different readings but one contains the other
+        Things like 吸わ are listed as separate readings also (comes from 吸わない) so this has to do with the backend code
