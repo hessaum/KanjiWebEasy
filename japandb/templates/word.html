@@ -19,8 +19,11 @@
     Occurrences: {{word_count[reading]}} 
     <font size="1">({{ '%.02f' % (100*(word_count[reading]/word_usage_total)) }}%)</font>
 
-    <br />
-    Class: {{ reading_data.class }}
+    {% if class_map[reading_data.class] %}
+        <br />
+        Class: {{ class_map[reading_data.class] }}
+    {% endif %}
+    
     
     <br />
     Kanji:
@@ -28,10 +31,12 @@
         <a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a>
 	{% endfor %}
 	{% if len(reading_data.kanji[0]) == 0 %}
-		<li>None.</li>
+		None
 	{% endif %}
 	
 	<span style=" clear: left; display: block; ">
+    <br />
+    <b>Example sentences</b>
     <ol>
 	{% for sentence in example_sentences[reading] %}
         <li>

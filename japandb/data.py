@@ -144,3 +144,18 @@ def populate_example_sentences(example_sentence_lookup, key):
             if len(sentences) == 10:
                 break
     return sentences
+
+    
+class_map = {
+	"0" : "Regular word",
+	"1" : "Regular word",
+	"2" : "Regular word",
+	"3" : "Regular word",
+	"4" : "Regular word",
+	"L" : "Location",
+	"B" : "Grammatical",
+	"F" : "Foreign influence",
+	"C" : "Group name",
+	"N" : "Name",
+	'-' : ""
+}

@@ -79,6 +79,7 @@ def show_word(word):
     return templates.render('word', 
         word=word, 
         info=word_order,
+        class_map = data.class_map,
         kanji_dict = kanji_dict,
         kanji_count = data._all_kanji_count,
         word_count = word_usage_info[0],
