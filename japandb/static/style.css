@@ -6,6 +6,26 @@ body {
     font-family: Meiryo;
 }
 
+
+.link {
+    text-decoration: none;
+    color: #7465B2;
+}
+
+ol {
+    overflow: hidden;
+    list-style: none outside none;
+    padding: 0;
+}
+
+li {
+  border-bottom: 1px solid #D7DFE4;
+  overflow: hidden;
+  padding: 10px 0;
+  vertical-align: top;
+  margin: 0 0 -1px;
+}
+
 /* Wordboxes */
 .wordbox {
     float:left;
@@ -83,40 +103,6 @@ body {
     width: 100px;
 }
 
-/* reading boxes */
-
-.readingbox {
-    float: left;
-    margin: 1px;
-    min-width: 475px;
-    max-width: 475px;
-    min-height: 250px;
-    max-height: 250px;
-    border: 4px solid gray;
-}
-.readingbox .id {
-    position: relative;
-    left: 25px;
-    font-size: 10px;
-    vertical-align: text-top;
-}
-.readingbox .group {
-    position: relative;
-    left: 50px;
-    top: 10px;
-}
-.readingbox .furigana {
-    font-size: 100%;
-}
-.readingbox .kanji {
-    font-size: 100%;
-}
-.readingbox .type {
-    width: 200px;
-}
-.readingbox .count {
-    width: 100px;
-}
 .kanjibox .more {
     font-family: Monaco;
     position: relative;
@@ -125,12 +111,6 @@ body {
     font-size: 75%;
     max-width: 0px;
 }
-.readingbox .freq {
-    width: 100px;
-}
-.readingbox .class {
-    width: 100px;
-}
 
 /* Hover tags */
 .wordbox:hover {
@@ -138,23 +118,4 @@ body {
 }
 .kanjibox:hover {
     text-shadow: 0 0 0.1em #f79731
-}
-
-.link {
-    text-decoration: none;
-    color: #7465B2;
-}
-
-ol {
-    overflow: hidden;
-    list-style: none outside none;
-    padding: 0;
-}
-
-li {
-  border-bottom: 1px solid #D7DFE4;
-  overflow: hidden;
-  padding: 10px 0;
-  vertical-align: top;
-  margin: 0 0 -1px;
 }
