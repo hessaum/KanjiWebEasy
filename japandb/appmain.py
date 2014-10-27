@@ -59,7 +59,7 @@ def show_word(word):
     kanji_dict = {}
     example_sentence_lookup = {}
     for reading, reading_data in word_info['readings'].items():
-        example_sentence_lookup[reading] = []
+        example_sentence_lookup[reading] = set()
         reading_kanji_list = []
         for kanji_subword in reading_data['kanji']:
             for kanji in kanji_subword:
@@ -68,7 +68,7 @@ def show_word(word):
         for examples in reading_data['examples']:
             # add a tuple of sentenceNum and article
             if 'sentenceNum' in examples:
-                example_sentence_lookup[reading].append((examples['sentenceNum'], examples['article']))
+                example_sentence_lookup[reading].add((examples['sentenceNum'], examples['article']))
     
     #Go through all the example sentences
     all_sentences = {}
