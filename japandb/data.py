@@ -110,6 +110,7 @@ def populate_example_sentences(example_sentence_lookup, key):
             containing_article = json.load(f)
             current_sentence = 0
             example_sentence = []
+            in_quote = False
             for token in containing_article['morph']:
             
                 #First check if we need to increase sentence number
@@ -117,7 +118,14 @@ def populate_example_sentences(example_sentence_lookup, key):
                     if current_sentence <= 1 and token['word'] == "<S>":
                         current_sentence += 1
                         continue
-                    if token['word'] == '。':
+                        
+                    if token['word'] == '「':
+                        in_quote = True
+                        
+                    if token['word'] == '」':
+                        in_quote = False
+                    
+                    if token['word'] == '。' and in_quote == False:
                         current_sentence += 1
                         continue
                 
