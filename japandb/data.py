@@ -51,7 +51,7 @@ for word, word_info in _all_words.items():
 def get_kanji_keys():
     return sorted(_kanji.keys(), key=_all_kanji_count.get, reverse=True)
 
-def get_kanji_count():
+def get_kanji_sorted_by_count():
     return sorted(_all_kanji_count.items(), key=itemgetter(1, 0), reverse=True)
     
 def get_kanji_items():
@@ -101,6 +101,15 @@ def get_kanji_usage_total(kanji):
     for word in _kanji[kanji]['words']:
         count_total += _all_word_count[word]
     return count_total
+    
+def get_running_total(sorted_list):
+    running_count = []
+    previous_count = 0
+    for i, kanji in enumerate(sorted_list):
+        running_count.append(previous_count + kanji[1]);
+        previous_count = previous_count + kanji[1]
+    
+    return running_count
     
 def populate_example_sentences(example_sentence_lookup, key):
     sentences = []

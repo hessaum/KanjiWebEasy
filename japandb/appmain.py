@@ -13,7 +13,7 @@ templates.setup(app)
 @app.route('/')
 def index():
     return templates.render('index',
-        kanji_count=data.get_kanji_count(),
+        kanji_count=data.get_kanji_sorted_by_count(),
         kanji_total = data.get_kanji_total(),
         word_count=data.get_word_count(),
         word_total = data.get_word_total()
@@ -21,9 +21,11 @@ def index():
 
 @app.route('/kanji/')
 def show_all_kanji():
+    sorted_kanji = data.get_kanji_sorted_by_count()
     return templates.render('allkanji',
-        all_kanji=data.get_kanji_count(),
+        all_kanji=sorted_kanji,
         kanji_count = data._all_kanji_count,
+        running_total = data.get_running_total(sorted_kanji),
         kanji_total=data.get_kanji_total()
     )
 
