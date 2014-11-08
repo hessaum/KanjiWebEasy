@@ -11,7 +11,7 @@ def inject_python_builtins():
 
 def inject_constants():
     return dict(
-        SITE_TITLE='ArataTori'
+        SITE_TITLE='Kanji Web Easy'
     )
 
 def setup(app):
