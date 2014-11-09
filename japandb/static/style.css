@@ -21,9 +21,12 @@ ol {
 li {
   border-bottom: 1px solid #D7DFE4;
   overflow: hidden;
-  padding: 10px 0;
   vertical-align: top;
-  margin: 0 0 -1px;
+}
+
+#header ol li {
+	margin-right:20px;
+    float: left;
 }
 
 /* Wordboxes */
