@@ -8,28 +8,25 @@ from operator import itemgetter
 # Perform initialization
 
 with open('data/output.json', encoding='utf-8') as f:
-    _categories = json.load(f)
+    words = json.load(f)
 
-# add "category" to each word, make _words_by_category dict
-_words_by_category = {}
 _all_words = {}
 _all_word_count = {}
 _all_kanji_count = {}
 
-for category, cat_info in _categories.items():
-    _words_by_category[category] = cat_info["words"]
-    for word, word_info in cat_info["words"].items():
-        word_info["category"] = category
-        _all_words[word] = word_info
-        word_occurrence = 0
-        for reading, reading_info in word_info["readings"].items():
-            example_count = len(reading_info["examples"])
-            word_occurrence = word_occurrence + example_count
-            
-            for kanji_str in reading_info["kanji"]:
-                for kanji in kanji_str:
-                    _all_kanji_count[kanji] = _all_kanji_count.get(kanji, 0) + example_count
-        _all_word_count[word] = word_occurrence
+for word, word_info in words["words"].items():
+    _all_words[word] = word_info
+    word_occurrence = 0
+    for reading, reading_info in word_info["readings"].items():
+        example_count = 0
+        for article, sentences in reading_info["examples"].items():
+            example_count = example_count + len(sentences)
+        word_occurrence = word_occurrence + example_count
+        
+        for kanji_str in reading_info["kanji"]:
+            for kanji in kanji_str:
+                _all_kanji_count[kanji] = _all_kanji_count.get(kanji, 0) + example_count
+    _all_word_count[word] = word_occurrence
 
 _kanji_total = sum(count for kanji, count in _all_kanji_count.items())
 _word_total = sum(count for word, count in _all_word_count.items())

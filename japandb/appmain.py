@@ -67,10 +67,10 @@ def show_word(word):
             for kanji in kanji_subword:
                 reading_kanji_list.append(kanji)
         kanji_dict[reading] = reading_kanji_list
-        for examples in reading_data['examples']:
+        for article, sentences in reading_data['examples'].items():
             # add a tuple of sentenceNum and article
-            if 'sentenceNum' in examples:
-                example_sentence_lookup[reading].add((examples['sentenceNum'], examples['article']))
+            for sentence_num in sentences:
+                example_sentence_lookup[reading].add((sentence_num, article))
     
     #Go through all the example sentences
     all_sentences = {}
