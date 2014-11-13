@@ -11,6 +11,10 @@ app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 templates.setup(app)
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return templates.render('page_not_found'), 404
+    
 @app.route('/')
 def index():
     return templates.render('index',
