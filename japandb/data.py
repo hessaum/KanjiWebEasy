@@ -202,7 +202,7 @@ def handle_reading_post(request):
     # don't allow the same IP twice
     if not request.remote_addr in resolved_readings[base][reading][kanji]['ip']:
         resolved_readings[base][reading][kanji]['split'].append(kanji_readings)
-        resolved_readings[base][reading][kanji]['ip'].append(request.remote_addr)
+        resolved_readings[base][reading][kanji]['ip'].append(request.environ['REMOTE_ADDR'])
         redis_conn.set('json', json.dumps(resolved_readings, ensure_ascii=False))
 
 def build_reading(request):

@@ -49,10 +49,10 @@ def reading_solver():
                     continue
                 if len(subword_info['ip']) >= 5:
                     continue
-                if request.remote_addr in subword_info['ip']:
+                if request.environ['REMOTE_ADDR'] in subword_info['ip']:
                     continue
                 
-                return templates.render('readingsolver', base=base, reading=reading, furigana=subword_info['furi'], kanji=subword)
+                return templates.render('readingsolver', ip=request.environ['REMOTE_ADDR'], ips=subword_info['ip'], base=base, reading=reading, furigana=subword_info['furi'], kanji=subword)
             
     return templates.render('readingsolver')
 
