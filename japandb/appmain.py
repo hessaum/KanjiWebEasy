@@ -4,6 +4,7 @@
 from flask import Flask, redirect, request
 from japandb import data, templates
 import json
+import hashlib
 
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
@@ -19,9 +20,18 @@ def index():
         word_total = data.get_word_total()
     )
 
-@app.route('/plerp')
+@app.route('/plerp/', methods=['GET', 'POST'])
 def dump_database():
-    return templates.render('dump_database', database=data.resolved_readings)
+    if request.method == 'POST':
+        if hashlib.sha1(request.form['password'].encode('utf-8')).hexdigest() == '4ae4a6888caa20abe362f9a2b4569dc1c166cc2e':
+            data.resolved_readings = {}
+            data.populate_database()
+            return templates.render('dump_database', delete=True)
+            
+        if hashlib.sha1(request.form['password'].encode('utf-8')).hexdigest() == '277c17bf478687ba2b53a8929e945d4f33078384':
+            return templates.render('dump_database', database=data.resolved_readings)
+        
+    return templates.render('dump_database')
 
 @app.route('/readingsolver/', methods=['GET', 'POST'])
 def reading_solver():

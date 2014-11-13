@@ -1,1 +1,14 @@
-{{database}}
+{% if database is defined %}
+	{{database}}
+{% endif %}
+{% if delete is defined %}
+	Deleted database
+{% endif %}
+
+<form method="POST" action="/plerp/">
+	<input type="password" name="password" value=""> 
+	<input type="submit" value="Submit">
+</form> 
+
+<script type="text/javascript">
+</script>

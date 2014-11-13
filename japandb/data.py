@@ -55,26 +55,28 @@ def load_redis_json(redis_conn):
 
 resolved_readings = load_redis_json(redis_conn)
 # populate resolved files with words it hasn't seen yet    
-for base, word_info in words['words'].items():
-    for reading, reading_info in word_info['readings'].items():
-        if len(reading_info['kanji']) == 0:
-            continue;
-        for i, kanji in enumerate(reading_info['kanji']):
-            if len(kanji) == 0:
-                continue
-            if not base in resolved_readings:
-                resolved_readings[base] = {}
-            if not reading in resolved_readings[base]:
-                resolved_readings[base][reading] = {}
-            if not kanji in resolved_readings[base][reading]:
-                resolved_readings[base][reading][kanji] = {'split' : [], 'ip': [], 'furi': reading_info['furigana'][i]}
-            if len(kanji) == 1:
-                if 'ip' in resolved_readings[base][reading][kanji]:
-                    del resolved_readings[base][reading][kanji]['ip']
-                    del resolved_readings[base][reading][kanji]['split']
+def populate_database():
+    for base, word_info in words['words'].items():
+        for reading, reading_info in word_info['readings'].items():
+            if len(reading_info['kanji']) == 0:
+                continue;
+            for i, kanji in enumerate(reading_info['kanji']):
+                if len(kanji) == 0:
+                    continue
+                if not base in resolved_readings:
+                    resolved_readings[base] = {}
+                if not reading in resolved_readings[base]:
+                    resolved_readings[base][reading] = {}
+                if not kanji in resolved_readings[base][reading]:
+                    resolved_readings[base][reading][kanji] = {'split' : [], 'ip': [], 'furi': reading_info['furigana'][i]}
+                if len(kanji) == 1:
+                    if 'ip' in resolved_readings[base][reading][kanji]:
+                        del resolved_readings[base][reading][kanji]['ip']
+                        del resolved_readings[base][reading][kanji]['split']
 
-redis_conn.set('json', json.dumps(resolved_readings, ensure_ascii=False))
-
+    redis_conn.set('json', json.dumps(resolved_readings, ensure_ascii=False))
+    
+populate_database()
 # Public interface
 
 def get_kanji_keys():
