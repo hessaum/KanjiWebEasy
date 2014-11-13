@@ -1,0 +1,80 @@
+{% extends "_base.html" %}
+{% block title %}Reading Solver{% endblock %}
+{% block content %}
+
+<h1>Reading Solver</h1>
+
+{% if base is defined %}
+<div style="border: 1px solid;border-style:dotted;width:{{len(furigana)}}em;" id="word">{{ furigana }}</div>
+<br />
+
+{% for i, char in enumerate(kanji) %}
+{{ char }}
+	<input type="text" id="kanji_{{i}}" disabled="disabled" autocomplete="off"/> 
+{% endfor %}
+<br />
+<button id="back" onclick="prev_box()">Back</button> 
+<button id="next" onclick="next_box()">Next</button> 
+<br />
+<form method="POST" action="/readingsolver/">
+	{% for i in range(len(kanji)) %}
+		<input type="hidden" id="kanji_val_{{i}}" name="kanji_val_{{i}}"/> 
+	{% endfor %}
+	<input type="hidden" name="base" value="{{base}}">
+	<input type="hidden" name="reading" value="{{reading}}">
+	<input type="hidden" name="kanji" value="{{kanji}}">
+	<br />
+	<input type="submit" value="Submit">
+</form> 
+
+<br /><br />
+
+<script type="text/javascript">
+curr_index=0;
+bg_color = "#C2E0FF";
+
+document.getElementById("kanji_0").style.backgroundColor  = bg_color;
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    } else if (document.selection && document.selection.type != "Control") {
+        text = document.selection.createRange().text;
+    }
+	if(curr_index < {{ len(kanji) }} && !IsEmptyOrContainsWhitespace(text)){
+		document.getElementById("kanji_" + curr_index).value = text;
+		document.getElementById("kanji_val_" + curr_index).value = text;
+		next_box();
+	}
+    return text;
+}
+
+function next_box(){
+	if(curr_index < {{ len(kanji)-1 }}){
+		document.getElementById("kanji_" + curr_index).style.backgroundColor  = '';
+		curr_index++;
+		document.getElementById("kanji_" + curr_index).style.backgroundColor  = bg_color;
+	}
+}
+function prev_box(){
+	if(curr_index > 0){
+		document.getElementById("kanji_" + curr_index).style.backgroundColor  = '';
+		curr_index--;
+		document.getElementById("kanji_" + curr_index).style.backgroundColor  = bg_color;
+	}
+}
+
+function IsEmptyOrContainsWhitespace(text){
+	return (!text || 0 === text.length) || text.indexOf(" ") != -1;
+}
+
+document.getElementById("word").addEventListener("click", function () {
+getSelectionText();
+});
+
+</script>
+{% else %}
+There are no readings to be solved right now.
+{% endif %}
+
+{% endblock %}

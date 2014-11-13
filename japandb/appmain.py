@@ -1,7 +1,7 @@
 # appmain.py
 # root thing
 
-from flask import Flask, redirect
+from flask import Flask, redirect, request
 from japandb import data, templates
 import json
 
@@ -18,6 +18,29 @@ def index():
         word_count=data.get_word_count(),
         word_total = data.get_word_total()
     )
+
+@app.route('/plerp')
+def dump_database():
+    return templates.render('dump_database', database=data.resolved_readings)
+
+@app.route('/readingsolver/', methods=['GET', 'POST'])
+def reading_solver():
+    if request.method == 'POST':
+        data.handle_reading_post(request)
+    
+    for base, word_info in data.resolved_readings.items():
+        for reading, reading_info in word_info.items():
+            for subword, subword_info in reading_info.items():
+                if not 'ip' in subword_info:
+                    continue
+                if len(subword_info['ip']) >= 5:
+                    continue
+                if request.remote_addr in subword_info['ip']:
+                    continue
+                
+                return templates.render('readingsolver', base=base, reading=reading, furigana=subword_info['furi'], kanji=subword)
+            
+    return templates.render('readingsolver')
 
 @app.route('/kanji/')
 def show_all_kanji():

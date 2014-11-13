@@ -2,6 +2,8 @@
 # module responsible for loading & indexing data
 
 import json
+import os
+import redis
 from collections import defaultdict
 from operator import itemgetter
 
@@ -14,16 +16,16 @@ _all_words = {}
 _all_word_count = {}
 _all_kanji_count = {}
 
-for word, word_info in words["words"].items():
+for word, word_info in words['words'].items():
     _all_words[word] = word_info
     word_occurrence = 0
-    for reading, reading_info in word_info["readings"].items():
+    for reading, reading_info in word_info['readings'].items():
         example_count = 0
-        for article, sentences in reading_info["examples"].items():
+        for article, sentences in reading_info['examples'].items():
             example_count = example_count + len(sentences)
         word_occurrence = word_occurrence + example_count
         
-        for kanji_str in reading_info["kanji"]:
+        for kanji_str in reading_info['kanji']:
             for kanji in kanji_str:
                 _all_kanji_count[kanji] = _all_kanji_count.get(kanji, 0) + example_count
     _all_word_count[word] = word_occurrence
@@ -41,7 +43,37 @@ for word, word_info in _all_words.items():
         for kanji_str in reading_info["kanji"]:
             for kanji in kanji_str:
                 _kanji[kanji]['words'].add(word)
-    # todo: determine readings properly
+
+#reading solving loading
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+redis_conn = redis.from_url(redis_url)
+def load_redis_json(redis_conn):
+    if redis_conn.exists('json'):
+        return json.loads(redis_conn.get('json').decode('utf-8'))
+    else:
+        return {}
+
+resolved_readings = load_redis_json(redis_conn)
+# populate resolved files with words it hasn't seen yet    
+for base, word_info in words['words'].items():
+    for reading, reading_info in word_info['readings'].items():
+        if len(reading_info['kanji']) == 0:
+            continue;
+        for i, kanji in enumerate(reading_info['kanji']):
+            if len(kanji) == 0:
+                continue
+            if not base in resolved_readings:
+                resolved_readings[base] = {}
+            if not reading in resolved_readings[base]:
+                resolved_readings[base][reading] = {}
+            if not kanji in resolved_readings[base][reading]:
+                resolved_readings[base][reading][kanji] = {'split' : [], 'ip': [], 'furi': reading_info['furigana'][i]}
+            if len(kanji) == 1:
+                if 'ip' in resolved_readings[base][reading][kanji]:
+                    del resolved_readings[base][reading][kanji]['ip']
+                    del resolved_readings[base][reading][kanji]['split']
+
+redis_conn.set('json', json.dumps(resolved_readings, ensure_ascii=False))
 
 # Public interface
 
@@ -151,6 +183,36 @@ def populate_example_sentences(example_sentence_lookup, key):
                 break
     return sentences
 
+def handle_reading_post(request):
+    base = request.form['base']
+    reading = request.form['reading']
+    kanji = request.form['kanji']
+    kanji_readings = build_reading(request)
+    # throw away impossible input
+    if kanji_readings is None:
+        return
+    if not base in resolved_readings:
+        return
+    if not reading in resolved_readings[base]:
+        return
+    if not kanji in resolved_readings[base][reading]:
+        return
+    # don't allow the same IP twice
+    if not request.remote_addr in resolved_readings[base][reading][kanji]['ip']:
+        resolved_readings[base][reading][kanji]['split'].append(kanji_readings)
+        resolved_readings[base][reading][kanji]['ip'].append(request.remote_addr)
+        redis_conn.set('json', json.dumps(resolved_readings, ensure_ascii=False))
+
+def build_reading(request):
+    i = 0
+    readings = []
+    while 'kanji_val_'+str(i) in request.form:
+        readings.append(request.form['kanji_val_'+str(i)])
+        # If user left it blank or somehow the reading the user input wasn't even a possible select
+        if readings[i] == '' or not (readings[i] in request.form['reading']):
+            return None
+        i+=1
+    return readings
     
 class_map = {
 	"0" : "Regular word",
