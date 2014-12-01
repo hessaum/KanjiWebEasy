@@ -1,14 +1,23 @@
 {% if database is defined %}
-	{{database}}
-{% endif %}
-{% if delete is defined %}
+	<ol>
+	{% for key in keys %}
+		<li>
+		{{ key.decode('utf-8') }} ----- {{ database.get(key).decode('utf-8') }}
+		</li>
+	{% endfor %}
+	</ol>
+{% elif delete is defined %}
 	Deleted database
-{% endif %}
+{% elif left is defined %}
+	{% for unsolved in left %}
+		{{ unsolved }}
+		</br>
+	{% endfor %}
+{% else %}
 
 <form method="POST" action="/plerp/">
 	<input type="password" name="password" value=""> 
 	<input type="submit" value="Submit">
 </form> 
 
-<script type="text/javascript">
-</script>
+{% endif %}

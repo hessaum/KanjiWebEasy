@@ -27,13 +27,15 @@ def index():
 @app.route('/plerp/', methods=['GET', 'POST'])
 def dump_database():
     if request.method == 'POST':
-        if hashlib.sha1(request.form['password'].encode('utf-8')).hexdigest() == '4ae4a6888caa20abe362f9a2b4569dc1c166cc2e':
-            data.resolved_readings = {}
+        password = hashlib.sha1(request.form['password'].encode('utf-8')).hexdigest()
+        if  password == '4ae4a6888caa20abe362f9a2b4569dc1c166cc2e':
+            data.redis_conn.flushdb()
             data.populate_database()
-            return templates.render('dump_database', delete=True)
-            
-        if hashlib.sha1(request.form['password'].encode('utf-8')).hexdigest() == '277c17bf478687ba2b53a8929e945d4f33078384':
-            return templates.render('dump_database', database=data.resolved_readings)
+            return templates.render('dump_database', delete=True)  
+        elif password == '277c17bf478687ba2b53a8929e945d4f33078384':
+            return templates.render('dump_database', database=data.redis_conn, keys=data.redis_conn.keys('*'))
+        elif password == '0d366a470b59ab03e98cea9bffe85e208ada3406':
+            return templates.render('dump_database', left=data.unsolved_readings)
         
     return templates.render('dump_database')
 
@@ -42,12 +44,13 @@ def reading_solver():
     if request.method == 'POST':
         data.handle_reading_post(request)
     
-    for base, word_info in data.resolved_readings.items():
+    for base in data.unsolved_readings:
+        word_info = json.loads(data.redis_conn.get(base).decode('utf-8'))
         for reading, reading_info in word_info.items():
             for subword, subword_info in reading_info.items():
-                if not 'ip' in subword_info:
+                if 'ip' not in subword_info:
                     continue
-                if len(subword_info['ip']) >= 5:
+                if len(subword_info['ip']) >= data.CONST_NUM_IP_REQ:
                     continue
                     
                 if not request.headers.getlist("X-Forwarded-For"):

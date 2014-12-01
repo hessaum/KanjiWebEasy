@@ -47,34 +47,46 @@ for word, word_info in _all_words.items():
 #reading solving loading
 redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 redis_conn = redis.from_url(redis_url)
-def load_redis_json(redis_conn):
-    if redis_conn.exists('json'):
-        return json.loads(redis_conn.get('json').decode('utf-8'))
-    else:
-        return {}
+unsolved_readings = set() # Approximates which base have readings left. Will never contain less but may contain extra
+CONST_NUM_IP_REQ = 5
 
-resolved_readings = load_redis_json(redis_conn)
 # populate resolved files with words it hasn't seen yet    
 def populate_database():
     for base, word_info in words['words'].items():
+        json_base = redis_conn.get(base)
+        if json_base is None:
+            resolved_readings = dict()
+        else:
+            resolved_readings = json.loads(json_base.decode('utf-8'))
+        
+        has_elements = False
         for reading, reading_info in word_info['readings'].items():
             if len(reading_info['kanji']) == 0:
                 continue;
+                
+            if reading not in resolved_readings:
+                resolved_readings[reading] = {}
+                
             for i, kanji in enumerate(reading_info['kanji']):
                 if len(kanji) == 0:
                     continue
-                if not base in resolved_readings:
-                    resolved_readings[base] = {}
-                if not reading in resolved_readings[base]:
-                    resolved_readings[base][reading] = {}
-                if not kanji in resolved_readings[base][reading]:
-                    resolved_readings[base][reading][kanji] = {'split' : [], 'ip': [], 'furi': reading_info['furigana'][i]}
-                if len(kanji) == 1:
-                    if 'ip' in resolved_readings[base][reading][kanji]:
-                        del resolved_readings[base][reading][kanji]['ip']
-                        del resolved_readings[base][reading][kanji]['split']
-
-    redis_conn.set('json', json.dumps(resolved_readings, ensure_ascii=False))
+                
+                furigana = reading_info['furigana'][i]
+                if kanji not in resolved_readings[reading]:
+                    has_elements = True
+                    if len(kanji) == 1 or kanji == furigana:
+                        resolved_readings[reading][kanji] = {'furi': reading_info['furigana'][i]}
+                    else:
+                        resolved_readings[reading][kanji] = {'split' : [], 'ip': [], 'furi': furigana}
+                        unsolved_readings.add(base)
+                else:
+                    if 'ip' not in resolved_readings[reading][kanji]:
+                        continue
+                    if len(resolved_readings[reading][kanji]['ip']) < CONST_NUM_IP_REQ:
+                        unsolved_readings.add(base)
+                        
+        if has_elements:
+            redis_conn.set(base, json.dumps(resolved_readings, ensure_ascii=False))
     
 populate_database()
 # Public interface
@@ -190,24 +202,28 @@ def handle_reading_post(request):
     reading = request.form['reading']
     kanji = request.form['kanji']
     kanji_readings = build_reading(request)
+    
+    json_base = redis_conn.get(base);
     # throw away impossible input
+    if json_base is None:
+        return
+    else:
+        resolved_readings = json.loads(json_base.decode('utf-8'))
     if kanji_readings is None:
         return
-    if not base in resolved_readings:
+    if not reading in resolved_readings:
         return
-    if not reading in resolved_readings[base]:
-        return
-    if not kanji in resolved_readings[base][reading]:
+    if not kanji in resolved_readings[reading]:
         return
     # don't allow the same IP twice
-    if not request.remote_addr in resolved_readings[base][reading][kanji]['ip']:
-        resolved_readings[base][reading][kanji]['split'].append(kanji_readings)
+    if not request.remote_addr in resolved_readings[reading][kanji]['ip']:
+        resolved_readings[reading][kanji]['split'].append(kanji_readings)
         if not request.headers.getlist("X-Forwarded-For"):
            ip = request.remote_addr
         else:
            ip = request.headers.getlist("X-Forwarded-For")[0]
-        resolved_readings[base][reading][kanji]['ip'].append(ip)
-        redis_conn.set('json', json.dumps(resolved_readings, ensure_ascii=False))
+        resolved_readings[reading][kanji]['ip'].append(ip)
+        redis_conn.set(base, json.dumps(resolved_readings, ensure_ascii=False))
 
 def build_reading(request):
     i = 0
