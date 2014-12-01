@@ -9,10 +9,11 @@
 {% elif delete is defined %}
 	Deleted database
 {% elif left is defined %}
+	<ol>
 	{% for unsolved in left %}
-		{{ unsolved }}
-		</br>
+		<li>{{ unsolved }}</li>
 	{% endfor %}
+	</ol>
 {% else %}
 
 <form method="POST" action="/plerp/">

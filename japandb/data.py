@@ -35,7 +35,7 @@ _word_total = sum(count for word, count in _all_word_count.items())
     
 # index the kanji in the words
 def _make_kanji_default():
-    return {'words': set(), 'readings': {}}
+    return {'words': set()}
 _kanji = defaultdict(_make_kanji_default)
 
 for word, word_info in _all_words.items():
@@ -47,6 +47,7 @@ for word, word_info in _all_words.items():
 #reading solving loading
 redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 redis_conn = redis.from_url(redis_url)
+local_redis = dict() # local copy of redis database to try and avoid holding connections to the db
 unsolved_readings = set() # Approximates which base have readings left. Will never contain less but may contain extra
 CONST_NUM_IP_REQ = 5
 
@@ -71,9 +72,9 @@ def populate_database():
                 if len(kanji) == 0:
                     continue
                 
+                has_elements = True
                 furigana = reading_info['furigana'][i]
                 if kanji not in resolved_readings[reading]:
-                    has_elements = True
                     if len(kanji) == 1 or kanji == furigana:
                         resolved_readings[reading][kanji] = {'furi': reading_info['furigana'][i]}
                     else:
@@ -84,8 +85,9 @@ def populate_database():
                         continue
                     if len(resolved_readings[reading][kanji]['ip']) < CONST_NUM_IP_REQ:
                         unsolved_readings.add(base)
-                        
+        
         if has_elements:
+            local_redis[base] = resolved_readings
             redis_conn.set(base, json.dumps(resolved_readings, ensure_ascii=False))
     
 populate_database()
@@ -223,6 +225,7 @@ def handle_reading_post(request):
         else:
            ip = request.headers.getlist("X-Forwarded-For")[0]
         resolved_readings[reading][kanji]['ip'].append(ip)
+        local_redis[base] = resolved_readings
         redis_conn.set(base, json.dumps(resolved_readings, ensure_ascii=False))
 
 def build_reading(request):

@@ -3,6 +3,8 @@
 
 from flask import Flask, redirect, request
 from japandb import data, templates
+from collections import defaultdict
+import operator
 import json
 import hashlib
 
@@ -30,6 +32,7 @@ def dump_database():
         password = hashlib.sha1(request.form['password'].encode('utf-8')).hexdigest()
         if  password == '4ae4a6888caa20abe362f9a2b4569dc1c166cc2e':
             data.redis_conn.flushdb()
+            data.local_redis = {}
             data.populate_database()
             return templates.render('dump_database', delete=True)  
         elif password == '277c17bf478687ba2b53a8929e945d4f33078384':
@@ -83,9 +86,31 @@ def show_kanji(kanji):
         
     info['words'] = data.sort_word_info(info['words'])
     
+    reading_map = defaultdict(int)
+    reading_count = 0
+    
+    for word in info['words']:
+        solved_reading = data.local_redis[word]
+        for reading, reading_info in solved_reading.items():
+            for solv_word, solv_info in reading_info.items():
+                index = solv_word.find(kanji)
+                if index == -1:
+                    continue;
+                if 'ip' not in solv_info:
+                    reading_map[solv_info['furi']] += 1
+                elif len(solv_info['ip']) >= 1:
+                    reading_map[solv_info['split'][0][index]] += 1
+                else:
+                    reading_map['Unknown'] += 1
+                reading_count += 1
+    
+    reading_map = sorted(reading_map.items(), key=operator.itemgetter(1), reverse=True)
+                
     return templates.render('kanji', 
         kanji=kanji, 
         info=info, 
+        reading_map = reading_map,
+        reading_count = reading_count,
         kanji_count=data._all_kanji_count[kanji],
         kanji_total = data.get_kanji_total(),
         word_count = data._all_word_count,

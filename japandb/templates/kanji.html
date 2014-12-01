@@ -8,21 +8,28 @@ Occurrences: {{ kanji_count }}
 <font size="1">({{ '%.02f' % (100*(kanji_count/kanji_total)) }}%)</font>
 
 <h2>Readings</h2>
-{% for reading, sources in info.readings.items() %}
-	<h3>{{ reading }}</h3>
-	<ul>
-	{% for source in sources %}
-		<li>{{ source }}</li>
-	{% endfor %}
-	</ul>
+
+{% for i, reading in enumerate(reading_map) %}
+	<div class="wordbox">
+		<span class="id">{{ i+1 }}</span>
+		{% if reading[0] == 'Unknown' %}
+			<span class="word">Unsolved</span>
+		{% else %}
+			<span class="word"><ruby>{{kanji}}<rp>(</rp><rt>{{ reading[0] }}</rt><rp>)</rp></ruby></span>
+		{% endif %}
+		<div class="more">
+			<span class="count">{{reading[1]}}</span>
+			<span class="freq">{{ 100*(reading[1]/reading_count) }}%</span>
+		</div>
+	</div>
+	<span style="clear: left; display: block; "/>
 {% endfor %}
-{% if len(info.readings) == 0 %}
-	<p>Not yet implemented.</p>
-{% endif %}
+
+
 
 <h2>Words</h2>
 <ul>
-{% for x,(word) in enumerate(info.words) %}
+{% for x, word in enumerate(info.words) %}
 	<div class="wordbox">
 	<a class="link" href="{{ url_for('show_word', word=word) }}">
 		<span class="id">{{ x+1 }}</span>
