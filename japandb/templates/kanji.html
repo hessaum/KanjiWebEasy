@@ -19,7 +19,7 @@ Occurrences: {{ kanji_count }}
 		{% endif %}
 		<div class="more">
 			<span class="count">{{reading[1]}}</span>
-			<span class="freq">{{ 100*(reading[1]/reading_count) }}%</span>
+			<span class="freq">{{ '%.02f' % (100*(reading[1]/reading_count)) }}%</span>
 		</div>
 	</div>
 	<span style="clear: left; display: block; "/>
