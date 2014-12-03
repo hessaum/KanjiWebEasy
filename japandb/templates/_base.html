@@ -9,12 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="/static/style.css" />
 		<title>{% block title %}{% endblock %} - {{ SITE_TITLE }}</title>
 		{% block head_extra %}{% endblock %}
-		
+	</head>
+	<body>
 		<div id="header">
 			{% include "bits/categories.html" %}
 		</div>
-	</head>
-	<body>
 		<section id="content">
 			{% block content %}
 			{% endblock %}
