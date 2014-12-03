@@ -96,7 +96,7 @@ def show_kanji(kanji):
                 for i in range(len(solv_word)):
                     if solv_word[i] == kanji:
                         if 'ip' not in solv_info:
-                            if not solv_info['furi'].isdigit():
+                            if not data.contains_num(solv_info['furi']):
                                 reading_map[solv_info['furi']] += 1
                             else:
                                 reading_map['Unknown'] += 1

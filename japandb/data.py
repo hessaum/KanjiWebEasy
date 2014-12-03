@@ -240,6 +240,9 @@ def build_reading(request):
         i+=1
     return readings
     
+def contains_num(word):
+    return any(c.isdigit() for c in word)
+    
 class_map = {
 	"0" : "Regular word",
 	"1" : "Regular word",
