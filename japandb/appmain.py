@@ -93,16 +93,22 @@ def show_kanji(kanji):
         solved_reading = data.local_redis[word]
         for reading, reading_info in solved_reading.items():
             for solv_word, solv_info in reading_info.items():
-                index = solv_word.find(kanji)
-                if index == -1:
-                    continue;
-                if 'ip' not in solv_info:
-                    reading_map[solv_info['furi']] += 1
-                elif len(solv_info['ip']) >= 1:
-                    reading_map[solv_info['split'][0][index]] += 1
-                else:
-                    reading_map['Unknown'] += 1
-                reading_count += 1
+                for i in range(len(solv_word)):
+                    if solv_word[i] == kanji:
+                        if 'ip' not in solv_info:
+                            reading_map[solv_info['furi']] += 1
+                        elif len(solv_info['ip']) >= data.CONST_NUM_IP_REQ:
+                            given_reading = defaultdict(int)
+                            for j in range(len(solv_info['split'])):
+                                given_reading[solv_info['split'][j][i]] += 1
+                            popular_reading = sorted(given_reading.items(), key=operator.itemgetter(1), reverse=True)[0]
+                            if popular_reading[1] >= data.CONST_NUM_AGREES_REQUIRED:
+                                reading_map[popular_reading[0]] += 1
+                            else:
+                                reading_map['Unknown'] += 1
+                        else:
+                            reading_map['Unknown'] += 1
+                        reading_count += 1
     
     reading_map = sorted(reading_map.items(), key=operator.itemgetter(1), reverse=True)
                 
