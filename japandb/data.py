@@ -45,7 +45,7 @@ for word, word_info in _all_words.items():
                 _kanji[kanji]['words'].add(word)
 
 #reading solving loading
-redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+redis_url = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379')
 redis_conn = redis.from_url(redis_url)
 local_redis = dict() # local copy of redis database to try and avoid holding connections to the db
 unsolved_readings = set() # Approximates which base have readings left. Will never contain less but may contain extra
