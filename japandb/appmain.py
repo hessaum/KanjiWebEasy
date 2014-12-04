@@ -69,7 +69,7 @@ def reading_solver():
 
 @app.route('/kanji/')
 def show_all_kanji():
-    sorted_kanji = data.get_kanji_sorted_by_count()
+    sorted_kanji = [c for c in data.get_kanji_sorted_by_count() if (not (ord(c[0]) >= data.CONST_LATIN_START) and (ord(c[0]) < data.CONST_LATIN_END))]
     return templates.render('allkanji',
         all_kanji=sorted_kanji,
         kanji_count = data._all_kanji_count,

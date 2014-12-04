@@ -7,6 +7,12 @@ import redis
 from collections import defaultdict
 from operator import itemgetter
 
+# constants
+CONST_NUM_IP_REQ = 5
+CONST_NUM_AGREES_REQUIRED = 3
+CONST_LATIN_START = 0xFF00
+CONST_LATIN_END = 0xFFA0
+
 # Perform initialization
 
 with open('data/output.json', encoding='utf-8') as f:
@@ -49,8 +55,6 @@ redis_url = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379')
 redis_conn = redis.from_url(redis_url)
 local_redis = dict() # local copy of redis database to try and avoid holding connections to the db
 unsolved_readings = set() # Approximates which base have readings left. Will never contain less but may contain extra
-CONST_NUM_IP_REQ = 5
-CONST_NUM_AGREES_REQUIRED = 3
 
 # populate resolved files with words it hasn't seen yet    
 def populate_database():
