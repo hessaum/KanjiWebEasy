@@ -10,9 +10,42 @@ from operator import itemgetter
 # constants
 CONST_NUM_IP_REQ = 5
 CONST_NUM_AGREES_REQUIRED = 3
-CONST_LATIN_START = 0xFF00
-CONST_LATIN_END = 0xFFA0
+CONST_WORDS_PER_PAGE = 1000
 
+#reading utils
+
+def contains_num(word):
+    return any(c.isdigit() for c in word)
+    
+def is_latin(c):
+    char = ord(c)
+    return (char > 0xFF00) and (char < 0xFFA0)
+    
+def is_kanji(c):
+    char = ord(c)
+    return (char > 0x4E00) and (char < 0x9FAF)
+
+def is_hiragana(c):
+    char = ord(c)
+    return (char > 0x3041) and (char < 0x3094)
+    
+def is_katakana(c):
+    char = ord(c)
+    return (char > 0x30A1) and (char < 0x30FA)
+    
+def is_valid(word):
+    #if it contains at least one hiragana/katakana/kanji
+    for c in word:
+        if is_kanji(c) or is_hiragana(c) or is_katakana(c):
+            return True
+    return False
+
+def contains_non_grammatical(word):
+    for reading, reading_info in _all_words[word]['readings'].items():
+        if reading_info['class'] is not 'B':
+            return True
+    return False
+    
 # Perform initialization
 
 with open('data/output.json', encoding='utf-8') as f:
@@ -34,11 +67,13 @@ for word, word_info in words['words'].items():
         for kanji_str in reading_info['kanji']:
             for kanji in kanji_str:
                 _all_kanji_count[kanji] = _all_kanji_count.get(kanji, 0) + example_count
-    _all_word_count[word] = word_occurrence
+                
+    if is_valid(word) and contains_non_grammatical(word):
+        _all_word_count[word] = word_occurrence
 
 _kanji_total = sum(count for kanji, count in _all_kanji_count.items())
 _word_total = sum(count for word, count in _all_word_count.items())
-    
+
 # index the kanji in the words
 def _make_kanji_default():
     return {'words': set()}
@@ -243,9 +278,6 @@ def build_reading(request):
             return None
         i+=1
     return readings
-    
-def contains_num(word):
-    return any(c.isdigit() for c in word)
     
 class_map = {
 	"0" : "Regular word",

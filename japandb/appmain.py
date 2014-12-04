@@ -7,6 +7,7 @@ from collections import defaultdict
 import operator
 import json
 import hashlib
+import math
 
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
@@ -64,7 +65,7 @@ def reading_solver():
 
 @app.route('/kanji/')
 def show_all_kanji():
-    sorted_kanji = [c for c in data.get_kanji_sorted_by_count() if (not (ord(c[0]) >= data.CONST_LATIN_START) and (ord(c[0]) < data.CONST_LATIN_END))]
+    sorted_kanji = [c for c in data.get_kanji_sorted_by_count() if (not data.is_latin(c[0]))]
     return templates.render('allkanji',
         all_kanji=sorted_kanji,
         kanji_count = data._all_kanji_count,
@@ -163,3 +164,30 @@ def show_word(word):
         kanji_usage_total = data.get_kanji_total(),
         example_sentences = all_sentences
     )
+
+@app.route('/word')
+def show_all_words():
+    page_num = 0
+    if 'page' in request.args:
+        page = request.args['page']
+        if page.isdigit():
+            page_num = int(page)-1
+    
+    word_list = data.get_word_count()
+    
+    start_slice = page_num*data.CONST_WORDS_PER_PAGE
+    if start_slice >= len(word_list):
+        start_slice = 0
+        page_num = 0
+        
+    end_slice = (page_num+1)*data.CONST_WORDS_PER_PAGE
+    if end_slice >= len(word_list):
+        end_slice = len(word_list)
+        
+    return templates.render('allwords',
+        num_pages = math.floor(len(word_list)/data.CONST_WORDS_PER_PAGE)+1,
+        start_slice = start_slice,
+        word_count=word_list[start_slice:end_slice],
+        word_total = data.get_word_total()
+    )
+        

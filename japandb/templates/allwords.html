@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% block title %}All Words{% endblock %}
+{% block content %}
+
+Pages: 
+{% for x in range(num_pages) %}
+	<a class="link" href="?page={{ x+1 }}">{{x+1}}</a>
+{% endfor %}
+<h2>Words</h2>
+<div class="words">
+	{% for x, (word, count) in enumerate(word_count) %}	
+	<div class="wordbox">
+		<a class="link" href="{{ url_for('show_word', word=word) }}">
+			<span class="id">{{ start_slice + x+1 }}</span>
+			<span class="word">{{ word }}</span>
+			<div class="more">
+				<span class="count">{{count}}</span>
+				<span class="freq">{{ '%.02f' % (100*(count/word_total)) }}%</span>
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}
