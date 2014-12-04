@@ -4,7 +4,7 @@
 from flask import Flask, redirect, request
 from japandb import data, templates
 from collections import defaultdict
-import operator
+from operator import itemgetter
 import json
 import hashlib
 import math
@@ -49,7 +49,8 @@ def reading_solver():
             for subword, subword_info in reading_info.items():
                 if 'ip' not in subword_info:
                     continue
-                if len(subword_info['ip']) >= data.CONST_NUM_IP_REQ:
+                
+                if not data.has_unsolved(subword, subword_info):
                     continue
                     
                 if not request.headers.getlist("X-Forwarded-For"):
@@ -96,20 +97,15 @@ def show_kanji(kanji):
                                 reading_map[solv_info['furi']] += 1
                             else:
                                 reading_map['Unknown'] += 1
-                        elif len(solv_info['ip']) >= data.CONST_NUM_IP_REQ:
-                            given_reading = defaultdict(int)
-                            for j in range(len(solv_info['split'])):
-                                given_reading[solv_info['split'][j][i]] += 1
-                            popular_reading = sorted(given_reading.items(), key=operator.itemgetter(1), reverse=True)[0]
-                            if popular_reading[1] >= data.CONST_NUM_AGREES_REQUIRED:
-                                reading_map[popular_reading[0]] += 1
+                        else: 
+                            popular_reading = data.is_solved(i, solv_info)
+                            if popular_reading is not None:
+                                reading_map[popular_reading] += 1
                             else:
                                 reading_map['Unknown'] += 1
-                        else:
-                            reading_map['Unknown'] += 1
-                        reading_count += 1
+                            reading_count += 1
     
-    reading_map = sorted(reading_map.items(), key=operator.itemgetter(1), reverse=True)
+    reading_map = sorted(reading_map.items(), key=itemgetter(1), reverse=True)
                 
     return templates.render('kanji', 
         kanji=kanji, 

@@ -8,7 +8,6 @@ from collections import defaultdict
 from operator import itemgetter
 
 # constants
-CONST_NUM_IP_REQ = 5
 CONST_NUM_AGREES_REQUIRED = 3
 CONST_WORDS_PER_PAGE = 1000
 
@@ -48,6 +47,26 @@ def contains_non_grammatical(word):
 
 def is_valid(word):
     return is_japanese(word) and contains_non_grammatical(word)
+    
+def is_solved(kanji_index, solv_info):
+    if len(solv_info['split']) == 0:
+        return None
+        
+    given_reading = defaultdict(int)
+    for j in range(len(solv_info['split'])):
+        given_reading[solv_info['split'][j][kanji_index]] += 1
+    popular_reading = sorted(given_reading.items(), key=itemgetter(1), reverse=True)[0]
+    if popular_reading[1] >= CONST_NUM_AGREES_REQUIRED:
+        return popular_reading[0]
+    else:
+        return None
+        
+def has_unsolved(kanji, solv_info):
+    for i in range(len(kanji)):
+        if is_solved(i, solv_info) is None:
+            return True
+    return False
+    
 # Perform initialization
 
 with open('data/output.json', encoding='utf-8') as f:
@@ -128,7 +147,7 @@ def populate_database():
                 else:
                     if 'ip' not in resolved_readings[reading][kanji]:
                         continue
-                    if len(resolved_readings[reading][kanji]['ip']) < CONST_NUM_IP_REQ:
+                    if has_unsolved(kanji, resolved_readings[reading][kanji]):
                         unsolved_readings.add(base)
         
         if has_elements:
