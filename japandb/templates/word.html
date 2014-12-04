@@ -30,7 +30,7 @@
 	{% for x, kanji in enumerate(kanji_dict[reading]) %}
         <a class="link" href="{{ url_for('show_kanji', kanji=kanji) }}">{{ kanji }}</a>
 	{% endfor %}
-	{% if len(reading_data.kanji[0]) == 0 %}
+	{% if len(reading_data.kanji) == 1 and len(reading_data.kanji[0]) == 0 %}
 		None
 	{% endif %}
 	
