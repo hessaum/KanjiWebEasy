@@ -41,7 +41,9 @@
 	{% for sentence in example_sentences[reading] %}
         <li>
 		<p>{% for word in sentence %}
+			{% if word[0]==reading or word[1] == reading %}<b>{% endif %}
 			{% if len(word) == 2 %}<ruby>{{ word[0] }}<rp>（</rp><rt>{{ word[1] }}</rt><rp>）</rp></ruby>{% else %}{{ word[0] }}{% endif %}
+			{% if word[0]==reading or word[1] == reading %}</b>{% endif %}
 		{% endfor %}
 		</p>
         </li>
