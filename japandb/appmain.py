@@ -103,7 +103,7 @@ def show_kanji(kanji):
                                 reading_map[popular_reading] += 1
                             else:
                                 reading_map['Unknown'] += 1
-                            reading_count += 1
+                        reading_count += 1
     
     reading_map = sorted(reading_map.items(), key=itemgetter(1), reverse=True)
                 
