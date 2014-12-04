@@ -173,7 +173,7 @@ def show_all_words():
         if page.isdigit():
             page_num = int(page)-1
     
-    word_list = data.get_word_count()
+    word_list = data.get_valid_word_count()
     
     start_slice = page_num*data.CONST_WORDS_PER_PAGE
     if start_slice >= len(word_list):
@@ -188,6 +188,6 @@ def show_all_words():
         num_pages = math.floor(len(word_list)/data.CONST_WORDS_PER_PAGE)+1,
         start_slice = start_slice,
         word_count=word_list[start_slice:end_slice],
-        word_total = data.get_word_total()
+        word_total = data.get_valid_word_total()
     )
         

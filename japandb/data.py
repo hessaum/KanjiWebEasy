@@ -33,7 +33,7 @@ def is_katakana(c):
     char = ord(c)
     return (char > 0x30A1) and (char < 0x30FA)
     
-def is_valid(word):
+def is_japanese(word):
     #if it contains at least one hiragana/katakana/kanji
     for c in word:
         if is_kanji(c) or is_hiragana(c) or is_katakana(c):
@@ -45,7 +45,9 @@ def contains_non_grammatical(word):
         if reading_info['class'] is not 'B':
             return True
     return False
-    
+
+def is_valid(word):
+    return is_japanese(word) and contains_non_grammatical(word)
 # Perform initialization
 
 with open('data/output.json', encoding='utf-8') as f:
@@ -53,6 +55,7 @@ with open('data/output.json', encoding='utf-8') as f:
 
 _all_words = {}
 _all_word_count = {}
+_valid_word_count = {}
 _all_kanji_count = {}
 
 for word, word_info in words['words'].items():
@@ -68,11 +71,13 @@ for word, word_info in words['words'].items():
             for kanji in kanji_str:
                 _all_kanji_count[kanji] = _all_kanji_count.get(kanji, 0) + example_count
                 
-    if is_valid(word) and contains_non_grammatical(word):
-        _all_word_count[word] = word_occurrence
+    if is_valid(word):
+        _valid_word_count[word] = word_occurrence
+    _all_word_count[word] = word_occurrence
 
 _kanji_total = sum(count for kanji, count in _all_kanji_count.items())
 _word_total = sum(count for word, count in _all_word_count.items())
+_valid_word_total = sum(count for word, count in _valid_word_count.items())
 
 # index the kanji in the words
 def _make_kanji_default():
@@ -156,9 +161,12 @@ def get_word_info(word):
     
 def get_word_total():
     return _word_total;
+    
+def get_valid_word_total():
+    return _valid_word_total;
 
-def get_word_count():
-    return sorted(_all_word_count.items(), key=itemgetter(1, 0), reverse=True)
+def get_valid_word_count():
+    return sorted(_valid_word_count.items(), key=itemgetter(1, 0), reverse=True)
 
 def sort_word_info(word_array):
     return sorted(word_array, key=lambda x: (_all_word_count[x],x), reverse=True)
