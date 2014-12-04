@@ -19,12 +19,7 @@ def page_not_found(error):
     
 @app.route('/')
 def index():
-    return templates.render('index',
-        kanji_count=data.get_kanji_sorted_by_count(),
-        kanji_total = data.get_kanji_total(),
-        word_count=data.get_word_count(),
-        word_total = data.get_word_total()
-    )
+    return templates.render('index')
 
 @app.route('/plerp/', methods=['GET', 'POST'])
 def dump_database():
