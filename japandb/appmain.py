@@ -1,5 +1,4 @@
 # appmain.py
-# root thing
 
 from flask import Flask, redirect, request
 from japandb import data, templates
@@ -12,6 +11,7 @@ import math
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+
 templates.setup(app)
 
 @app.errorhandler(404)
