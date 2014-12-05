@@ -1,6 +1,6 @@
 # appmain.py
 
-from flask import Flask, redirect, request, send_from_directory
+from flask import Flask, redirect, request
 from japandb import data, templates
 from collections import defaultdict
 from operator import itemgetter
@@ -18,14 +18,6 @@ templates.setup(app)
 def page_not_found(error):
     return templates.render('page_not_found'), 404
     
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-@app.route('/apple-touch-icon.png')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'apple-touch-icon.png')
-       
 @app.route('/')
 def index():
     return templates.render('index')
@@ -196,3 +188,4 @@ def show_all_words():
         word_count=word_list[start_slice:end_slice],
         word_total = data.get_valid_word_total()
     )
+        
