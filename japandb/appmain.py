@@ -86,24 +86,26 @@ def show_kanji(kanji):
     reading_map = defaultdict(int)
     reading_count = 0
     
+    word_count = data._all_word_count
     for word in info['words']:
         solved_reading = data.local_redis[word]
         for reading, reading_info in solved_reading.items():
+            count = data.count_examples(data.words['words'][word]['readings'][reading]['examples'])
             for solv_word, solv_info in reading_info.items():
                 for i in range(len(solv_word)):
                     if solv_word[i] == kanji:
                         if 'ip' not in solv_info:
                             if not data.contains_num(solv_info['furi']):
-                                reading_map[solv_info['furi']] += 1
+                                reading_map[solv_info['furi']] += count
                             else:
-                                reading_map['Unknown'] += 1
+                                reading_map['Unknown'] += count
                         else: 
                             popular_reading = data.is_solved(i, solv_info)
                             if popular_reading is not None:
-                                reading_map[popular_reading] += 1
+                                reading_map[popular_reading] += count
                             else:
-                                reading_map['Unknown'] += 1
-                        reading_count += 1
+                                reading_map['Unknown'] += count
+                        reading_count += count
     
     reading_map = sorted(reading_map.items(), key=itemgetter(1), reverse=True)
                 
@@ -114,7 +116,7 @@ def show_kanji(kanji):
         reading_count = reading_count,
         kanji_count=data._all_kanji_count[kanji],
         kanji_total = data.get_kanji_total(),
-        word_count = data._all_word_count,
+        word_count = word_count,
         usage_total = data.get_kanji_usage_total(kanji)
     )
 

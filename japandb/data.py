@@ -77,13 +77,17 @@ _all_word_count = {}
 _valid_word_count = {}
 _all_kanji_count = {}
 
+def count_examples(examples):
+    example_count = 0
+    for article, sentences in examples.items():
+        example_count = example_count + len(sentences)
+    return example_count
+        
 for word, word_info in words['words'].items():
     _all_words[word] = word_info
     word_occurrence = 0
     for reading, reading_info in word_info['readings'].items():
-        example_count = 0
-        for article, sentences in reading_info['examples'].items():
-            example_count = example_count + len(sentences)
+        example_count = count_examples(reading_info['examples'])
         word_occurrence = word_occurrence + example_count
         
         for kanji_str in reading_info['kanji']:
