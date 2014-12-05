@@ -14,6 +14,15 @@ app.jinja_env.lstrip_blocks = True
 
 templates.setup(app)
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+      
+@app.route('/apple-touch-icon.png')
+def apple_touch():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'apple-touch-icon.png')
+   
+   
 @app.errorhandler(404)
 def page_not_found(error):
     return templates.render('page_not_found'), 404
