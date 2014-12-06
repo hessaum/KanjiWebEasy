@@ -160,6 +160,7 @@ def populate_database():
     
 populate_database()
 # Public interface
+unsolved_readings = sorted(unsolved_readings, key=lambda x: _all_word_count[x], reverse=True)
 
 def get_kanji_keys():
     return sorted(_kanji.keys(), key=_all_kanji_count.get, reverse=True)
