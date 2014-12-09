@@ -158,8 +158,7 @@ def show_word(word):
     #Go through all the example sentences
     all_sentences = {}
     for key in example_sentence_lookup:
-        all_sentences[key] = data.populate_example_sentences(example_sentence_lookup, key)
-                
+        all_sentences[key] = data.populate_example_sentences(example_sentence_lookup[key], word_info['readings'][key])                
     
     return templates.render('word', 
         word=word, 

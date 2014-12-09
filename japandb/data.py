@@ -228,9 +228,30 @@ def get_running_total(sorted_list):
     
     return running_count
     
-def populate_example_sentences(example_sentence_lookup, key):
+def insert_bold(example_sentence, word_info):
+    insertion_points = []
+    
+    for i in range(len(example_sentence)):
+        for j in range(len(word_info['furigana'])):
+            if word_info['kanji'][j] == '':
+                if example_sentence[i+j][0] != word_info['furigana'][j]:
+                    break
+            else:
+                if example_sentence[i+j][0] != word_info['kanji'][j]:
+                    break
+            
+            if j == len(word_info['furigana'])-1:
+                insertion_points.append(i)
+    
+    for i, point in enumerate(insertion_points):
+        example_sentence.insert(point, ('<b>',))
+        example_sentence.insert(point+len(word_info['furigana'])+1, ('</b>',))
+        for j in range(i+1, len(insertion_points)):
+            insertion_points[j] += 2
+
+def populate_example_sentences(lookup_info, word_info):
     sentences = []
-    for lookup_info in example_sentence_lookup[key]:
+    for lookup_info in lookup_info:
         article_info = splice_article_id(lookup_info[1])
         with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+lookup_info[1]+'.json', encoding='utf-8') as f:
             containing_article = json.load(f)
@@ -254,7 +275,7 @@ def populate_example_sentences(example_sentence_lookup, key):
                     if token['word'] == '。' and in_quote == False:
                         current_sentence += 1
                         continue
-                
+                                        
                 #Then parse one word
                 if current_sentence == lookup_info[0]:
                     if 'ruby' in token:
@@ -265,6 +286,9 @@ def populate_example_sentences(example_sentence_lookup, key):
                                 example_sentence.append((reading['s'],))
                 if current_sentence > lookup_info[0]:
                     break
+            
+            insert_bold(example_sentence, word_info)
+            
             sentences.append(example_sentence)
             
             if len(sentences) == 10:
