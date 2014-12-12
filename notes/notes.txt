@@ -1,11 +1,11 @@
 ﻿TODO ::
 
-Add footer
 Make that you can press a button to see even more example sentences
-	Maybe load 30 at max in the data.py but only display 10 unless user presses button
-Put analytics?
-Make sufficiently solved readings appear on kanji page
+	Maybe load 30 at max in the data.py but only display 10 unless user presses buttone
 Make a crowd-source sentence translator
 Fix the following issue and more with n-grams:
 	Can't tell some words are often related. i.e. オバマ　and 大統領 are usually beside each other
     Things like 吸わ are listed as separate readings also (comes from 吸わない) so this has to do with the backend code
+	
+http://www.kanjiwebeasy.com/word/%E5%85%88 has more sentences than occurrences
+http://www.kanjiwebeasy.com/kanji/%E3%81%A4 is not a kanji
