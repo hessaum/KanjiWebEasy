@@ -238,12 +238,12 @@ def search(word):
     for char in word:
         if is_kanji(char):
             if(len(max_word_set) == 0):
-                max_word_set |= get_kanji_info(char)['words']
+                max_word_set = set(get_kanji_info(char)['words'])
             else:
                 max_word_set &= get_kanji_info(char)['words']
         else:
             if(len(max_word_set) == 0):
-                max_word_set |= _letter_map[char]
+                max_word_set = set(_letter_map[char])
             else:
                 max_word_set &= _letter_map[char]
         
