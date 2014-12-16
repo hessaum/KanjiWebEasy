@@ -172,15 +172,20 @@ def show_word(word):
         example_sentences = all_sentences
     )
 
-@app.route('/word')
+@app.route('/word', methods=['GET'])
 def show_all_words():
     page_num = 0
-    if 'page' in request.args:
-        page = request.args['page']
-        if page.isdigit():
-            page_num = int(page)-1
-    
-    word_list = data.get_valid_word_count()
+    search_content = ''
+    if request.method == 'GET':
+        if 'page' in request.args:
+            page = request.args['page']
+            if page.isdigit():
+                page_num = int(page)-1
+        if 'search' in request.args:
+            search_content = request.args['search']
+            word_list = data.search(search_content)
+        else:
+            word_list = data.get_valid_word_count()
     
     start_slice = page_num*data.CONST_WORDS_PER_PAGE
     if start_slice >= len(word_list):
@@ -192,9 +197,9 @@ def show_all_words():
         end_slice = len(word_list)
         
     return templates.render('allwords',
+        search = search_content,
         num_pages = math.floor(len(word_list)/data.CONST_WORDS_PER_PAGE)+1,
         start_slice = start_slice,
         word_count=word_list[start_slice:end_slice],
         word_total = data.get_valid_word_total()
     )
-        

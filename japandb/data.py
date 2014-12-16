@@ -76,6 +76,7 @@ _all_words = {}
 _all_word_count = {}
 _valid_word_count = {}
 _all_kanji_count = {}
+_letter_map = defaultdict(set)
 
 def count_examples(examples):
     example_count = 0
@@ -87,6 +88,8 @@ for word, word_info in words['words'].items():
     _all_words[word] = word_info
     word_occurrence = 0
     for reading, reading_info in word_info['readings'].items():
+        for furi in reading:
+            _letter_map[furi].add(word)
         example_count = count_examples(reading_info['examples'])
         word_occurrence = word_occurrence + example_count
         
@@ -218,6 +221,75 @@ def get_kanji_usage_total(kanji):
     for word in _kanji[kanji]['words']:
         count_total += _all_word_count[word]
     return count_total
+
+def contains_ascending(text, token_list):
+    start_pos = 0
+    for token in token_list:
+        index = text.find(token, start_pos)
+        if index == -1:
+            return False
+        start_pos += index + len(token)
+    
+    return True
+            
+def search(word):
+    # represents an overestimate of all the words that match
+    max_word_set = set()
+    for char in word:
+        if is_kanji(char):
+            if(len(max_word_set) == 0):
+                max_word_set |= get_kanji_info(char)['words']
+            else:
+                max_word_set &= get_kanji_info(char)['words']
+        else:
+            if(len(max_word_set) == 0):
+                max_word_set |= _letter_map[char]
+            else:
+                max_word_set &= _letter_map[char]
+        
+        # if we ever have no elements left, we can just stop
+        if(len(max_word_set) == 0):
+            return []
+    
+    # need to filter our max set to find words that contain both
+    # 1) the kanji list in ascending order
+    # 2) the furigana list in ascending order
+    kanji_list = []
+    furi_list = []
+    i = 0
+    while(i < len(word)):
+        start_index = i
+        while(i < len(word) and is_kanji(word[i])):
+            i += 1
+        if start_index != i:
+            kanji_list.append(word[start_index:i])
+        
+        start_index = i
+        while(i < len(word) and not is_kanji(word[i])):
+            i += 1
+        if start_index != i:
+            furi_list.append(word[start_index:i])
+    
+    # create an approximate set. It removes words from the max word set that didn't have ascending order for tokens
+    # this set is an approximate because the presence/lack of kanji can cause issues
+    approx_set = set()
+    for word in max_word_set:
+        does_match = False
+        word_info = _all_words[word]['readings']
+        for reading in word_info: 
+            if does_match:
+                break
+            if contains_ascending(reading, furi_list):
+                # flatten kanji in the word
+                kanji_text = ''
+                for kanji in word_info[reading]['kanji']:
+                    kanji_text += kanji
+                
+                if contains_ascending(kanji_text, kanji_list):
+                    approx_set.add((word, _all_word_count[word]))
+                    does_match = True
+            
+    return sorted(approx_set, key=itemgetter(1, 0), reverse=True)
     
 def get_running_total(sorted_list):
     running_count = []

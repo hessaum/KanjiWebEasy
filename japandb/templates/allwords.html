@@ -4,22 +4,34 @@
 
 Pages: 
 {% for x in range(num_pages) %}
-	<a class="link" href="?page={{ x+1 }}">{{x+1}}</a>
+	{% if len(search) == 0 %}
+		<a class="link" href="?page={{ x+1 }}">{{x+1}}</a>
+	{% else %}
+		<a class="link" href="?search={{search}}&page={{ x+1 }}">{{x+1}}</a>
+	{% endif %}
 {% endfor %}
+<br />
+<form method="GET" action="/word">
+Search: <input type="text" name="search" value="{{search}}">
+</form>
 <h2>Words</h2>
-<div class="words">
-	{% for x, (word, count) in enumerate(word_count) %}	
-	<div class="wordbox">
-		<a class="link" href="{{ url_for('show_word', word=word) }}">
-			<span class="id">{{ start_slice + x+1 }}</span>
-			<span class="word">{{ word }}</span>
-			<div class="more">
-				<span class="count">{{count}}</span>
-				<span class="freq">{{ '%.02f' % (100*(count/word_total)) }}%</span>
-			</div>
-		</a>
+{% if len(word_count) == 0 %}
+	No words found. If your search contained kanji, you may have better luck searching entirely in hiragana
+{% else %}
+	<div class="words">
+		{% for x, (word, count) in enumerate(word_count) %}	
+		<div class="wordbox">
+			<a class="link" href="{{ url_for('show_word', word=word) }}">
+				<span class="id">{{ start_slice + x+1 }}</span>
+				<span class="word">{{ word }}</span>
+				<div class="more">
+					<span class="count">{{count}}</span>
+					<span class="freq">{{ '%.02f' % (100*(count/word_total)) }}%</span>
+				</div>
+			</a>
+		</div>
+		{% endfor %}
 	</div>
-	{% endfor %}
-</div>
+{% endif %}
 
 {% endblock %}
