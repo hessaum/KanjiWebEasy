@@ -5,8 +5,12 @@
 
 {% include "bits/introduction.html" %}
 
-<div class="kanji">
-	<a class="link" href="/kanji/">See a list of all kanji</a>
-</div>
+
+<form style="text-align:center" method="GET" action="/word">
+	<div class="kanji">
+		<a class="link" href="/kanji/">List of all kanji</a>
+	</div>
+	Search: <input type="text" name="search" value="{{search}}">
+</form>
 
 {% endblock %}
