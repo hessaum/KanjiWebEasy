@@ -22,15 +22,19 @@ def is_latin(c):
     
 def is_kanji(c):
     char = ord(c)
-    return (char > 0x4E00) and (char < 0x9FAF)
+    return (char >= 0x4E00) and (char <= 0x9FAF)
 
 def is_hiragana(c):
     char = ord(c)
-    return (char > 0x3041) and (char < 0x3094)
+    return (char >= 0x3041) and (char <= 0x3094)
     
 def is_katakana(c):
     char = ord(c)
-    return (char > 0x30A1) and (char < 0x30FA)
+    return (char >= 0x30A1) and (char <= 0x30FA)
+    
+def is_digit(c):
+    char = ord(c)
+    return (char >= 0x30) and (char <= 0x39)
     
 def is_japanese(word):
     #if it contains at least one hiragana/katakana/kanji
@@ -233,6 +237,10 @@ def contains_ascending(text, token_list):
     return True
             
 def search(word):
+    for i in range(len(word)):
+        if is_digit(word[i]):
+            word = word[0:i] + chr((ord(word[i])-0x30)+0xFF10) + word[i+1:]
+            
     # represents an overestimate of all the words that match
     max_word_set = set()
     for char in word:
