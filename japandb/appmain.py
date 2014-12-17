@@ -203,3 +203,7 @@ def show_all_words():
         word_count=word_list[start_slice:end_slice],
         word_total = data.get_valid_word_total()
     )
+
+@app.route('/whyuse')
+def why_use():
+    return templates.render('whyuse')
