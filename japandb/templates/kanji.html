@@ -13,7 +13,7 @@ Occurrences: {{ kanji_count }}
 	<div class="wordbox">
 		<span class="id">{{ i+1 }}</span>
 		{% if reading[0] == 'Unknown' %}
-			<span class="word">Unsolved</span>
+			<span class="word"><a class ="link" href="/readingsolver">Unsolved</a></span>
 		{% else %}
 			<span class="word"><ruby>{{kanji}}<rp>(</rp><rt>{{ reading[0] }}</rt><rp>)</rp></ruby></span>
 		{% endif %}
