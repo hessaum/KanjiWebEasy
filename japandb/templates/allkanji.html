@@ -8,7 +8,7 @@
 	<p>{{ len(all_kanji) }} kanji listed</p>
 
 	{% for x, kanji_info in enumerate(all_kanji) %}
-		{% for percent in [0.25, 0.50, 0.75, 0.90, 0.95, 0.975, 0.99] %}
+		{% for percent in [0.25, 0.50, 0.75] %}
 			{% if x > 0 and (running_total[x-1]/kanji_total) < percent and (running_total[x]/kanji_total) > percent %}
 				<span style="clear: left; display: block; ">
 				<br />
