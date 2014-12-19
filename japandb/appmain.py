@@ -183,7 +183,10 @@ def show_all_words():
                 page_num = int(page)-1
         if 'search' in request.args:
             search_content = request.args['search']
-            word_list = data.search(search_content)
+            if search_content: 
+                word_list = data.search(search_content)
+            else:
+                word_list = data.get_valid_word_count()
         else:
             word_list = data.get_valid_word_count()
     
