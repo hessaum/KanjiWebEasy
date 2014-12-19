@@ -145,6 +145,10 @@ def populate_database():
             resolved_readings = dict()
         else:
             resolved_readings = json.loads(json_base.decode('utf-8'))
+            
+        if base == "ＡＫＢ４８":
+            if 'エーケービー' in resolved_readings:
+                del resolved_readings['エーケービー']
         
         has_elements = False
         for reading, reading_info in word_info['readings'].items():
