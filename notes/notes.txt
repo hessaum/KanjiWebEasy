@@ -8,7 +8,6 @@ Fix the following issue and more with n-grams:
     Things like 吸わ are listed as separate readings also (comes from 吸わない) so this has to do with the backend code
 	
 http://www.kanjiwebeasy.com/kanji/%E3%81%A4 is not a kanji
-Make katakana readings turn into hiragana
 Make readings appear on two columns. One column is too much (see http://www.kanjiwebeasy.com/kanji/%E6%97%A5)
 々 should be excluded from reading solver and shouldn't show reading on page
 Add search by non-word (i.e. location name, people name, group name)

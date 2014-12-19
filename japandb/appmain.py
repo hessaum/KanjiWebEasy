@@ -106,7 +106,8 @@ def show_kanji(kanji):
                     if solv_word[i] == kanji:
                         if 'ip' not in solv_info:
                             if not data.contains_num(solv_info['furi']):
-                                reading_map[solv_info['furi']] += count
+                                hira_reading = data.kata_to_hira(solv_info['furi'])
+                                reading_map[hira_reading] += count
                             else:
                                 reading_map['Unknown'] += count
                         else: 
