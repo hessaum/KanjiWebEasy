@@ -214,7 +214,9 @@ def get_inside_word_usage(word_info):
     count_total = 0
     count_map = {}
     for reading, reading_info in word_info['readings'].items():
-        num_examples = len(reading_info['examples'])
+        num_examples = 0
+        for example in reading_info['examples']:
+            num_examples += len(reading_info['examples'][example])
         count_total += num_examples
         count_map[reading] = num_examples
         

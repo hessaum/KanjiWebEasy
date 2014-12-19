@@ -7,9 +7,8 @@ Fix the following issue and more with n-grams:
 	Can't tell some words are often related. i.e. オバマ　and 大統領 are usually beside each other
     Things like 吸わ are listed as separate readings also (comes from 吸わない) so this has to do with the backend code
 	
-http://www.kanjiwebeasy.com/word/%E5%85%88 has more sentences than occurrences
 http://www.kanjiwebeasy.com/kanji/%E3%81%A4 is not a kanji
-Why does 会 have so many unread readings?
 Make katakana readings turn into hiragana
 Make readings appear on two columns. One column is too much (see http://www.kanjiwebeasy.com/kanji/%E6%97%A5)
 々 should be excluded from reading solver and shouldn't show reading on page
+Add search by non-word (i.e. location name, people name, group name)
