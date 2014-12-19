@@ -5,6 +5,7 @@ import json
 import os
 import redis
 from collections import defaultdict
+from japandb import suffixtree
 from operator import itemgetter
 
 # constants
@@ -426,7 +427,32 @@ def build_reading(request):
             return None
         i+=1
     return readings
+
+tree = suffixtree.GeneralizedSuffixTree()
+'''
+for (root, dirs, files) in os.walk('data/in/'):
+    if len(dirs) == 0:
+        for file in files:
+            with open(os.path.join(root,file), encoding='utf-8') as f:
+                article = json.load(f)['text']
+                title_index = article.find(' ')
+                article = article[0:title_index] + '。' + article[title_index:]
+                article = article.replace(' ', '')
+                
+                
+                for line in article.split('。'):
+                    tree.add(line, file[file.find('k'):len(file)-5])
+'''
+with open('data/in/20140425/k10013985201000/news20140425_k10013985201000.json', encoding='utf-8') as f:
+    article = json.load(f)['text']
+    title_index = article.find(' ')
+    article = article[0:title_index] + '。' + article[title_index:]
+    article = article.replace(' ', '')
     
+    
+    for line in article.split('。'):
+        tree.add(line, 'article')
+
 class_map = {
 	"0" : "Regular word",
 	"1" : "Regular word",

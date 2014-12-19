@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+{% block title %}Search Sentences{% endblock %}
+{% block content %}
+
+{{ result }}
+<br />
+<form method="GET" action="/search">
+Search: <input type="text" name="search" value="{{search}}">
+</form>
+<h2>Sentences</h2>
+{% if len(sentence_count) == 0 %}
+	No sentences found. If your search contained kanji, you may have better luck searching entirely in hiragana
+{% else %}
+	Sentences found.
+{% endif %}
+
+{% endblock %}

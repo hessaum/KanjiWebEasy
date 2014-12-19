@@ -209,6 +209,22 @@ def show_all_words():
         word_total = data.get_valid_word_total()
     )
 
+@app.route('/search', methods=['GET']) 
+def search():
+    search_content = ''
+    search_result = ''
+    if request.method == 'GET':
+        if 'search' in request.args:
+            search_content = request.args['search']
+            if search_content: 
+                search_result = data.tree.find(search_content)
+                
+    return templates.render('search',
+        result=search_result,
+        search='',
+        setence_count = 0
+    )
+        
 @app.route('/whyuse')
 def why_use():
     return templates.render('whyuse')
