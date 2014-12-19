@@ -32,6 +32,16 @@ def is_katakana(c):
     char = ord(c)
     return (char >= 0x30A1) and (char <= 0x30FA)
     
+def kata_to_hira(word):
+    new_word = ''
+    for c in word:
+        if is_katakana(c):
+            new_word += chr(ord(c) - 0x30A1 + 0x3041)
+        else:
+            new_word += c
+            
+    return new_word
+    
 def is_digit(c):
     char = ord(c)
     return (char >= 0x30) and (char <= 0x39)

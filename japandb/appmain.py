@@ -112,6 +112,7 @@ def show_kanji(kanji):
                         else: 
                             popular_reading = data.is_solved(i, solv_info)
                             if popular_reading is not None:
+                                popular_reading = data.kata_to_hira(popular_reading)
                                 reading_map[popular_reading] += count
                             else:
                                 reading_map['Unknown'] += count
