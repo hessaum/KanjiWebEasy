@@ -1,5 +1,7 @@
 import os
 
+CONST_SEARCH_SENTENCE_LIMIT = 20
+
 class TreeNode:
     contents = None
     children = None
@@ -16,7 +18,7 @@ class GeneralizedSuffixTree:
     def __init__(self):
         self.root = TreeNode('', [])
         
-    def add(self, word, article_title):
+    def add(self, word, article_info):
         for i in range(len(word)):  
             curr_node = self.root
             subword = word[i:len(word)]
@@ -33,36 +35,36 @@ class GeneralizedSuffixTree:
                         curr_node.contents = curr_node.contents[:prefix]
                         # removed shared content from subword
                         subword = subword[prefix:]
-                        curr_node = GeneralizedSuffixTree.get_branch(curr_node, subword, article_title)
+                        curr_node = GeneralizedSuffixTree.get_branch(curr_node, subword, article_info)
                         if curr_node is None:
                             break
                     else:
                         # check if the curr_node is a leaf
                         if curr_node.article is not None:
                             old_end = TreeNode('', [], curr_node.article)
-                            new_end = TreeNode(subword[prefix:], [], article_title)
+                            new_end = TreeNode(subword[prefix:], [], article_info)
                             curr_node.article = None
                             curr_node.children = [old_end, new_end]
                             break
                         else:
                             subword = subword[prefix:]
-                            curr_node = GeneralizedSuffixTree.get_branch(curr_node, subword, article_title)
+                            curr_node = GeneralizedSuffixTree.get_branch(curr_node, subword, article_info)
                             if curr_node is None:
                                 break
                 else:
                     # note: only way nothing can be shared at all is if we compared root
-                    curr_node = GeneralizedSuffixTree.get_branch(curr_node, subword, article_title)
+                    curr_node = GeneralizedSuffixTree.get_branch(curr_node, subword, article_info)
                     if curr_node is None:
                         break
     
     @staticmethod
-    def get_branch(curr_node, subword, article_title):
+    def get_branch(curr_node, subword, article_info):
         if len(subword) > 0:
             for child in curr_node.children:
                 if(child.contents[:1] == subword[:1]):
                     return child
                     
-        new_node = TreeNode(subword, [], article_title)
+        new_node = TreeNode(subword, [], article_info)
         curr_node.children.append(new_node)
         return None
     
@@ -78,10 +80,24 @@ class GeneralizedSuffixTree:
             return result + ' )'
         else:
             if node.article is not None:
-                result = '^'+node.article+'^'
+                result = '^'+str(node.article)+'^'
             else:
                 result = '^None^'
             return node.contents+result
+    
+    @staticmethod
+    def bfs(nodes, articles):
+        if len(nodes) == 0 or len(articles) > CONST_SEARCH_SENTENCE_LIMIT:
+            return articles
+            
+        next_depth = []
+        for child in nodes:
+            if child.article is not None:
+                articles.append(child.article)
+            else:
+                next_depth.extend(child.children)
+                
+        return GeneralizedSuffixTree.bfs(next_depth, articles)
     
     def find(self, word):
         curr_node = self.root
@@ -89,16 +105,13 @@ class GeneralizedSuffixTree:
             prefix = len(os.path.commonprefix([word, curr_node.contents]))
             if prefix == len(word):
                 if curr_node.article is not None:
-                    return curr_node.article
+                    return [curr_node.article]
                 else:
-                    #todo all paths
-                    return 'not done yet'
+                    return GeneralizedSuffixTree.bfs(curr_node.children, [])
             if prefix > 0:
                 word = word[prefix:]
             
             # word contains more than curr_node
-            word = word[prefix:]
-            print(str(len(word)) + ' ' + str(prefix))
             for child in curr_node.children:
                 if child.contents[:1] == word[:1]:
                     curr_node = child

@@ -4,11 +4,17 @@
 
 {% include "bits/introduction.html" %}
 
-<form style="text-align:center" method="GET" action="/word">
-	<div class="kanji">
-		<a class="link" href="/kanji/">List of all kanji</a>
-	</div>
-	Search: <input type="text" name="search" value="{{search}}">
-</form>
+<br />
+<br />
+<br />
+<div style="text-align:center">
+	<form  method="GET" action="/word">
+		      Search word: <input type="text" name="search" value="{{search}}">
+	</form>
+	<br />
+	<form  method="GET" action="/search">
+		Search sentence: <input type="text" name="search" value="{{search}}">
+	</form>
+</div>
 
 {% endblock %}

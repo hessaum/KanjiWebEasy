@@ -11,6 +11,8 @@ from operator import itemgetter
 # constants
 CONST_NUM_AGREES_REQUIRED = 3
 CONST_WORDS_PER_PAGE = 1000
+CONST_WORD_SENTENCE_LIMIT = 10
+CONST_TO_TRIM = '　 ' # Japanese whitespace and ASCII whitespace
 
 #reading utils
 
@@ -217,8 +219,10 @@ def sort_kanji_info(word_array):
     return sorted(word_array, key=lambda x: (_all_kanji_count[x],x), reverse=True)
 
 def splice_article_id(articleId):
-    time = articleId[4:12];
-    id = articleId[13:];
+    if articleId.startswith('news'):
+        articleId = articleId[4:]
+    time = articleId[0:8];
+    id = articleId[9:];
     return (time, id)
 
 def get_inside_word_usage(word_info):
@@ -342,7 +346,7 @@ def insert_bold(example_sentence, word_info):
         for j in range(i+1, len(insertion_points)):
             insertion_points[j] += 2
 
-def populate_example_sentences(lookup_info, word_info):
+def populate_example_sentences(lookup_info, sentence_limit, word_info=None):
     sentences = []
     for lookup_info in lookup_info:
         article_info = splice_article_id(lookup_info[1])
@@ -368,7 +372,7 @@ def populate_example_sentences(lookup_info, word_info):
                     if token['word'] == '。' and in_quote == False:
                         current_sentence += 1
                         continue
-                                        
+                
                 #Then parse one word
                 if current_sentence == lookup_info[0]:
                     if 'ruby' in token:
@@ -380,11 +384,12 @@ def populate_example_sentences(lookup_info, word_info):
                 if current_sentence > lookup_info[0]:
                     break
             
-            insert_bold(example_sentence, word_info)
+            if word_info != None:
+                insert_bold(example_sentence, word_info)
             
             sentences.append(example_sentence)
             
-            if len(sentences) == 10:
+            if len(sentences) == sentence_limit:
                 break
     return sentences
 
@@ -429,7 +434,7 @@ def build_reading(request):
     return readings
 
 tree = suffixtree.GeneralizedSuffixTree()
-'''
+
 for (root, dirs, files) in os.walk('data/in/'):
     if len(dirs) == 0:
         for file in files:
@@ -440,19 +445,21 @@ for (root, dirs, files) in os.walk('data/in/'):
                 article = article.replace(' ', '')
                 
                 
-                for line in article.split('。'):
-                    tree.add(line, file[file.find('k'):len(file)-5])
-'''
-with open('data/in/20140425/k10013985201000/news20140425_k10013985201000.json', encoding='utf-8') as f:
-    article = json.load(f)['text']
-    title_index = article.find(' ')
-    article = article[0:title_index] + '。' + article[title_index:]
-    article = article.replace(' ', '')
-    
-    
-    for line in article.split('。'):
-        tree.add(line, 'article')
-
+                last_cut = 0
+                in_quote = False
+                sentence_count = 1
+                for i in range(len(article)):
+                    if article[i] == '「':
+                        in_quote = True
+                    if article[i] == '」':
+                        in_quote = False
+                    if not in_quote and article[i] == '。':
+                        tree.add(article[last_cut:i].strip(CONST_TO_TRIM), (sentence_count, file[4:len(file)-5]))
+                        last_cut = i+1
+                        sentence_count += 1
+                if last_cut != len(article):
+                    tree.add(article[last_cut:i].strip(CONST_TO_TRIM), (sentence_count, file[4:len(file)-5]))
+        
 class_map = {
 	"0" : "Regular word",
 	"1" : "Regular word",

@@ -1,7 +1,7 @@
 # appmain.py
 
 from flask import Flask, redirect, request, send_from_directory
-from japandb import data, templates
+from japandb import data, suffixtree, templates
 from collections import defaultdict
 from operator import itemgetter
 from os import path
@@ -160,7 +160,7 @@ def show_word(word):
     #Go through all the example sentences
     all_sentences = {}
     for key in example_sentence_lookup:
-        all_sentences[key] = data.populate_example_sentences(example_sentence_lookup[key], word_info['readings'][key])                
+        all_sentences[key] = data.populate_example_sentences(example_sentence_lookup[key], data.CONST_WORD_SENTENCE_LIMIT, word_info['readings'][key])                
     
     return templates.render('word', 
         word=word, 
@@ -212,17 +212,27 @@ def show_all_words():
 @app.route('/search', methods=['GET']) 
 def search():
     search_content = ''
-    search_result = ''
+    search_result = None
     if request.method == 'GET':
         if 'search' in request.args:
             search_content = request.args['search']
             if search_content: 
                 search_result = data.tree.find(search_content)
-                
+    
+    if search_result != None:
+        # append 'news' in front of all article Ids. We took it out to save some memory
+        for i in range(len(search_result)):
+            search_result[i] = (search_result[i][0], 'news'+search_result[i][1])
+        sentences = data.populate_example_sentences(search_result, suffixtree.CONST_SEARCH_SENTENCE_LIMIT)
+        sentence_count = len(sentences)
+    else:
+        sentences = None
+        sentence_count = 0
+        
     return templates.render('search',
-        result=search_result,
-        search='',
-        setence_count = 0
+        result=sentences,
+        search=search_content,
+        sentence_count = sentence_count
     )
         
 @app.route('/whyuse')

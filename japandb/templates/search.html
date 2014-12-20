@@ -2,16 +2,30 @@
 {% block title %}Search Sentences{% endblock %}
 {% block content %}
 
-{{ result }}
 <br />
 <form method="GET" action="/search">
 Search: <input type="text" name="search" value="{{search}}">
 </form>
 <h2>Sentences</h2>
-{% if len(sentence_count) == 0 %}
-	No sentences found. If your search contained kanji, you may have better luck searching entirely in hiragana
+{% if len(search) != 0 %}
+	{% if sentence_count == 0 %}
+		No sentences found. Note that your kanji/kana must match the same style as the NHK uses. (ex: 犬 will not match with いぬ and vice-versa)
+	{% else %}
+		<ol>
+		{% for sentence in result %}
+			<li>
+			<p>{% for word in sentence %}
+				{% if word[0]=='<b>' %}<b>{% elif word[0]=='</b>' %}</b>{% elif len(word) == 2 %}<ruby>{{ word[0] }}<rp>（</rp><rt>{{ word[1] }}</rt><rp>）</rp></ruby>{% elif len(word) == 1 %}{{ word[0] }}{% endif %}
+			{% endfor %}
+			</p>
+			</li>
+		{% endfor %}
+		</ol>
+	{% endif %}
 {% else %}
-	Sentences found.
+	Search will find any sentence that contains your input<br />
+	Output is limited to a maximum of 20 results.<br />
+	Note that your kanji/kana must match the same style as the NHK uses. (ex: 犬 will not match with いぬ and vice-versa)
 {% endif %}
-
+<span style="height: 250px; clear: left; display: block; "></span>
 {% endblock %}
