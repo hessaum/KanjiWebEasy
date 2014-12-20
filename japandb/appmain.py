@@ -1,7 +1,7 @@
 # appmain.py
 
 from flask import Flask, redirect, request, send_from_directory
-from japandb import data, suffixtree, templates
+from japandb import data, tree, templates
 from collections import defaultdict
 from operator import itemgetter
 from os import path
@@ -217,13 +217,14 @@ def search():
         if 'search' in request.args:
             search_content = request.args['search']
             if search_content: 
-                search_result = data.tree.find(search_content)
+                if data.load_key(search_content):
+                    search_result = data.tree.find(search_content)
     
     if search_result != None:
         # append 'news' in front of all article Ids. We took it out to save some memory
         for i in range(len(search_result)):
             search_result[i] = (search_result[i][0], 'news'+search_result[i][1])
-        sentences = data.populate_example_sentences(search_result, suffixtree.CONST_SEARCH_SENTENCE_LIMIT)
+        sentences = data.populate_example_sentences(search_result, tree.CONST_SEARCH_SENTENCE_LIMIT)
         sentence_count = len(sentences)
     else:
         sentences = None

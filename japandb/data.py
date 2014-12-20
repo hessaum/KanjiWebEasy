@@ -4,8 +4,10 @@
 import json
 import os
 import redis
+import jsonpickle
+import gzip
 from collections import defaultdict
-from japandb import suffixtree
+from japandb import tree
 from operator import itemgetter
 
 # constants
@@ -433,32 +435,53 @@ def build_reading(request):
         i+=1
     return readings
 
-tree = suffixtree.GeneralizedSuffixTree()
 
-for (root, dirs, files) in os.walk('data/in/'):
-    if len(dirs) == 0:
-        for file in files:
-            with open(os.path.join(root,file), encoding='utf-8') as f:
-                article = json.load(f)['text']
-                title_index = article.find(' ')
-                article = article[0:title_index] + '。' + article[title_index:]
-                article = article.replace(' ', '')
-                
-                
-                last_cut = 0
-                in_quote = False
-                sentence_count = 1
-                for i in range(len(article)):
-                    if article[i] == '「':
-                        in_quote = True
-                    if article[i] == '」':
-                        in_quote = False
-                    if not in_quote and article[i] == '。':
-                        tree.add(article[last_cut:i].strip(CONST_TO_TRIM), (sentence_count, file[4:len(file)-5]))
-                        last_cut = i+1
-                        sentence_count += 1
-                if last_cut != len(article):
-                    tree.add(article[last_cut:i].strip(CONST_TO_TRIM), (sentence_count, file[4:len(file)-5]))
+tree = tree.GST()
+CONST_REWRITE_GZIPS = False
+
+if CONST_REWRITE_GZIPS:
+    for (root, dirs, files) in os.walk('data/in/'):
+        if len(dirs) == 0:
+            for file in files:
+                with open(os.path.join(root,file), encoding='utf-8') as f:
+                    article = json.load(f)['text']
+                    title_index = article.find(' ')
+                    article = article[0:title_index] + '。' + article[title_index:]
+                    article = article.replace(' ', '')
+                    
+                    
+                    last_cut = 0
+                    in_quote = False
+                    sentence_count = 1
+                    for i in range(len(article)):
+                        if article[i] == '「':
+                            in_quote = True
+                        if article[i] == '」':
+                            in_quote = False
+                        if not in_quote and article[i] == '。':
+                            tree.add(article[last_cut:i].strip(CONST_TO_TRIM), (sentence_count, file[4:len(file)-5]))
+                            last_cut = i+1
+                            sentence_count += 1
+                    if last_cut != len(article):
+                        tree.add(article[last_cut:i].strip(CONST_TO_TRIM), (sentence_count, file[4:len(file)-5]))  
+    for child in tree.root.cld:
+        with gzip.open('data/sentences/'+str(ord(child.cts[:1]))+'.gz', 'wb') as f:
+            f.write(bytes(jsonpickle.encode(child), 'UTF-8'))
+
+def load_key(key):
+    folder_key = ord(key[:1])
+    
+    for child in tree.root.cld:
+        if ord(child.cts[:1]) == folder_key:
+            return True
+    
+    path = 'data/sentences/'+str(folder_key)+'.gz'
+    if not os.path.exists(path):
+        return False
+    
+    with gzip.open(path, 'r') as f:
+        tree.root.cld.append(jsonpickle.decode(f.read().decode('UTF-8')))
+        return True
         
 class_map = {
 	"0" : "Regular word",
