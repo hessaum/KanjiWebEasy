@@ -9,5 +9,7 @@ Fix the following issue and more with n-grams:
 	
 http://www.kanjiwebeasy.com/kanji/%E3%81%A4 is not a kanji
 Make readings appear on two columns. One column is too much (see http://www.kanjiwebeasy.com/kanji/%E6%97%A5)
+Same example sentence can appear twice:
+	http://www.kanjiwebeasy.com/search?search=%E6%8E%A2%E3%81%99
 々 should be excluded from reading solver and shouldn't show reading on page
 Add search by non-word (i.e. location name, people name, group name)
