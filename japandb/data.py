@@ -264,15 +264,21 @@ def search(word):
     max_word_set = set()
     for char in word:
         if is_kanji(char):
+            kanji_info = get_kanji_info(char)
+            if kanji_info == None:
+                return []
             if(len(max_word_set) == 0):
-                max_word_set = set(get_kanji_info(char)['words'])
+                max_word_set = set(kanji_info['words'])
             else:
-                max_word_set &= set(get_kanji_info(char)['words'])
+                max_word_set &= set(kanji_info['words'])
         else:
+            letter_map = _letter_map[char]
+            if letter_map == None:
+                return []
             if(len(max_word_set) == 0):
-                max_word_set |= _letter_map[char]
+                max_word_set |= letter_map
             else:
-                max_word_set &= _letter_map[char]
+                max_word_set &= letter_map
         
         # if we ever have no elements left, we can just stop
         if(len(max_word_set) == 0):
@@ -448,7 +454,6 @@ if CONST_REWRITE_GZIPS:
                     title_index = article.find(' ')
                     article = article[0:title_index] + '。' + article[title_index:]
                     article = article.replace(' ', '')
-                    
                     
                     last_cut = 0
                     in_quote = False
