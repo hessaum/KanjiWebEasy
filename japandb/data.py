@@ -357,8 +357,12 @@ def insert_bold(example_sentence, word_info):
 def populate_example_sentences(lookup_info, sentence_limit, word_info=None):
     sentences = []
     for lookup_info in lookup_info:
+        if lookup_info[1].startswith('news'):
+            filename = lookup_info[1]
+        else:
+            filename = 'news'+lookup_info[1]
         article_info = splice_article_id(lookup_info[1])
-        with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+lookup_info[1]+'.json', encoding='utf-8') as f:
+        with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+filename+'.json', encoding='utf-8') as f:
             containing_article = json.load(f)
             current_sentence = 0
             example_sentence = []

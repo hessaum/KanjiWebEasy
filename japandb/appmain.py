@@ -221,9 +221,8 @@ def search():
                     search_result = data.tree.find(search_content)
     
     if search_result != None:
-        # append 'news' in front of all article Ids. We took it out to save some memory
-        for i in range(len(search_result)):
-            search_result[i] = (search_result[i][0], 'news'+search_result[i][1])
+        for sentence in search_result:
+            print(sentence)
         sentences = data.populate_example_sentences(search_result, tree.CONST_SEARCH_SENTENCE_LIMIT)
         sentence_count = len(sentences)
     else:

@@ -93,7 +93,7 @@ class GST: # Generalized Suffix Tree
         next_depth = []
         for child in nodes:
             if child.ar is not None:
-                articles.append(child.ar)
+                articles.add(child.ar)
             else:
                 next_depth.extend(child.cld)
                 
@@ -107,7 +107,7 @@ class GST: # Generalized Suffix Tree
                 if curr_node.ar is not None:
                     return [curr_node.ar]
                 else:
-                    return GST.bfs(curr_node.cld, [])
+                    return GST.bfs(curr_node.cld, set())
             if prefix > 0:
                 word = word[prefix:]
             
