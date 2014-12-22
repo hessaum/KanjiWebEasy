@@ -221,8 +221,6 @@ def search():
                     search_result = data.tree.find(search_content)
     
     if search_result != None:
-        for sentence in search_result:
-            print(sentence)
         sentences = data.populate_example_sentences(search_result, tree.CONST_SEARCH_SENTENCE_LIMIT)
         sentence_count = len(sentences)
     else:
