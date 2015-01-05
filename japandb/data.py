@@ -366,9 +366,15 @@ def populate_example_sentences(lookup_info, sentence_limit, word_info=None):
             containing_article = json.load(f)
             current_sentence = 0
             example_sentence = []
+            
+            # If we're trying to find the first sentence AKA the title
+            if lookup_info[0] == 1:
+                example_sentence.append(('(タイトル） ',))
             in_quote = False
             for token in containing_article['morph']:
-            
+                if current_sentence > lookup_info[0]:
+                    break
+                    
                 #First check if we need to increase sentence number
                 if 'word' in token:
                     if current_sentence <= 1 and token['word'] == "<S>":
@@ -382,6 +388,9 @@ def populate_example_sentences(lookup_info, sentence_limit, word_info=None):
                         in_quote = False
                     
                     if token['word'] == '。' and in_quote == False:
+                        # we want a trailing dot at the end
+                        if current_sentence == lookup_info[0]:
+                            example_sentence.append('。')
                         current_sentence += 1
                         continue
                 
@@ -393,8 +402,6 @@ def populate_example_sentences(lookup_info, sentence_limit, word_info=None):
                                 example_sentence.append((reading['s'], reading['r']))
                             else:
                                 example_sentence.append((reading['s'],))
-                if current_sentence > lookup_info[0]:
-                    break
             
             if word_info != None:
                 insert_bold(example_sentence, word_info)
