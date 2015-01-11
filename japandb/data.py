@@ -454,7 +454,7 @@ def build_reading(request):
 
 
 tree = tree.GST()
-CONST_REWRITE_GZIPS = False
+CONST_REWRITE_GZIPS = True
 
 if CONST_REWRITE_GZIPS:
     for (root, dirs, files) in os.walk('data/in/'):
