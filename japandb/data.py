@@ -447,8 +447,9 @@ def build_reading(request):
     while 'kanji_val_'+str(i) in request.form:
         readings.append(request.form['kanji_val_'+str(i)])
         # If user left it blank or somehow the reading the user input wasn't even a possible select
-        if readings[i] == '' or not (readings[i] in request.form['reading']):
-            return None
+        if readings[i] != 'unsolvable':
+            if readings[i] == '' or (readings[i] not in request.form['reading']):
+                return None
         i+=1
     return readings
 
