@@ -14,11 +14,13 @@
 		<div id="header">
 			{% include "bits/categories.html" %}
 		</div>
-		<section class="page-wrap">
-			{% block content %}
-			{% endblock %}
-		</section>
-		<footer class="site-footer">
+		<div id="container">
+			<section id="content">
+				{% block content %}
+				{% endblock %}
+			</section>
+		</div>
+		<footer id="footer">
 			{% include "bits/footer.html" %}
 		</footer>
 	</body>
