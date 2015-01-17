@@ -38,6 +38,39 @@ li {
     float: left;
 }
 
+/* MailChimp Form Embed Code - Slim - 08/17/2011 */
+#mc_embed_signup form {display: block; position: relative; text-align: left; padding: 10px 0 10px 3%; }
+#mc_embed_signup h2 {font-weight: bold; padding: 0; margin: 15px 0; font-size: 1.4em; }
+ 
+#mc_embed_signup input { border: 1px solid #ababab; -webkit-appearance: none; }
+#mc_embed_signup input[type=checkbox]{ -webkit-appearance: checkbox; }
+#mc_embed_signup input[type=radio]{ -webkit-appearance: radio; }
+#mc_embed_signup input:focus { border-color: #799877; }
+ 
+#mc_embed_signup .button {
+  display: block;
+  position: relative;
+  background-color: #4F71CA;
+  padding: 0;
+  margin: 0 auto;
+  border: 0 none;
+  border-bottom: #374F8D 3px solid;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  width: 140px;
+  height: 36px;
+  line-height: 36px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+}
+#mc_embed_signup .button:hover { background-color: #4766B6; border-bottom-color: #32477F; }
+#mc_embed_signup .button:active { top: 2px; border-bottom-width: 1px; }
+
+
 /* Wordboxes */
 .wordbox {
     float:left;
