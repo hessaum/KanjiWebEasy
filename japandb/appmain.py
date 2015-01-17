@@ -237,3 +237,7 @@ def search():
 @app.route('/whyuse')
 def why_use():
     return templates.render('whyuse')
+    
+@app.route('/confirmmail')
+def confirm_email():
+    return templates.render('confirmmail')
