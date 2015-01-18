@@ -241,3 +241,7 @@ def why_use():
 @app.route('/confirmmail')
 def confirm_email():
     return templates.render('confirmmail')
+    
+@app.route('/mailconfirmed')
+def mail_confirmed():
+    return templates.render('mailconfirmed')
