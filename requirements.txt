@@ -6,3 +6,4 @@ gunicorn==18.0
 itsdangerous==0.24
 redis==2.10.3
 jsonpickle==0.8.0
+Flask-OpenID==1.2.4

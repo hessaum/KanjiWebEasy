@@ -1,20 +1,26 @@
 # appmain.py
 # -*- coding: utf-8 -*- 
 
-from flask import Flask, redirect, request, send_from_directory
+from flask import Flask, redirect, request, g, session, flash, send_from_directory
 from japandb import data, tree, templates
 from collections import defaultdict
 from operator import itemgetter
 from os import path
+from flask.ext.openid import OpenID
+from openid.extensions import pape
 import json
 import hashlib
 import math
 
 app = Flask(__name__)
+app.config.update(SECRET_KEY = 'n8@`K$qo6VG.>)=E!,x]S5U.F8O345')
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
 templates.setup(app)
+
+# setup flask-openid
+oid = OpenID(app, safe_roots=[], extension_responses=[pape.Response])
 
 @app.route('/favicon.ico')
 def favicon():
@@ -246,3 +252,112 @@ def confirm_email():
 @app.route('/mailconfirmed')
 def mail_confirmed():
     return templates.render('mailconfirmed')
+
+class User():	
+	def __init__(self, name, email, openid):
+		self.name = name
+		self.email = email
+		self.openid = openid
+
+@app.before_request
+def before_request():
+	g.user = None
+	if 'openid' in session:
+		# TODO: get user with openID same as session openID
+		# g.user = User.query.filter_by(openid=session['openid']).first()
+		i = 0 #random line to avoid error
+	
+@app.after_request
+def after_request(response):
+	#unconnect from DB
+	return response
+
+@app.route('/login', methods=['GET', 'POST'])
+@oid.loginhandler
+def login():
+	"""Does the login via OpenID. Has to call into `oid.try_login`
+	to start the OpenID machinery.
+	"""
+	# if we are already logged in, go back to were we came from
+	if g.user is not None:
+		return redirect(oid.get_next_url())
+	if request.method == 'POST':
+		openid = request.form.get('openid')
+		if openid:
+			pape_req = pape.Request([])
+			return oid.try_login(openid, ask_for=['email', 'nickname'],	extensions=[pape_req])
+	
+	return templates.render('login', next=oid.get_next_url(), error=oid.fetch_error())
+	
+@oid.after_login
+def create_or_login(resp):
+	"""This is called when login with OpenID succeeded and it's not
+	necessary to figure out if this is the users's first login or not.
+	This function has to redirect otherwise the user will be presented
+	with a terrible URL which we certainly don't want.
+	"""
+	session['openid'] = resp.identity_url
+	if 'pape' in resp.extensions:
+		pape_resp = resp.extensions['pape']
+		session['auth_time'] = pape_resp.auth_time
+	
+	#TODO: Get user with ID equal to "openid" variable
+	#user = User.query.filter_by(openid=resp.identity_url).first()
+	if user is not None:
+		flash(u'Successfully signed in')
+		g.user = user
+		return redirect(oid.get_next_url())
+	
+	return redirect(url_for('create_profile', next=oid.get_next_url(), name=resp.fullname or resp.nickname, email=resp.email))
+	
+@app.route('/create-profile', methods=['GET', 'POST'])
+def create_profile():
+	"""If this is the user's first login, the create_or_login function
+	will redirect here so that the user can set up his profile.
+	"""
+	if g.user is not None or 'openid' not in session:
+		return redirect(url_for('index'))
+	if request.method == 'POST':
+		name = request.form['name']
+		email = request.form['email']
+		if not name:
+			flash(u'Error: you have to provide a name')
+		elif '@' not in email:
+			flash(u'Error: you have to enter a valid email address')
+		else:
+			flash(u'Profile successfully created')
+			# TODO: WE ADD TO DATABASE HERE
+			return redirect(oid.get_next_url())
+	return templates.render('create_profile', next_url=oid.get_next_url())
+
+@app.route('/profile', methods=['GET', 'POST'])
+def edit_profile():
+	"""Updates a profile"""
+	if g.user is None:
+		abort(401)
+	form = dict(name=g.user.name, email=g.user.email)
+	if request.method == 'POST':
+		if 'delete' in request.form:
+			#Remove from DB here
+			session['openid'] = None
+			flash(u'Profile deleted')
+			return redirect(url_for('index'))
+		form['name'] = request.form['name']
+		form['email'] = request.form['email']
+		if not form['name']:
+			flash(u'Error: you have to provide a name')
+		elif '@' not in form['email']:
+			flash(u'Error: you have to enter a valid email address')
+		else:
+			flash(u'Profile successfully created')
+			g.user.name = form['name']
+			g.user.email = form['email']
+			# TODO: Update DB here
+			return redirect(url_for('edit_profile'))
+	return templates.render('edit_profile', form=form)
+	
+@app.route('/logout')
+def logout():
+	session.pop('openid', None)
+	flash(u'You have been signed out')
+	return redirect(oid.get_next_url())
