@@ -1,4 +1,5 @@
 # data.py
+# -*- coding: utf-8 -*- 
 # module responsible for loading & indexing data
 
 import json

@@ -1,4 +1,5 @@
 # appmain.py
+# -*- coding: utf-8 -*- 
 
 from flask import Flask, redirect, request, send_from_directory
 from japandb import data, tree, templates
