@@ -8,28 +8,28 @@ Setup
 
 <ol>
 <li>
-Download Python 3.4 from https://www.python.org/downloads/
-</li>
-<li>
-Download https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py to C:Users/*computer account name here*
-</li>
-<li>
-Go to C:Users/*computer account name here* and shift+click "open command window here"
-</li>
-<li>
-C:/Python34/python.exe get-pip.py
-</li>
-<li>
-Type <b>without</b> quotes: "python get-pip.pyc"
-</li>
-<li>
-Type <b>without</b> quotes: "pip install virtualenv"
-</li>
-<li>
-Download Githu for Windows https://windows.github.com/
+Download Github for Windows https://windows.github.com/
 </li>
 <li>
 Drap and drop https://github.com/SebastienGllmt/KanjiWebEasy.git into the Github for Windows application and place file in the default path
+</li>
+<li>
+Download Python 3.4 from https://www.python.org/downloads/
+</li>
+<li>
+Download https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py to some folder
+</li>
+<li>
+Go to the folder where you placed get-pip.py. Inside the folder, shift+right click "open command window here"
+</li>
+<li>
+Type <b>without</b> quotes: "C:/Python34/python.exe get-pip.py"
+</li>
+<li>
+Go to C:\Python34\Scripts and shift+right click "open command window here"
+</li>
+<li>
+Type <b>without</b> quotes: "pip install virtualenv"
 </li>
 <li>
 Go to My Documents/Github/KanjiWebEasy
@@ -38,7 +38,7 @@ Go to My Documents/Github/KanjiWebEasy
 Once in the folder, Shift+Right click and select "Open command window here"
 </li>
 <li>
-Type <b>without</b> quotes: "virtualenv --python=c:\Python34\python.exe venv"
+Type <b>without</b> quotes: "C:\Python34\Scripts\virtualenv venv"
 </li>
 <li>
 Go to KanjiWebEasy/venv/scripts or KanjiWebEasy/venv/bin
