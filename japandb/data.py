@@ -142,7 +142,7 @@ redis_conn = redis.from_url(redis_url)
 local_redis = dict() # local copy of redis database to try and avoid holding connections to the db
 unsolved_readings = set() # Approximates which base have readings left. Will never contain less but may contain extra
 
-# populate resolved files with words it hasn't seen yet    
+# populate resolved files with words it hasn't seen yet 
 def populate_database():
     for base, word_info in words['words'].items():
         json_base = redis_conn.get(base)
@@ -163,9 +163,9 @@ def populate_database():
                 if len(kanji) == 0:
                     continue
                 
-                has_elements = True
                 furigana = reading_info['furigana'][i]
                 if kanji not in resolved_readings[reading]:
+                    has_elements = True
                     if len(kanji) == 1 or kanji == furigana:
                         resolved_readings[reading][kanji] = {'furi': reading_info['furigana'][i]}
                     else:
