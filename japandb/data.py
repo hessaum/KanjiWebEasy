@@ -152,6 +152,7 @@ def populate_database():
             resolved_readings = json.loads(json_base.decode('utf-8'))
         
         has_elements = False
+        rewrite_to_database = False
         for reading, reading_info in word_info['readings'].items():
             if len(reading_info['kanji']) == 0:
                 continue;
@@ -163,9 +164,10 @@ def populate_database():
                 if len(kanji) == 0:
                     continue
                 
+                has_elements = True
                 furigana = reading_info['furigana'][i]
                 if kanji not in resolved_readings[reading]:
-                    has_elements = True
+                    rewrite_to_database = True
                     if len(kanji) == 1 or kanji == furigana:
                         resolved_readings[reading][kanji] = {'furi': reading_info['furigana'][i]}
                     else:
@@ -179,6 +181,7 @@ def populate_database():
         
         if has_elements:
             local_redis[base] = resolved_readings
+        if rewrite_to_database:
             redis_conn.set(base, json.dumps(resolved_readings, ensure_ascii=False))
     
 populate_database()
