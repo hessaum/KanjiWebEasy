@@ -1,14 +1,19 @@
 # appmain.py
 # -*- coding: utf-8 -*- 
 
-from flask import Flask, redirect, request, send_from_directory
-from japandb import data, tree, templates
+#stdlib
 from collections import defaultdict
 from operator import itemgetter
 from os import path
 import json
 import hashlib
 import math
+
+#3rd party lib
+from flask import Flask, redirect, request, send_from_directory
+
+#user defined
+from japandb import data, tree, templates, wordutils, redis_connect
 
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
@@ -39,29 +44,29 @@ def dump_database():
         password = hashlib.sha1(request.form['password'].encode('utf-8')).hexdigest()
         if  password == '4ae4a6888caa20abe362f9a2b4569dc1c166cc2e':
             data.redis_conn.flushdb()
-            data.local_redis = {}
+            redis_connect.local_redis = {}
             data.populate_database()
             return templates.render('dump_database', delete=True)  
         elif password == '277c17bf478687ba2b53a8929e945d4f33078384':
             return templates.render('dump_database', database=data.redis_conn, keys=data.redis_conn.keys('*'))
         elif password == '0d366a470b59ab03e98cea9bffe85e208ada3406':
-            return templates.render('dump_database', left=data.unsolved_readings)
+            return templates.render('dump_database', left=redis_connect.unsolved_readings)
         
     return templates.render('dump_database')
 
 @app.route('/readingsolver/', methods=['GET', 'POST'])
 def reading_solver():
     if request.method == 'POST':
-        data.handle_reading_post(request)
+        redis_connect.handle_reading_post(request)
     
-    for base in data.unsolved_readings:
-        word_info = json.loads(data.redis_conn.get(base).decode('utf-8'))
+    for base in redis_connect.unsolved_readings:
+        word_info = json.loads(redis_connect.redis_conn.get(base).decode('utf-8'))
         for reading, reading_info in word_info.items():
             for subword, subword_info in reading_info.items():
                 if 'ip' not in subword_info:
                     continue
                 
-                if not data.has_unsolved(subword, subword_info):
+                if not redis_connect.has_unsolved(subword, subword_info):
                     continue
                     
                 if not request.headers.getlist("X-Forwarded-For"):
@@ -77,7 +82,7 @@ def reading_solver():
 
 @app.route('/kanji/')
 def show_all_kanji():
-    sorted_kanji = [c for c in data.get_kanji_sorted_by_count() if (not data.is_latin(c[0]))]
+    sorted_kanji = [c for c in data.get_kanji_sorted_by_count() if (not wordutils.is_latin(c[0]))]
     return templates.render('allkanji',
         all_kanji=sorted_kanji,
         kanji_count = data._all_kanji_count,
@@ -99,23 +104,23 @@ def show_kanji(kanji):
     
     word_count = data._all_word_count
     for word in info['words']:
-        solved_reading = data.local_redis[word]
+        solved_reading = redis_connect.local_redis[word]
         for reading, reading_info in solved_reading.items():
             count = data.count_examples(data.words['words'][word]['readings'][reading]['examples'])
             for solv_word, solv_info in reading_info.items():
                 for i in range(len(solv_word)):
                     if solv_word[i] == kanji:
                         if 'ip' not in solv_info:
-                            if not data.contains_num(solv_info['furi']):
-                                hira_reading = data.kata_to_hira(solv_info['furi'])
+                            if not wordutils.contains_num(solv_info['furi']):
+                                hira_reading = wordutils.kata_to_hira(solv_info['furi'])
                                 reading_map[hira_reading] += count
                             else:
                                 reading_map['Unknown'] += count
                         else: 
-                            popular_reading = data.is_solved(i, solv_info)
+                            popular_reading = redis_connect.is_solved(i, solv_info)
                             if popular_reading is not None:
                                 if popular_reading != 'unsolvable':
-                                    popular_reading = data.kata_to_hira(popular_reading)
+                                    popular_reading = wordutils.kata_to_hira(popular_reading)
                                     reading_map[popular_reading] += count
                             else:
                                 reading_map['Unknown'] += count

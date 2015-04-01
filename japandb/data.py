@@ -2,90 +2,23 @@
 # -*- coding: utf-8 -*- 
 # module responsible for loading & indexing data
 
+# stdlib
 import json
 import os
-import redis
-import jsonpickle
 import gzip
-from collections import defaultdict
-from japandb import tree
 from operator import itemgetter
+from collections import defaultdict
+
+# 3rd party lib
+import jsonpickle
+
+# user defined
+from japandb import wordutils, tree, redis_connect
 
 # constants
-CONST_NUM_AGREES_REQUIRED = 3
 CONST_WORDS_PER_PAGE = 1000
 CONST_WORD_SENTENCE_LIMIT = 10
 CONST_TO_TRIM = '　 ' # Japanese whitespace and ASCII whitespace
-
-#reading utils
-
-def contains_num(word):
-    return any(c.isdigit() for c in word)
-    
-def is_latin(c):
-    char = ord(c)
-    return (char > 0xFF00) and (char < 0xFFA0)
-    
-def is_kanji(c):
-    char = ord(c)
-    return (char >= 0x4E00) and (char <= 0x9FAF)
-
-def is_hiragana(c):
-    char = ord(c)
-    return (char >= 0x3041) and (char <= 0x3094)
-    
-def is_katakana(c):
-    char = ord(c)
-    return (char >= 0x30A1) and (char <= 0x30FA)
-    
-def kata_to_hira(word):
-    new_word = ''
-    for c in word:
-        if is_katakana(c):
-            new_word += chr(ord(c) - 0x30A1 + 0x3041)
-        else:
-            new_word += c
-            
-    return new_word
-    
-def is_digit(c):
-    char = ord(c)
-    return (char >= 0x30) and (char <= 0x39)
-    
-def is_japanese(word):
-    #if it contains at least one hiragana/katakana/kanji
-    for c in word:
-        if is_kanji(c) or is_hiragana(c) or is_katakana(c):
-            return True
-    return False
-
-def contains_non_grammatical(word):
-    for reading, reading_info in _all_words[word]['readings'].items():
-        if reading_info['class'] is not 'B':
-            return True
-    return False
-
-def is_valid(word):
-    return is_japanese(word) and contains_non_grammatical(word)
-    
-def is_solved(kanji_index, solv_info):
-    if len(solv_info['split']) == 0:
-        return None
-        
-    given_reading = defaultdict(int)
-    for j in range(len(solv_info['split'])):
-        given_reading[solv_info['split'][j][kanji_index]] += 1
-    popular_reading = sorted(given_reading.items(), key=itemgetter(1), reverse=True)[0]
-    if popular_reading[1] >= CONST_NUM_AGREES_REQUIRED:
-        return popular_reading[0]
-    else:
-        return None
-        
-def has_unsolved(kanji, solv_info):
-    for i in range(len(kanji)):
-        if is_solved(i, solv_info) is None:
-            return True
-    return False
     
 # Perform initialization
 
@@ -117,7 +50,7 @@ for word, word_info in words['words'].items():
             for kanji in kanji_str:
                 _all_kanji_count[kanji] = _all_kanji_count.get(kanji, 0) + example_count
                 
-    if is_valid(word):
+    if wordutils.is_valid(word, _all_words[word]):
         _valid_word_count[word] = word_occurrence
     _all_word_count[word] = word_occurrence
 
@@ -136,58 +69,10 @@ for word, word_info in _all_words.items():
             for kanji in kanji_str:
                 _kanji[kanji]['words'].add(word)
 
-#reading solving loading
-redis_url = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379')
-redis_conn = redis.from_url(redis_url)
-local_redis = dict() # local copy of redis database to try and avoid holding connections to the db
-unsolved_readings = set() # Approximates which base have readings left. Will never contain less but may contain extra
+#reading solving loadin
+redis_connect.populate_database(words, _all_word_count)
 
-# populate resolved files with words it hasn't seen yet 
-def populate_database():
-    for base, word_info in words['words'].items():
-        json_base = redis_conn.get(base)
-        if json_base is None:
-            resolved_readings = dict()
-        else:
-            resolved_readings = json.loads(json_base.decode('utf-8'))
-        
-        has_elements = False
-        rewrite_to_database = False
-        for reading, reading_info in word_info['readings'].items():
-            if len(reading_info['kanji']) == 0:
-                continue;
-                
-            if reading not in resolved_readings:
-                resolved_readings[reading] = {}
-                
-            for i, kanji in enumerate(reading_info['kanji']):
-                if len(kanji) == 0:
-                    continue
-                
-                has_elements = True
-                furigana = reading_info['furigana'][i]
-                if kanji not in resolved_readings[reading]:
-                    rewrite_to_database = True
-                    if len(kanji) == 1 or kanji == furigana:
-                        resolved_readings[reading][kanji] = {'furi': reading_info['furigana'][i]}
-                    else:
-                        resolved_readings[reading][kanji] = {'split' : [], 'ip': [], 'furi': furigana}
-                        unsolved_readings.add(base)
-                else:
-                    if 'ip' not in resolved_readings[reading][kanji]:
-                        continue
-                    if has_unsolved(kanji, resolved_readings[reading][kanji]):
-                        unsolved_readings.add(base)
-        
-        if has_elements:
-            local_redis[base] = resolved_readings
-        if rewrite_to_database:
-            redis_conn.set(base, json.dumps(resolved_readings, ensure_ascii=False))
-    
-populate_database()
 # Public interface
-unsolved_readings = sorted(unsolved_readings, key=lambda x: _all_word_count[x], reverse=True)
-
 def get_kanji_keys():
     return sorted(_kanji.keys(), key=_all_kanji_count.get, reverse=True)
 
@@ -261,13 +146,13 @@ def contains_ascending(text, token_list):
             
 def search(word):
     for i in range(len(word)):
-        if is_digit(word[i]):
-            word = word[0:i] + chr((ord(word[i])-0x30)+0xFF10) + word[i+1:]
+        if wordutils.is_digit(word[i]):
+            word = word[0:i] + wordutils.convert_numeral(word[i]) + word[i+1:]
             
     # represents an overestimate of all the words that match
     max_word_set = set()
     for char in word:
-        if is_kanji(char):
+        if wordutils.is_kanji(char):
             kanji_info = get_kanji_info(char)
             if kanji_info == None:
                 return []
@@ -296,13 +181,13 @@ def search(word):
     i = 0
     while(i < len(word)):
         start_index = i
-        while(i < len(word) and is_kanji(word[i])):
+        while(i < len(word) and wordutils.is_kanji(word[i])):
             i += 1
         if start_index != i:
             kanji_list.append(word[start_index:i])
         
         start_index = i
-        while(i < len(word) and not is_kanji(word[i])):
+        while(i < len(word) and not wordutils.is_kanji(word[i])):
             i += 1
         if start_index != i:
             furi_list.append(word[start_index:i])
@@ -415,48 +300,6 @@ def populate_example_sentences(lookup_info, sentence_limit, word_info=None):
             if len(sentences) == sentence_limit:
                 break
     return sentences
-
-def handle_reading_post(request):
-    base = request.form['base']
-    reading = request.form['reading']
-    kanji = request.form['kanji']
-    kanji_readings = build_reading(request)
-    
-    json_base = redis_conn.get(base);
-    # throw away impossible input
-    if json_base is None:
-        return
-    else:
-        resolved_readings = json.loads(json_base.decode('utf-8'))
-    if kanji_readings is None:
-        return
-    if not reading in resolved_readings:
-        return
-    if not kanji in resolved_readings[reading]:
-        return
-    # don't allow the same IP twice
-    if not request.remote_addr in resolved_readings[reading][kanji]['ip']:
-        resolved_readings[reading][kanji]['split'].append(kanji_readings)
-        if not request.headers.getlist("X-Forwarded-For"):
-           ip = request.remote_addr
-        else:
-           ip = request.headers.getlist("X-Forwarded-For")[0]
-        resolved_readings[reading][kanji]['ip'].append(ip)
-        local_redis[base] = resolved_readings
-        redis_conn.set(base, json.dumps(resolved_readings, ensure_ascii=False))
-
-def build_reading(request):
-    i = 0
-    readings = []
-    while 'kanji_val_'+str(i) in request.form:
-        readings.append(request.form['kanji_val_'+str(i)])
-        # If user left it blank or somehow the reading the user input wasn't even a possible select
-        if readings[i] != 'unsolvable':
-            if readings[i] == '' or (readings[i] not in request.form['reading']):
-                return None
-        i+=1
-    return readings
-
 
 tree = tree.GST()
 CONST_REWRITE_GZIPS = False
