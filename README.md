@@ -76,10 +76,10 @@ Once in the folder, Shift+Right click and select "Open command window here"
 Type <b>without</b> quotes: "activate.bat"
 </li>
 <li>
-Type <b>without</b> quotes: "set PYTHONPATH=."
+Type <b>without</b> quotes: "cd ../.."
 </li>
 <li>
-Type <b>without</b> quotes: "cd ../.."
+Type <b>without</b> quotes: "set PYTHONPATH=."
 </li>
 <li>
 Type <b>without</b> quotes: "python -m japandb"
