@@ -43,12 +43,12 @@ def dump_database():
     if request.method == 'POST':
         password = hashlib.sha1(request.form['password'].encode('utf-8')).hexdigest()
         if  password == '4ae4a6888caa20abe362f9a2b4569dc1c166cc2e':
-            data.redis_conn.flushdb()
+            redis_connect.redis_conn.flushdb()
             redis_connect.local_redis = {}
-            data.populate_database()
+            redis_connect.populate_database()
             return templates.render('dump_database', delete=True)  
         elif password == '277c17bf478687ba2b53a8929e945d4f33078384':
-            return templates.render('dump_database', database=data.redis_conn, keys=data.redis_conn.keys('*'))
+            return templates.render('dump_database', database=redis_connect.redis_conn, keys=redis_connect.redis_conn.keys('*'))
         elif password == '0d366a470b59ab03e98cea9bffe85e208ada3406':
             return templates.render('dump_database', left=redis_connect.unsolved_readings)
         
