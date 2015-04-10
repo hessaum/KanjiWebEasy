@@ -3,7 +3,7 @@ KanjiWebEasy
 
 Website made to users learn how to read NHK Web Easy articles
 
-Setup
+Setup for Windows
 ============
 
 <ol>
@@ -57,7 +57,7 @@ Put the contents of the .zip file in a foler on your C drive called "Redis 2.8.1
 </li>
 </ol>
 
-Launching
+Launching for Windows
 ============
 <ol>
 <li>
@@ -116,3 +116,47 @@ Once all your changes have been made, press Sync again
 </ol>
 
 <b>Note</b>: Your changes will not appear on the live site even after you push a change.
+
+Setup for Linux (Tested on Linux Mint)
+============
+
+<ol>
+<li>
+Make sure you have the latest packages "sudo apt-get update"
+</li>
+<li>
+Install all the packages we will need "sudo apt-get install git redis-server python3.4 python3.4-dev python3-pip python-virtualenv"
+</li>
+<li>
+Clone the repository wherever you want the project "git clone https://github.com/SebastienGllmt/KanjiWebEasy.git" (this step takes a long time)
+</li>
+<li>
+Navigate into the KanjiWebEasy directory you just cloned "cd KanjiWebEasy"
+</li>
+<li>
+Setup the virtual environment "virtualenv venv"
+</li>
+<li>
+Install the project requirements "sudo pip3 install -r requirements.txt"
+</li>
+</ol>
+<div>
+sudo apt-get update; sudo apt-get install git redis-server python3.4 python3.4-dev python3-pip python-virtualenv; git clone https://github.com/SebastienGllmt/KanjiWebEasy.git; cd KanjiWebEasy; virtualenv venv; sudo pip3 install -r requirements.txt
+</div>
+
+Launching for Linux (Tested on Linux Mint)
+============
+<ol>
+<li>
+Run "redis-server"
+</li>
+<li>
+Navigate to the KanjiWebEasy folder "source venv/bin/activate"
+</li>
+<li>
+Run "python3.4 -m japandb" in the KanjiWebEasy folder
+</li>
+<li>
+Open up your browser of choice and go to http://localhost:5000/
+</li>
+</ol>
