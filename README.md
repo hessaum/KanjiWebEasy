@@ -141,6 +141,7 @@ Install the project requirements "sudo pip3 install -r requirements.txt"
 </li>
 </ol>
 <div>
+If you prefer a one line install use this. It will clone the project and set everything up in the current directory. <br>
 sudo apt-get update; sudo apt-get install git redis-server python3.4 python3.4-dev python3-pip python-virtualenv; git clone https://github.com/SebastienGllmt/KanjiWebEasy.git; cd KanjiWebEasy; virtualenv venv; sudo pip3 install -r requirements.txt
 </div>
 
