@@ -4,6 +4,9 @@
 
 <h1>Word: {{ word }}</h1>
 
+Total number of occurrences: {{ word_usage_total }}<br />
+<a class="link" href="http://ejje.weblio.jp/content/{{word}}">Look up meaning on Weblio</a>
+
 {{ info.readings }}
 {% for x, (reading, reading_data) in enumerate(info) %}
     <h2>{{ reading }}</h2>
