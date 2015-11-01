@@ -48,6 +48,7 @@ Once in the folder, Shift+Right click and select "Open command window here"
 </li>
 <li>
 Type <b>without</b> quotes: "pip install -r ../../requirements.txt"
+If you get a missing DLL error, download the Visual C++ redistribution from https://www.microsoft.com/en-us/download/details.aspx?id=48145 (probably x86)
 </li>
 <li>
 Download Redis 2.8.17 from https://github.com/MSOpenTech/redis/releases
