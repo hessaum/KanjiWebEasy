@@ -47,7 +47,7 @@ Go to KanjiWebEasy/venv/scripts or KanjiWebEasy/venv/bin
 Once in the folder, Shift+Right click and select "Open command window here"
 </li>
 <li>
-Type <b>without</b> quotes: "pip install -r ../../requirements.txt" </br>
+Type <b>without</b> quotes: "pip install -r ../../requirements.txt" <br>
 If you get a missing DLL error, download the Visual C++ redistribution from https://www.microsoft.com/en-us/download/details.aspx?id=48145 (probably x86)
 </li>
 <li>
@@ -62,7 +62,7 @@ Launching for Windows
 ============
 <ol>
 <li>
-Go to the folder where you put Redis then Shift+Right click and select "Open command window here" </ br>
+Go to the folder where you put Redis then Shift+Right click and select "Open command window here" <br>
 <b>Note</b>: You may have to run cmd as an admin, in which case launch cmd as admin and then cd into your Redis directory.
 </li>
 <li>
