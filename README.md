@@ -62,7 +62,8 @@ Launching for Windows
 ============
 <ol>
 <li>
-Go to the folder where you put Redis then Shift+Right click and select "Open command window here"
+Go to the folder where you put Redis then Shift+Right click and select "Open command window here" </ br>
+<b>Note</b>: You may have to run cmd as an admin, in which case launch cmd as admin and then cd into your Redis directory.
 </li>
 <li>
 Type <b>without</b> quotes: "redis-server"
