@@ -8,12 +8,14 @@ from os import path
 import json
 import hashlib
 import math
+import urllib.parse
+import urllib.request
 
 #3rd party lib
 from flask import Flask, redirect, request, send_from_directory
 
 #user defined
-from japandb import data, tree, templates, wordutils, redis_connect
+from japandb import data, templates, wordutils, redis_connect
 
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
@@ -224,11 +226,15 @@ def search():
         if 'search' in request.args:
             search_content = request.args['search']
             if search_content: 
-                if data.load_key(search_content):
-                    search_result = data.tree.find(search_content)
-    
+                params = urllib.parse.urlencode({'query': search_content, 'articles': 'true', 'max' : 40})
+                try:
+                    f = urllib.request.urlopen('http://jpsearch.herokuapp.com/fetch?' + params)
+                    search_result = json.loads(f.read().decode('utf8'))
+                except:
+                    search_result = []
+                    
     if search_result != None:
-        sentences = data.populate_example_sentences(search_result, tree.CONST_SEARCH_SENTENCE_LIMIT)
+        sentences = data.populate_example_sentences(search_result, 40)
         sentence_count = len(sentences)
     else:
         sentences = None

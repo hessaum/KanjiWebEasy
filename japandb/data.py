@@ -13,7 +13,7 @@ from collections import defaultdict
 import jsonpickle
 
 # user defined
-from japandb import wordutils, tree, redis_connect
+from japandb import wordutils, redis_connect
 
 # constants
 CONST_WORDS_PER_PAGE = 1000
@@ -246,106 +246,63 @@ def insert_bold(example_sentence, word_info):
 def populate_example_sentences(lookup_info, sentence_limit, word_info=None):
     sentences = []
     for lookup_info in lookup_info:
-        if lookup_info[1].startswith('news'):
-            filename = lookup_info[1]
+        if lookup_info[0].startswith('news'):
+            filename = lookup_info[0]
         else:
-            filename = 'news'+lookup_info[1]
-        article_info = splice_article_id(lookup_info[1])
-        with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+filename+'.json', encoding='utf-8') as f:
-            containing_article = json.load(f)
-            current_sentence = 0
-            example_sentence = []
-            
-            # If we're trying to find the first sentence AKA the title
-            if lookup_info[0] == 1:
-                example_sentence.append(('(タイトル） ',))
-            in_quote = False
-            for token in containing_article['morph']:
-                if current_sentence > lookup_info[0]:
-                    break
-                    
-                #First check if we need to increase sentence number
-                if 'word' in token:
-                    if current_sentence <= 1 and token['word'] == "<S>":
-                        current_sentence += 1
-                        continue
-                        
-                    if token['word'] == '「':
-                        in_quote = True
-                        
-                    if token['word'] == '」':
-                        in_quote = False
-                    
-                    if token['word'] == '。' and in_quote == False:
-                        # we want a trailing dot at the end
-                        if current_sentence == lookup_info[0]:
-                            example_sentence.append('。')
-                        current_sentence += 1
-                        continue
+            filename = 'news'+lookup_info[0]
+        article_info = splice_article_id(lookup_info[0])
+        try:
+            with open('data/in/'+article_info[0]+'/'+article_info[1]+'/'+filename+'.json', encoding='utf-8') as f:
+                containing_article = json.load(f)
+                current_sentence = 0
+                example_sentence = []
                 
-                #Then parse one word
-                if current_sentence == lookup_info[0]:
-                    if 'ruby' in token:
-                        for reading in token['ruby']:
-                            if 'r' in reading:
-                                example_sentence.append((reading['s'], reading['r']))
-                            else:
-                                example_sentence.append((reading['s'],))
-            
-            if word_info != None:
-                insert_bold(example_sentence, word_info)
-            
-            sentences.append(example_sentence)
-            
-            if len(sentences) == sentence_limit:
-                break
-    return sentences
-
-tree = tree.GST()
-CONST_REWRITE_GZIPS = False
-
-if CONST_REWRITE_GZIPS:
-    for (root, dirs, files) in os.walk('data/in/'):
-        if len(dirs) == 0:
-            for file in files:
-                with open(os.path.join(root,file), encoding='utf-8') as f:
-                    article = json.load(f)['text']
-                    title_index = article.find(' ')
-                    article = article[0:title_index] + '。' + article[title_index:]
-                    article = article.replace(' ', '')
-                    
-                    last_cut = 0
-                    in_quote = False
-                    sentence_count = 1
-                    for i in range(len(article)):
-                        if article[i] == '「':
+                # If we're trying to find the first sentence AKA the title
+                if lookup_info[1] == 1:
+                    example_sentence.append(('(タイトル） ',))
+                in_quote = False
+                for token in containing_article['morph']:
+                    if current_sentence > lookup_info[1]:
+                        break
+                        
+                    #First check if we need to increase sentence number
+                    if 'word' in token:
+                        if current_sentence <= 1 and token['word'] == "<S>":
+                            current_sentence += 1
+                            continue
+                            
+                        if token['word'] == '「':
                             in_quote = True
-                        if article[i] == '」':
+                            
+                        if token['word'] == '」':
                             in_quote = False
-                        if not in_quote and article[i] == '。':
-                            tree.add(article[last_cut:i].strip(CONST_TO_TRIM), (sentence_count, file[4:len(file)-5]))
-                            last_cut = i+1
-                            sentence_count += 1
-                    if last_cut != len(article):
-                        tree.add(article[last_cut:i].strip(CONST_TO_TRIM), (sentence_count, file[4:len(file)-5]))  
-    for child in tree.root.cld:
-        with gzip.open('data/sentences/'+str(ord(child.cts[:1]))+'.gz', 'wb') as f:
-            f.write(bytes(jsonpickle.encode(child), 'UTF-8'))
-
-def load_key(key):
-    folder_key = ord(key[:1])
-    
-    for child in tree.root.cld:
-        if ord(child.cts[:1]) == folder_key:
-            return True
-    
-    path = 'data/sentences/'+str(folder_key)+'.gz'
-    if not os.path.exists(path):
-        return False
-    
-    with gzip.open(path, 'r') as f:
-        tree.root.cld.append(jsonpickle.decode(f.read().decode('UTF-8')))
-        return True
+                        
+                        if token['word'] == '。' and in_quote == False:
+                            # we want a trailing dot at the end
+                            if current_sentence == lookup_info[1]:
+                                example_sentence.append('。')
+                            current_sentence += 1
+                            continue
+                    
+                    #Then parse one word
+                    if current_sentence == lookup_info[1]:
+                        if 'ruby' in token:
+                            for reading in token['ruby']:
+                                if 'r' in reading:
+                                    example_sentence.append((reading['s'], reading['r']))
+                                else:
+                                    example_sentence.append((reading['s'],))
+                
+                if word_info != None:
+                    insert_bold(example_sentence, word_info)
+                
+                sentences.append(example_sentence)
+                
+                if len(sentences) == sentence_limit:
+                    break
+        except FileNotFoundError:
+            pass
+    return sentences
         
 class_map = {
 	"0" : "Regular word",
